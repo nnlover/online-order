@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sust.onlineorder.dao.TShopMapper" >
+  <resultMap id="BaseResultMap" type="com.sust.onlineorder.entity.TShop" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="shop_name" property="shopName" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="dispatch_pay" property="dispatchPay" jdbcType="INTEGER" />
+    <result column="dispatch_time" property="dispatchTime" jdbcType="INTEGER" />
+    <result column="assess_rate" property="assessRate" jdbcType="DECIMAL" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="dispatch_price" property="dispatchPrice" jdbcType="DECIMAL" />
+    <result column="salesroom_price" property="salesroomPrice" jdbcType="DECIMAL" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="business_time" property="businessTime" jdbcType="VARCHAR" />
+    <result column="main_picture" property="mainPicture" jdbcType="VARCHAR" />
+    <result column="average" property="average" jdbcType="INTEGER" />
+    <result column="month_pay" property="monthPay" jdbcType="INTEGER" />
+    <result column="shop_type" property="shopType" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, shop_name, title, dispatch_pay, dispatch_time, assess_rate, address, dispatch_price, 
+    salesroom_price, phone, business_time, main_picture, average, month_pay, shop_type
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sust.onlineorder.entity.TShopExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_shop
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_shop
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_shop
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sust.onlineorder.entity.TShopExample" >
+    delete from t_shop
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sust.onlineorder.entity.TShop" >
+    insert into t_shop (id, shop_name, title, 
+      dispatch_pay, dispatch_time, assess_rate, 
+      address, dispatch_price, salesroom_price, 
+      phone, business_time, main_picture, 
+      average, month_pay, shop_type
+      )
+    values (#{id,jdbcType=INTEGER}, #{shopName,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{dispatchPay,jdbcType=INTEGER}, #{dispatchTime,jdbcType=INTEGER}, #{assessRate,jdbcType=DECIMAL}, 
+      #{address,jdbcType=VARCHAR}, #{dispatchPrice,jdbcType=DECIMAL}, #{salesroomPrice,jdbcType=DECIMAL}, 
+      #{phone,jdbcType=VARCHAR}, #{businessTime,jdbcType=VARCHAR}, #{mainPicture,jdbcType=VARCHAR}, 
+      #{average,jdbcType=INTEGER}, #{monthPay,jdbcType=INTEGER}, #{shopType,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sust.onlineorder.entity.TShop" >
+    insert into t_shop
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="shopName != null" >
+        shop_name,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="dispatchPay != null" >
+        dispatch_pay,
+      </if>
+      <if test="dispatchTime != null" >
+        dispatch_time,
+      </if>
+      <if test="assessRate != null" >
+        assess_rate,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="dispatchPrice != null" >
+        dispatch_price,
+      </if>
+      <if test="salesroomPrice != null" >
+        salesroom_price,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="businessTime != null" >
+        business_time,
+      </if>
+      <if test="mainPicture != null" >
+        main_picture,
+      </if>
+      <if test="average != null" >
+        average,
+      </if>
+      <if test="monthPay != null" >
+        month_pay,
+      </if>
+      <if test="shopType != null" >
+        shop_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="shopName != null" >
+        #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="dispatchPay != null" >
+        #{dispatchPay,jdbcType=INTEGER},
+      </if>
+      <if test="dispatchTime != null" >
+        #{dispatchTime,jdbcType=INTEGER},
+      </if>
+      <if test="assessRate != null" >
+        #{assessRate,jdbcType=DECIMAL},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="dispatchPrice != null" >
+        #{dispatchPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="salesroomPrice != null" >
+        #{salesroomPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="businessTime != null" >
+        #{businessTime,jdbcType=VARCHAR},
+      </if>
+      <if test="mainPicture != null" >
+        #{mainPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="average != null" >
+        #{average,jdbcType=INTEGER},
+      </if>
+      <if test="monthPay != null" >
+        #{monthPay,jdbcType=INTEGER},
+      </if>
+      <if test="shopType != null" >
+        #{shopType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sust.onlineorder.entity.TShopExample" resultType="java.lang.Integer" >
+    select count(*) from t_shop
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_shop
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopName != null" >
+        shop_name = #{record.shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dispatchPay != null" >
+        dispatch_pay = #{record.dispatchPay,jdbcType=INTEGER},
+      </if>
+      <if test="record.dispatchTime != null" >
+        dispatch_time = #{record.dispatchTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.assessRate != null" >
+        assess_rate = #{record.assessRate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dispatchPrice != null" >
+        dispatch_price = #{record.dispatchPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.salesroomPrice != null" >
+        salesroom_price = #{record.salesroomPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessTime != null" >
+        business_time = #{record.businessTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mainPicture != null" >
+        main_picture = #{record.mainPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.average != null" >
+        average = #{record.average,jdbcType=INTEGER},
+      </if>
+      <if test="record.monthPay != null" >
+        month_pay = #{record.monthPay,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopType != null" >
+        shop_type = #{record.shopType,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_shop
+    set id = #{record.id,jdbcType=INTEGER},
+      shop_name = #{record.shopName,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      dispatch_pay = #{record.dispatchPay,jdbcType=INTEGER},
+      dispatch_time = #{record.dispatchTime,jdbcType=INTEGER},
+      assess_rate = #{record.assessRate,jdbcType=DECIMAL},
+      address = #{record.address,jdbcType=VARCHAR},
+      dispatch_price = #{record.dispatchPrice,jdbcType=DECIMAL},
+      salesroom_price = #{record.salesroomPrice,jdbcType=DECIMAL},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      business_time = #{record.businessTime,jdbcType=VARCHAR},
+      main_picture = #{record.mainPicture,jdbcType=VARCHAR},
+      average = #{record.average,jdbcType=INTEGER},
+      month_pay = #{record.monthPay,jdbcType=INTEGER},
+      shop_type = #{record.shopType,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sust.onlineorder.entity.TShop" >
+    update t_shop
+    <set >
+      <if test="shopName != null" >
+        shop_name = #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="dispatchPay != null" >
+        dispatch_pay = #{dispatchPay,jdbcType=INTEGER},
+      </if>
+      <if test="dispatchTime != null" >
+        dispatch_time = #{dispatchTime,jdbcType=INTEGER},
+      </if>
+      <if test="assessRate != null" >
+        assess_rate = #{assessRate,jdbcType=DECIMAL},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="dispatchPrice != null" >
+        dispatch_price = #{dispatchPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="salesroomPrice != null" >
+        salesroom_price = #{salesroomPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="businessTime != null" >
+        business_time = #{businessTime,jdbcType=VARCHAR},
+      </if>
+      <if test="mainPicture != null" >
+        main_picture = #{mainPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="average != null" >
+        average = #{average,jdbcType=INTEGER},
+      </if>
+      <if test="monthPay != null" >
+        month_pay = #{monthPay,jdbcType=INTEGER},
+      </if>
+      <if test="shopType != null" >
+        shop_type = #{shopType,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sust.onlineorder.entity.TShop" >
+    update t_shop
+    set shop_name = #{shopName,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      dispatch_pay = #{dispatchPay,jdbcType=INTEGER},
+      dispatch_time = #{dispatchTime,jdbcType=INTEGER},
+      assess_rate = #{assessRate,jdbcType=DECIMAL},
+      address = #{address,jdbcType=VARCHAR},
+      dispatch_price = #{dispatchPrice,jdbcType=DECIMAL},
+      salesroom_price = #{salesroomPrice,jdbcType=DECIMAL},
+      phone = #{phone,jdbcType=VARCHAR},
+      business_time = #{businessTime,jdbcType=VARCHAR},
+      main_picture = #{mainPicture,jdbcType=VARCHAR},
+      average = #{average,jdbcType=INTEGER},
+      month_pay = #{monthPay,jdbcType=INTEGER},
+      shop_type = #{shopType,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
