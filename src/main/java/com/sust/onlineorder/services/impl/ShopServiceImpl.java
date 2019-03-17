@@ -17,7 +17,7 @@ public class ShopServiceImpl implements ShopService {
 	@Override
 	public List<TShop> getShopListByPage() {
 		TShopExample example = new TShopExample();
-		example.createCriteria().andIdIsNotNull();
+		example.createCriteria().andIdGreaterThan(10);
 		List<TShop> tShops = shopMapper.selectByExample(example);
 		return tShops;
 	}
