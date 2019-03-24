@@ -22,9 +22,9 @@ public interface TFoodMapper {
 
     TFood selectByPrimaryKey(Integer id);
 
-    int updateByExampleSelective(@Param("record") TFood record, @Param("example") TFoodExample example);
+    int updateByExampleSelective(@Param("record") TFood record, @Param("model") TFoodExample example);
 
-    int updateByExample(@Param("record") TFood record, @Param("example") TFoodExample example);
+    int updateByExample(@Param("record") TFood record, @Param("model") TFoodExample example);
 
     int updateByPrimaryKeySelective(TFood record);
 

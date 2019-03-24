@@ -22,9 +22,9 @@ public interface TCollectionMapper {
 
     TCollection selectByPrimaryKey(Integer id);
 
-    int updateByExampleSelective(@Param("record") TCollection record, @Param("example") TCollectionExample example);
+    int updateByExampleSelective(@Param("record") TCollection record, @Param("model") TCollectionExample example);
 
-    int updateByExample(@Param("record") TCollection record, @Param("example") TCollectionExample example);
+    int updateByExample(@Param("record") TCollection record, @Param("model") TCollectionExample example);
 
     int updateByPrimaryKeySelective(TCollection record);
 

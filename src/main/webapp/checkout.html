@@ -23,6 +23,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 <body>
 <!-- header -->
+<div class="header-item"></div>
+<script>
+    $(document).load($('.header-item').load('header.html'));
+</script>
+<!--
 <div class="head-top">
 			
 		</div>
@@ -42,7 +47,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<li><a href=" contact.html">Contact</a></li>
 								<div class="clearfix"> </div>		
 						</ul>
-								<!-- script-for-nav -->
+								&lt;!&ndash; script-for-nav &ndash;&gt;
 							<script>
 								$( "span.menu" ).click(function() {
 								  $( ".head-nav ul" ).slideToggle(300, function() {
@@ -50,7 +55,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								  });
 								});
 							</script>
-						<!-- script-for-nav --> 
+						&lt;!&ndash; script-for-nav &ndash;&gt;
 					</div>
 					<div class="header-right1">
 						<div class="cart box_1">
@@ -65,11 +70,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 					<div class="clearfix"> </div>
 			</div>
-	</div>
+	</div>-->
 <!-- header -->
 <!-- checkout -->
 <div class="cart-items">
-	<div class="container">
+	<div id="checked_items" class="container">
 			 <h1>My Shopping Bag (2)</h1>
 				<script>$(document).ready(function(c) {
 					$('.close1').on('click', function(c){
@@ -184,5 +189,65 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 	</div>
 <!-- footer-->	
+<script>
+	$(document).ready(function () {
+        $.getJSON("cart/cart-list.json",
+	    function (data) {
+            var checkList = "";
+            //TODO:: 需要将购物车面的东西完善，
+            $.each(data, function (i, item) {
+                var check_item = "<div class=\"cart-header\">" +
+                    " <div class=\"close1\"> </div>" +
+                    " <div class=\"cart-sec simpleCart_shelfItem\">" +
+                    "<div class=\"cart-item cyc\">" +
+                    " <img src="+item.picture+" class=\"img-responsive\" alt=\"\">" +
+                    "</div>" +
+                    "   <div class=\"cart-item-info\">" +
+                    "<h3><a href=\"#\"> "+item.itemName+"</a><span>简介:"+item.itemTitle+"</span></h3>" +
+                    "<ul class=\"qty\">" +
+                    "<li><p>Min. order value:</p></li>" +
+                    "<li><p>FREE delivery</p></li>" +
+                    "</ul>" +
+                    " <div class=\"delivery\">" +
+                    " <p>Service Charges : $10.00</p>" +
+                    " <span>Delivered in 1-1:30 hours</span>" +
+                    " <div class=\"clearfix\"></div>" +
+                    "        </div>" +
+                    "   </div>" +
+                    "   <div class=\"clearfix\"></div>" +
+                    "" +
+                    "  </div>" +
+                    " </div>";
+                checkList += check_item;
+            })
+			$("#checked_items").html(checkList);
+        });
+	    
+		
+	    
+	    var check_item = "<div class=\"cart-header\">" +
+            " <div class=\"close1\"> </div>" +
+            " <div class=\"cart-sec simpleCart_shelfItem\">" +
+            "<div class=\"cart-item cyc\">" +
+            " <img src=\"images/6p.jpg\" class=\"img-responsive\" alt=\"\">" +
+            "</div>" +
+            "   <div class=\"cart-item-info\">" +
+            "<h3><a href=\"#\"> Lorem Ipsum is not simply </a><span>Pickup time:</span></h3>" +
+            "<ul class=\"qty\">" +
+            "<li><p>Min. order value:</p></li>" +
+            "<li><p>FREE delivery</p></li>" +
+            "</ul>" +
+            " <div class=\"delivery\">" +
+            " <p>Service Charges : $10.00</p>" +
+            " <span>Delivered in 1-1:30 hours</span>" +
+            " <div class=\"clearfix\"></div>" +
+            "        </div>" +
+            "   </div>" +
+            "   <div class=\"clearfix\"></div>" +
+            "" +
+            "  </div>" +
+            " </div>"
+    })
+</script>
 </body>
 </html>

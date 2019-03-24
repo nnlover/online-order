@@ -7,6 +7,8 @@ import com.sust.onlineorder.services.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -16,7 +18,7 @@ import java.util.List;
 @Service
 public class FoodServiceImpl implements FoodService {
 
-	@Autowired
+	@Resource
 	private TFoodMapper foodMapper;
 
 	/**
@@ -28,7 +30,18 @@ public class FoodServiceImpl implements FoodService {
 	public List<TFood> getFoodsWithShopId(Integer id) {
 		TFoodExample example = new TFoodExample();
 		example.createCriteria().andShopIdEqualTo(id);
-		List<TFood> foodList = foodMapper.selectByExample(example);
-		return foodList;
+		return foodMapper.selectByExample(example);
+	}
+
+	/**
+	 * 根据idList 查询商品
+	 * @param ids
+	 * @return
+	 */
+	@Override
+	public List<TFood> getFoodsWithIds(List<Integer> ids) {
+		TFoodExample example = new TFoodExample();
+		example.createCriteria().andIdIn(ids);
+		return foodMapper.selectByExample(example);
 	}
 }

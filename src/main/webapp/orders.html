@@ -19,11 +19,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href='http://fonts.adminun/css?family=Libre+Baskerville:400,700' rel='stylesheet' type='text/css'>
 <script src="js/jquery.min.js"></script>
 <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" />
-<script src="js/simpleCart.min.js"> </script>		
+<!--<script src="js/simpleCart.min.js"> </script>	-->
 </head>
 <body>
 <!-- header -->
-<div class="head-top">
+
+<div class="header-item"></div>
+
+<!--<div class="head-top">
 			
 		</div>
 	<div class="header">
@@ -42,7 +45,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<li><a href=" contact.html">Contact</a></li>
 								<div class="clearfix"> </div>		
 						</ul>
-								<!-- script-for-nav -->
+								&lt;!&ndash; script-for-nav &ndash;&gt;
 							<script>
 								$( "span.menu" ).click(function() {
 								  $( ".head-nav ul" ).slideToggle(300, function() {
@@ -50,14 +53,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								  });
 								});
 							</script>
-						<!-- script-for-nav --> 
+						&lt;!&ndash; script-for-nav &ndash;&gt;
 					</div>
 					<div class="header-right1">
 						<div class="cart box_1">
 							<a href="checkout.html">
-								<h3> <span class="simpleCart_total">$0.00</span> (<span id="simpleCart_quantity" class="simpleCart_quantity">0</span> items)<img src="images/bag.png" alt=""></h3>
+								<h3> $<span id="total_price" class="simpleCart_total">0.00</span> (<span id="total_count" class="simpleCart_quantity">0</span> items)<img src="images/bag.png" alt=""></h3>
 							</a>	
-							<p><a href="javascript:;" class="simpleCart_empty">empty card</a></p>
+							<p><a href="javascript:;" class="simpleCart_empty" onclick="clear_cart()">empty card</a></p>
 							<div class="clearfix"> </div>
 						</div>
 					</div>
@@ -65,7 +68,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 					<div class="clearfix"> </div>
 			</div>
-	</div>
+	</div>-->
 <!-- header -->
 <!-- about -->
 <div class="orders">
@@ -410,6 +413,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 <script>
     $(document).ready(function(){
+        $('.header-item').load('header.html');
         /*TODO :: 这里为 商品列表*/
         $.getJSON("shop/food-list.json?id=11",
             function(res){
@@ -432,13 +436,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 $.each(res, function (i, item)
                 {
                     //alert(item.itemName);
+					var tocart ="toCart("+item.price+","+item.id+")";
                     var food =
                         "<div class=\"pre-top\">"
                         	+"<div class=\"pr-left\">\n" +
                         		"<div class=\"item_add\"><span class=\"item_price\"><h6>ONLY $"+item.price+"</h6></span></div>\n" +
                         	"</div>\n" +
                         	"<div class=\"pr-right\">\n" +
-                        		"<div class=\"item_add\"><span class=\"item_price\"><a href=\"#\">Pick</a></span></div>\n" +
+                        		"<div class=\"item_add\"><span class=\"item_price\"><a href=\"#\" onclick="+tocart+">Pick</a></span></div>\n" +
 							"</div>\n" +
                         	"<div class=\"clearfix\"></div>"
                         +"</div>";
@@ -476,7 +481,34 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         +"</li>"
         +"</div>"
     );*/
+	function toCart(price, id) {
+		//alert(price +id);
+		//TODO::这里是是添加商品到购物车
+        $.post("/add/to_cart",
+            {
+                price: price,
+                id:id
+            },
+            function(data){
+               // alert("数据: \n" + data);
+                var curtotal = $("#total_price").text();
+				$("#total_price").text((parseFloat(curtotal)+parseFloat(price)).toFixed(2));
+				var total_cnt = parseInt($("#total_count").text());
+				$("#total_count").text(total_cnt + 1);
+            });
+    }
+    //TODO:: 清空购物车
+    function clear_cart() {
+        $.post("/remove/from_cart",
+            {
+                id:id
+            },
+            function(data){
+            });
 
+        $("#total_price").text(0.00);
+        $("#total_count").text(0);
+    }
 </script>
 <!-- footer-->
 </body>

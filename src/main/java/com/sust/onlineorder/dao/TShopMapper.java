@@ -22,9 +22,9 @@ public interface TShopMapper {
 
     TShop selectByPrimaryKey(Integer id);
 
-    int updateByExampleSelective(@Param("record") TShop record, @Param("example") TShopExample example);
+    int updateByExampleSelective(@Param("record") TShop record, @Param("model") TShopExample example);
 
-    int updateByExample(@Param("record") TShop record, @Param("example") TShopExample example);
+    int updateByExample(@Param("record") TShop record, @Param("model") TShopExample example);
 
     int updateByPrimaryKeySelective(TShop record);
 

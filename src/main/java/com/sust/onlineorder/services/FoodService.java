@@ -2,7 +2,9 @@ package com.sust.onlineorder.services;
 
 import com.sust.onlineorder.entity.TFood;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @Author: wangzongyu
@@ -11,4 +13,6 @@ import java.util.List;
 public interface FoodService {
 
 	List<TFood> getFoodsWithShopId(Integer id);
+
+	List<TFood> getFoodsWithIds(List<Integer> ids);
 }

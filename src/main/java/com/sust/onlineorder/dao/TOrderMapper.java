@@ -22,9 +22,9 @@ public interface TOrderMapper {
 
     TOrder selectByPrimaryKey(Integer id);
 
-    int updateByExampleSelective(@Param("record") TOrder record, @Param("example") TOrderExample example);
+    int updateByExampleSelective(@Param("record") TOrder record, @Param("model") TOrderExample example);
 
-    int updateByExample(@Param("record") TOrder record, @Param("example") TOrderExample example);
+    int updateByExample(@Param("record") TOrder record, @Param("model") TOrderExample example);
 
     int updateByPrimaryKeySelective(TOrder record);
 

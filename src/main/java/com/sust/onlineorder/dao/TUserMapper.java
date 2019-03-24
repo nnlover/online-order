@@ -24,11 +24,11 @@ public interface TUserMapper {
 
     TUser selectByPrimaryKey(Integer id);
 
-    int updateByExampleSelective(@Param("record") TUser record, @Param("example") TUserExample example);
+    int updateByExampleSelective(@Param("record") TUser record, @Param("model") TUserExample example);
 
-    int updateByExampleWithBLOBs(@Param("record") TUser record, @Param("example") TUserExample example);
+    int updateByExampleWithBLOBs(@Param("record") TUser record, @Param("model") TUserExample example);
 
-    int updateByExample(@Param("record") TUser record, @Param("example") TUserExample example);
+    int updateByExample(@Param("record") TUser record, @Param("model") TUserExample example);
 
     int updateByPrimaryKeySelective(TUser record);
 

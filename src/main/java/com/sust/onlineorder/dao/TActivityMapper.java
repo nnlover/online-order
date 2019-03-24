@@ -22,9 +22,9 @@ public interface TActivityMapper {
 
     TActivity selectByPrimaryKey(Integer id);
 
-    int updateByExampleSelective(@Param("record") TActivity record, @Param("example") TActivityExample example);
+    int updateByExampleSelective(@Param("record") TActivity record, @Param("model") TActivityExample example);
 
-    int updateByExample(@Param("record") TActivity record, @Param("example") TActivityExample example);
+    int updateByExample(@Param("record") TActivity record, @Param("model") TActivityExample example);
 
     int updateByPrimaryKeySelective(TActivity record);
 
