@@ -54,12 +54,12 @@ public class CartController {
 		HttpSession session = request.getSession();
 		CartModel cart = (CartModel) session.getAttribute(CART);
 		if (cart == null) {
-			CartModel cartModel = new CartModel();
-			cartModel.putItem(id, price);
-			session.setAttribute(CART, cartModel);
+			cart = CartModel.createCart();
+			cart.putItem(id, price);
 		} else {
 			cart.putItem(id, price);
 		}
+		session.setAttribute(CART, cart);
 		return "ok";
 	}
 

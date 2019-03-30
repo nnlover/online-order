@@ -1,5 +1,7 @@
 package com.sust.onlineorder.model;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -8,10 +10,17 @@ import java.util.Map;
  * @Author: wangzongyu
  * @Date: 2019/3/24 22:19
  */
+@Slf4j
 public class CartModel implements Serializable {
-	Map<String, SimpleItem> cartMap = new HashMap<>(5);
+	Map<String, SimpleItem> cartMap;
 
-	public CartModel() {
+
+	private CartModel() {
+		cartMap =new HashMap<>(5);
+	}
+
+	public static CartModel createCart(){
+		return new CartModel();
 	}
 
 	public Map<String, SimpleItem> getCartMap() {
@@ -24,7 +33,9 @@ public class CartModel implements Serializable {
 
 	public void putItem(String id, String price) {
 		if (cartMap.containsKey(id)) {
-			cartMap.put(id, new SimpleItem(price, cartMap.get(id).cnt + 1));
+			SimpleItem item = cartMap.get(id);
+			log.info("SimpleItem:{}", item.toString());
+			cartMap.put(id, new SimpleItem(price, item.cnt + 1));
 		} else {
 			cartMap.put(id, new SimpleItem(price, 1));
 		}
@@ -45,17 +56,22 @@ public class CartModel implements Serializable {
 	}
 
 	 public  static  class SimpleItem implements Serializable {
-		//价格
+		 /**
+		  * 价格
+		  */
 		Float price;
-		//数量
+		 /**
+		  * 数量
+		  */
 		Integer cnt;
 		public SimpleItem(Float price, Integer cnt) {
 			this.price = price;
 			this.cnt = cnt;
 		}
 
-		public SimpleItem(String price, int cnt) {
-			new SimpleItem(Float.valueOf(price), cnt);
+		SimpleItem(String price, int cnt) {
+			this.price = Float.valueOf(price);
+			this.cnt = cnt;
 		}
 	}
 }
