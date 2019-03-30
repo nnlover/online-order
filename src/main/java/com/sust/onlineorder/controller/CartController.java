@@ -63,15 +63,13 @@ public class CartController {
 		return "ok";
 	}
 
-	@RequestMapping("/remove/from_cart")
+	@RequestMapping("/remove/clean_cart")
 	@ResponseBody
-	public String revomeFromCart(String id, HttpServletRequest request) {
-		log.info("id:{}", id);
+	public String revomeFromCart(HttpServletRequest request) {
+
 		HttpSession session = request.getSession();
-		CartModel cart = (CartModel) session.getAttribute(CART);
-		if (cart != null) {
-			cart.removeItem(id);
-		}
+		//CartModel cart = (CartModel) session.getAttribute(CART);
+		session.setAttribute(CART, CartModel.createCart());
 		return "ok";
 	}
 

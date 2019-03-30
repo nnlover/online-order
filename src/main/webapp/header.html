@@ -66,7 +66,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script>
     function toCart(price, id) {
         //alert(price +id);
-        //TODO::这里是是添加商品到购物车
+        //这里是是添加商品到购物车
         $.post("/add/to_cart",
             {
                 price: price,
@@ -80,13 +80,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 $("#total_count").text(total_cnt + 1);
             });
     }
-    //TODO:: 清空购物车
+    //清空购物车
     function clear_cart() {
-        $.post("/remove/from_cart",
-            {
-                id:id
-            },
+        $.post("/remove/clean_cart",
             function(data){
+            alert("清空购物车成功");
             });
 
         $("#total_price").text(0.00);
