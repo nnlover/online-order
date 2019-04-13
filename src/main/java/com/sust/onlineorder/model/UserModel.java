@@ -31,6 +31,7 @@ public class UserModel implements Serializable {
 			user.setUserName("张三");
 			user.setPhone("18611921410");
 			user.setRank(1);
+			user.setSelectAddrId(1);
 			setAttr(request,USER, user);
 		}
 	}

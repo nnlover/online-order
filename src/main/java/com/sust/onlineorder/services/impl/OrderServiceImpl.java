@@ -38,24 +38,31 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public int create(CartModel cartModel, UserModel userModel) {
+
 		Map<String, CartModel.SimpleItem> cartMap = cartModel.getCartMap();
-		addressService.getByUserId(userModel.getId());
+		TShop shop = shopService.getShopById(cartModel.getShopId());
+
+		return orderMapper.insert(buildOrder(userModel, cartMap, shop));
+	}
+
+	private TOrder buildOrder(UserModel userModel, Map<String, CartModel.SimpleItem> cartMap, TShop shop) {
 		TOrder order = new TOrder();
 		order.setOrderNo(IdUtils.getNextId());
 		order.setUserId(userModel.getId());
 		order.setItemIds(buildItemsString(cartMap));
 		order.setAddrId(userModel.getSelectAddrId());
-
+		order.setPayTime(new Date());
+		order.setCreateTime(new Date());
+		order.setPayType("支付宝");
 		//设置店铺信息
-		TShop shop = shopService.getShopById(cartModel.getShopId());
 		order.setTotalPrice(calTotalPrice(cartMap, shop.getDispatchPrice()));
 		Date date = new Date();
 		order.setDeliveryTime(new Date(date.toInstant().plusSeconds(shop.getDispatchTime() * 60).toEpochMilli()));
-		//order.setComments();
+		order.setComments("");
 		order.setShopName(shop.getShopName());
-
-		int insert = orderMapper.insert(order);
-		return insert;
+		log.info("[order]-->{}", order.toString());
+		log.info("[user]-->{}", userModel.toString());
+		return order;
 	}
 
 	//计算总价  订单价格+ 快递费
@@ -70,6 +77,7 @@ public class OrderServiceImpl implements OrderService {
 		cartMap.forEach((id, val) -> itemsString.add(new OrderItem(id, val.getCnt())));
 		return JsonUtils.objectToJson(itemsString);
 	}
+
 
 	public static class OrderItem implements Serializable {
 		String itemId;
