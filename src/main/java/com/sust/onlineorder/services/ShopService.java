@@ -12,4 +12,5 @@ public interface ShopService {
 	 */
 	List<TShop> getShopListByPage();
 
+	TShop getShopById(Integer shopId);
 }

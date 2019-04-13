@@ -12,15 +12,23 @@ import java.util.Map;
  */
 @Slf4j
 public class CartModel implements Serializable {
+	Integer shopId;
 	Map<String, SimpleItem> cartMap;
 
-
 	private CartModel() {
-		cartMap =new HashMap<>(5);
+		cartMap = new HashMap<>(5);
 	}
 
-	public static CartModel createCart(){
+	public static CartModel createCart() {
 		return new CartModel();
+	}
+
+	public Integer getShopId() {
+		return shopId;
+	}
+
+	public void setShopId(Integer shopId) {
+		this.shopId = shopId;
 	}
 
 	public Map<String, SimpleItem> getCartMap() {
@@ -47,7 +55,7 @@ public class CartModel implements Serializable {
 		}
 	}
 
-	public Integer getPayCount(String id){
+	public Integer getPayCount(String id) {
 		Integer res = 0;
 		if (cartMap.containsKey(id)) {
 			res = cartMap.get(id).cnt;
@@ -55,14 +63,14 @@ public class CartModel implements Serializable {
 		return res;
 	}
 
-	 public  static  class SimpleItem implements Serializable {
-		 /**
-		  * 价格
-		  */
+	public static class SimpleItem implements Serializable {
+		/**
+		 * 价格
+		 */
 		Float price;
-		 /**
-		  * 数量
-		  */
+		/**
+		 * 数量
+		 */
 		Integer cnt;
 		public SimpleItem(Float price, Integer cnt) {
 			this.price = price;
@@ -71,6 +79,30 @@ public class CartModel implements Serializable {
 
 		SimpleItem(String price, int cnt) {
 			this.price = Float.valueOf(price);
+			this.cnt = cnt;
+		}
+
+		@Override
+		public String toString() {
+			return "SimpleItem{" +
+					"price=" + price +
+					", cnt=" + cnt +
+					'}';
+		}
+
+		public Float getPrice() {
+			return price;
+		}
+
+		public void setPrice(Float price) {
+			this.price = price;
+		}
+
+		public Integer getCnt() {
+			return cnt;
+		}
+
+		public void setCnt(Integer cnt) {
 			this.cnt = cnt;
 		}
 	}

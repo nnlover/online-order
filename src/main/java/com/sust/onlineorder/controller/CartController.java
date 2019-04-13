@@ -1,21 +1,30 @@
 package com.sust.onlineorder.controller;
 
 import com.sust.onlineorder.entity.TFood;
+import com.sust.onlineorder.entity.TShop;
 import com.sust.onlineorder.model.CartModel;
+import com.sust.onlineorder.model.CheckoutDetailDTO;
 import com.sust.onlineorder.model.OutputCartItem;
+import com.sust.onlineorder.model.UserModel;
 import com.sust.onlineorder.services.FoodService;
+import com.sust.onlineorder.services.OrderService;
+import com.sust.onlineorder.services.ShopService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import static com.sust.onlineorder.constants.UserConts.USER;
+import static com.sust.onlineorder.utils.SessionUtils.getAttr;
+import static com.sust.onlineorder.utils.SessionUtils.setAttr;
 
 /**
  * @Author: wangzongyu
@@ -27,8 +36,12 @@ public class CartController {
 
 	private static final String CART = "cart";
 
-	@Autowired
+	@Resource
 	private FoodService foodService;
+	@Resource
+	private ShopService shopService;
+	@Resource
+	private OrderService orderService;
 
 	public static List<OutputCartItem> TransToCartItem(List<TFood> foods, CartModel cart) {
 		return foods.stream().map(food -> convert(food, cart)).collect(Collectors.toList());
@@ -44,6 +57,8 @@ public class CartController {
 		cartItem.setShopId(food.getShopId());
 		cartItem.setPicture(food.getPicture());
 		cartItem.setPayCount(cart.getPayCount(String.valueOf(food.getId())));
+		cartItem.setOrginPrice(food.getOrginPrice());
+		cartItem.setMonthSale(food.getMonthSale());
 		return cartItem;
 	}
 
@@ -51,41 +66,61 @@ public class CartController {
 	@ResponseBody
 	public String toCart(String price, String id, HttpServletRequest request) {
 		log.info("price:{}, id:{}", price, id);
-		HttpSession session = request.getSession();
-		CartModel cart = (CartModel) session.getAttribute(CART);
+		CartModel cart = getAttr(request, CART);
 		if (cart == null) {
 			cart = CartModel.createCart();
 			cart.putItem(id, price);
 		} else {
 			cart.putItem(id, price);
 		}
-		session.setAttribute(CART, cart);
+		setAttr(request, CART, cart);
 		return "ok";
 	}
 
 	@RequestMapping("/remove/clean_cart")
 	@ResponseBody
 	public String revomeFromCart(HttpServletRequest request) {
-
-		HttpSession session = request.getSession();
-		//CartModel cart = (CartModel) session.getAttribute(CART);
-		session.setAttribute(CART, CartModel.createCart());
+		setAttr(request, CART, CartModel.createCart());
 		return "ok";
 	}
 
 	@RequestMapping("/cart/cart-list.json")
 	@ResponseBody
-	public List<OutputCartItem> cartList(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		CartModel cart = (CartModel) session.getAttribute(CART);
-		List<OutputCartItem> res = new ArrayList<>();
+	public CheckoutDetailDTO cartList(String shopId, HttpServletRequest request) {
+		CartModel cart = getAttr(request, CART);
+		List<OutputCartItem> items = new ArrayList<>();
 		if (cart != null) {
 			Map<String, CartModel.SimpleItem> cartMap = cart.getCartMap();
 			List<Integer> ids = cartMap.keySet().stream().map(Integer::valueOf).collect(Collectors.toList());
 			List<TFood> foods = foodService.getFoodsWithIds(ids);
-			res = TransToCartItem(foods, cart);
+			items = TransToCartItem(foods, cart);
 		}
-		return res;
+
+		TShop shop = shopService.getShopById(items.get(0).getShopId());
+
+		return CheckoutDetailDTO.builder().items(items).shop(shop).build();
 	}
 
+
+	@RequestMapping("/submit/cart")
+	@ResponseBody
+	public String submitCart(HttpServletRequest request) {
+		CartModel cart = getAttr(request, CART);
+		if (cart == null || CollectionUtils.isEmpty(cart.getCartMap())) {
+			return "cart is empty";
+		}
+		UserModel user = getAttr(request, USER);
+		int i = orderService.create(cart, user);
+
+		return i > 0 ? "ok" : "failed";
+	}
+
+	@RequestMapping("/select/addr")
+	@ResponseBody
+	public String selectAddr(Integer addrId, HttpServletRequest request) {
+		UserModel user = getAttr(request, USER);
+		user.setSelectAddrId(addrId);
+		setAttr(request, USER, user);
+		return "ok";
+	}
 }

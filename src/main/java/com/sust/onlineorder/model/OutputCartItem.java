@@ -35,4 +35,6 @@ public class OutputCartItem implements Serializable {
 	private Integer activityId;
 
 	private Integer payCount;
+
+	private Integer monthSale;
 }
