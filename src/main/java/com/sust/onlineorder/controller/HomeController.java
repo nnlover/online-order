@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 
 import static com.sust.onlineorder.constants.CartConts.CART;
 import static com.sust.onlineorder.constants.UserConts.USER;
+import static com.sust.onlineorder.model.UserModel.setUserSession;
 import static com.sust.onlineorder.utils.SessionUtils.getAttr;
 import static com.sust.onlineorder.utils.SessionUtils.setAttr;
 
@@ -40,17 +41,10 @@ public class HomeController {
 
 	@RequestMapping(value = "/index")
 	public String home(HttpServletRequest request) {
-		UserModel user = getAttr(request, USER);
-		if(user == null){
-			user = new UserModel();
-			user.setId(1);
-			user.setUserName("张三");
-			user.setPhone("18611921410");
-			user.setRank(1);
-			setAttr(request,USER, user);
-		}
+		setUserSession(request);
 		return "index";
 	}
+
 
 	@RequestMapping(value = "/test")
 	public String test() {
@@ -89,6 +83,7 @@ public class HomeController {
 				setAttr(request, CART, cart);
 			}
 		}
+		setUserSession(request);
 		List<TFood> foodList = foodService.getFoodsWithShopId(id);
 
 		return foodList;

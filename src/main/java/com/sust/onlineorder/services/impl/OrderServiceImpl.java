@@ -1,7 +1,6 @@
 package com.sust.onlineorder.services.impl;
 
 import com.sust.onlineorder.dao.TOrderMapper;
-import com.sust.onlineorder.dao.TShopMapper;
 import com.sust.onlineorder.entity.TOrder;
 import com.sust.onlineorder.entity.TShop;
 import com.sust.onlineorder.model.CartModel;
@@ -11,14 +10,12 @@ import com.sust.onlineorder.services.OrderService;
 import com.sust.onlineorder.services.ShopService;
 import com.sust.onlineorder.utils.IdUtils;
 import com.sust.onlineorder.utils.JsonUtils;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.tomcat.jni.Time;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.io.Serializable;
-import java.time.Instant;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -51,6 +48,7 @@ public class OrderServiceImpl implements OrderService {
 
 		//设置店铺信息
 		TShop shop = shopService.getShopById(cartModel.getShopId());
+		order.setTotalPrice(calTotalPrice(cartMap, shop.getDispatchPrice()));
 		Date date = new Date();
 		order.setDeliveryTime(new Date(date.toInstant().plusSeconds(shop.getDispatchTime() * 60).toEpochMilli()));
 		//order.setComments();
@@ -58,6 +56,11 @@ public class OrderServiceImpl implements OrderService {
 
 		int insert = orderMapper.insert(order);
 		return insert;
+	}
+
+	//计算总价  订单价格+ 快递费
+	private BigDecimal calTotalPrice(Map<String, CartModel.SimpleItem> cartMap, BigDecimal dispatchPrice) {
+		return BigDecimal.valueOf(cartMap.values().stream().mapToDouble(item -> item.getPrice() * item.getCnt()).sum() + dispatchPrice.doubleValue());
 	}
 
 

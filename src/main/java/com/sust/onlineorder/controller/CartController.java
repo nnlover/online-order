@@ -24,6 +24,7 @@ import java.util.stream.Collectors;
 
 import static com.sust.onlineorder.constants.CartConts.CART;
 import static com.sust.onlineorder.constants.UserConts.USER;
+import static com.sust.onlineorder.model.UserModel.setUserSession;
 import static com.sust.onlineorder.utils.SessionUtils.getAttr;
 import static com.sust.onlineorder.utils.SessionUtils.setAttr;
 
@@ -86,6 +87,7 @@ public class CartController {
 	@RequestMapping("/cart/cart-list.json")
 	@ResponseBody
 	public CheckoutDetailDTO cartList(String shopId, HttpServletRequest request) {
+		setUserSession(request);
 		CartModel cart = getAttr(request, CART);
 		List<OutputCartItem> items = new ArrayList<>();
 		if (cart != null) {
