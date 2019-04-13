@@ -133,4 +133,23 @@ public class TOrder {
     public void setShopName(String shopName) {
         this.shopName = shopName == null ? null : shopName.trim();
     }
+
+    @Override
+    public String toString() {
+        return "TOrder{" +
+                "id=" + id +
+                ", orderNo='" + orderNo + '\'' +
+                ", userId=" + userId +
+                ", itemIds='" + itemIds + '\'' +
+                ", totalPrice=" + totalPrice +
+                ", addrId=" + addrId +
+                ", payTime=" + payTime +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", deliveryTime=" + deliveryTime +
+                ", payType='" + payType + '\'' +
+                ", comments='" + comments + '\'' +
+                ", shopName='" + shopName + '\'' +
+                '}';
+    }
 }

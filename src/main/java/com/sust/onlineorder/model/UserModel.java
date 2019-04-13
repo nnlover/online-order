@@ -24,16 +24,15 @@ public class UserModel implements Serializable {
 
 
 	public static void setUserSession(HttpServletRequest request) {
-		UserModel user = getAttr(request, USER);
-		if(user == null){
-			user = new UserModel();
-			user.setId(1);
-			user.setUserName("张三");
-			user.setPhone("18611921410");
-			user.setRank(1);
-			user.setSelectAddrId(1);
-			setAttr(request,USER, user);
-		}
+		UserModel user;// = getAttr(request, USER);
+		user = new UserModel();
+		user.setId(1);
+		user.setUserName("张三");
+		user.setPhone("18611921410");
+		user.setRank(1);
+		user.setSelectAddrId(1);
+		setAttr(request, USER, user);
+
 	}
 
 }
