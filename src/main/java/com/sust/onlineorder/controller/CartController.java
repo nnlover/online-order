@@ -9,6 +9,7 @@ import com.sust.onlineorder.model.UserModel;
 import com.sust.onlineorder.services.FoodService;
 import com.sust.onlineorder.services.OrderService;
 import com.sust.onlineorder.services.ShopService;
+import com.sust.onlineorder.utils.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
@@ -25,6 +26,7 @@ import java.util.stream.Collectors;
 import static com.sust.onlineorder.constants.CartConts.CART;
 import static com.sust.onlineorder.constants.UserConts.USER;
 import static com.sust.onlineorder.model.UserModel.setUserSession;
+import static com.sust.onlineorder.utils.IdUtils.buildAOrderNo;
 import static com.sust.onlineorder.utils.SessionUtils.getAttr;
 import static com.sust.onlineorder.utils.SessionUtils.setAttr;
 
@@ -105,15 +107,18 @@ public class CartController {
 
 	@RequestMapping("/submit/cart")
 	@ResponseBody
-	public String submitCart(HttpServletRequest request) {
+	public Result submitCart(HttpServletRequest request) {
 		CartModel cart = getAttr(request, CART);
 		if (cart == null || CollectionUtils.isEmpty(cart.getCartMap())) {
-			return "cart is empty";
+			return Result.build(400, "订单出现异常");
 		}
 		UserModel user = getAttr(request, USER);
-		int i = orderService.create(cart, user);
-
-		return i > 0 ? "ok" : "failed";
+		String orderNo = buildAOrderNo();
+		int i = orderService.create(cart, user, orderNo);
+		if(i > 0){
+			return Result.ok(orderNo);
+		}
+		return Result.build(400, "订单出现异常");
 	}
 
 	@RequestMapping("/select/addr")

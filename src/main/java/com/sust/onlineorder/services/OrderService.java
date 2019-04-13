@@ -9,5 +9,5 @@ import com.sust.onlineorder.model.UserModel;
  */
 public interface OrderService {
 
-	public int create(CartModel cartModel, UserModel userModel);
+	public int create(CartModel cartModel, UserModel userModel, String orderNo);
 }

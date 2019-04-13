@@ -9,4 +9,6 @@ public class IdUtils {
     public static String getNextId(){
         return String.valueOf(idWorker.nextId());
     }
+
+    public static String buildAOrderNo(){ return  String.valueOf(idWorker.nextId());}
 }

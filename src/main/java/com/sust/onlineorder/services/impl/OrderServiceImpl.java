@@ -37,17 +37,17 @@ public class OrderServiceImpl implements OrderService {
 	private AddressService addressService;
 
 	@Override
-	public int create(CartModel cartModel, UserModel userModel) {
+	public int create(CartModel cartModel, UserModel userModel, String orderNo) {
 
 		Map<String, CartModel.SimpleItem> cartMap = cartModel.getCartMap();
 		TShop shop = shopService.getShopById(cartModel.getShopId());
 
-		return orderMapper.insert(buildOrder(userModel, cartMap, shop));
+		return orderMapper.insert(buildOrder(userModel, cartMap, shop, orderNo));
 	}
 
-	private TOrder buildOrder(UserModel userModel, Map<String, CartModel.SimpleItem> cartMap, TShop shop) {
+	private TOrder buildOrder(UserModel userModel, Map<String, CartModel.SimpleItem> cartMap, TShop shop, String orderNo) {
 		TOrder order = new TOrder();
-		order.setOrderNo(IdUtils.getNextId());
+		order.setOrderNo(orderNo);
 		order.setUserId(userModel.getId());
 		order.setItemIds(buildItemsString(cartMap));
 		order.setAddrId(userModel.getSelectAddrId());
