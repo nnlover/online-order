@@ -60,12 +60,11 @@ public class HomeController {
 	/**
 	 * 商家列表页面
 	 *
-	 * @param model
 	 * @return
 	 */
 	@RequestMapping(value = "/shop/shop-list.json")
 	@ResponseBody
-	public List<TShop> shopList(Model model) {
+	public List<TShop> shopList() {
 		List<TShop> shopListByPage = shopService.getShopListByPage();
 		//model.addAttribute("shopList", shopListByPage);
 		return shopListByPage;
@@ -74,17 +73,21 @@ public class HomeController {
 	/**
 	 * 进店 商品页面
 	 *
-	 * @param model
 	 * @return
 	 */
 	@RequestMapping(value = "/shop/food-list.json")
 	@ResponseBody
-	public List<TFood> inShop(@RequestParam(value = "id", required = true) Integer id, Model model, HttpServletRequest request) {
+	public List<TFood> inShop(@RequestParam(value = "id") Integer id, HttpServletRequest request) {
 		CartModel cart;
 		if((cart = getAttr(request,CART)) == null) {
 			cart = CartModel.createCart();
 			cart.setShopId(id);
 			setAttr(request, CART, cart);
+		}else {
+			if(!id.equals(cart.getShopId())){
+				cart.setShopId(id);
+				setAttr(request, CART, cart);
+			}
 		}
 		List<TFood> foodList = foodService.getFoodsWithShopId(id);
 
@@ -92,7 +95,7 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/shop_detail")
-	public String shopDetail(@RequestParam(value = "id", required = true) Integer id, Model model) {
+	public String shopDetail(@RequestParam(value = "id") Integer id, Model model) {
 		List<TFood> foodList = foodService.getFoodsWithShopId(id);
 		Map<String, List<TFood>> foodsGroup = foodList.stream().collect(Collectors.groupingBy(TFood::getCategory));
 
