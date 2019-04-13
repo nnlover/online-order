@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static com.sust.onlineorder.constants.CartConts.CART;
 import static com.sust.onlineorder.constants.UserConts.USER;
 import static com.sust.onlineorder.utils.SessionUtils.getAttr;
 import static com.sust.onlineorder.utils.SessionUtils.setAttr;
@@ -33,8 +34,6 @@ import static com.sust.onlineorder.utils.SessionUtils.setAttr;
 @Slf4j
 @Controller
 public class CartController {
-
-	private static final String CART = "cart";
 
 	@Resource
 	private FoodService foodService;

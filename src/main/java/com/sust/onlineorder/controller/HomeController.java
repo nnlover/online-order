@@ -1,7 +1,11 @@
 package com.sust.onlineorder.controller;
 
+import com.sust.onlineorder.constants.CartConts;
+import com.sust.onlineorder.constants.UserConts;
 import com.sust.onlineorder.entity.TFood;
 import com.sust.onlineorder.entity.TShop;
+import com.sust.onlineorder.model.CartModel;
+import com.sust.onlineorder.model.UserModel;
 import com.sust.onlineorder.services.FoodService;
 import com.sust.onlineorder.services.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +16,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import static com.sust.onlineorder.constants.CartConts.CART;
+import static com.sust.onlineorder.constants.UserConts.USER;
+import static com.sust.onlineorder.utils.SessionUtils.getAttr;
+import static com.sust.onlineorder.utils.SessionUtils.setAttr;
 
 /**
  * @Author: wangzongyu
@@ -29,7 +39,16 @@ public class HomeController {
 	private FoodService foodService;
 
 	@RequestMapping(value = "/index")
-	public String home() {
+	public String home(HttpServletRequest request) {
+		UserModel user = getAttr(request, USER);
+		if(user == null){
+			user = new UserModel();
+			user.setId(1);
+			user.setUserName("张三");
+			user.setPhone("18611921410");
+			user.setRank(1);
+			setAttr(request,USER, user);
+		}
 		return "index";
 	}
 
@@ -60,9 +79,15 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/shop/food-list.json")
 	@ResponseBody
-	public List<TFood> inShop(@RequestParam(value = "id", required = true) Integer id, Model model) {
+	public List<TFood> inShop(@RequestParam(value = "id", required = true) Integer id, Model model, HttpServletRequest request) {
+		CartModel cart;
+		if((cart = getAttr(request,CART)) == null) {
+			cart = CartModel.createCart();
+			cart.setShopId(id);
+			setAttr(request, CART, cart);
+		}
 		List<TFood> foodList = foodService.getFoodsWithShopId(id);
-		//model.addAttribute("foods", foodList);
+
 		return foodList;
 	}
 
