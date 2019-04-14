@@ -17,7 +17,7 @@ import javax.annotation.Resource;
 @Slf4j
 @Controller
 public class UserController {
-
+	private static final String DEFAULT_ICON = "/image/maomi.jpg";
 	@Resource
 	private UserService userService;
 	@Resource
@@ -29,16 +29,19 @@ public class UserController {
 	                       @RequestParam("phone")String phone,
 	                       @RequestParam("address")String address,
 	                       @RequestParam("pwd")String pwd){
-		TUser user = TUser.builder().
-				userName(name).
-				phone(phone).
-				password(pwd).
-				build();
-		userService.insert(user);
-		TUser tUser = userService.selectByName(name);
+
+		TUser user = new TUser();
+		user.setUserName(name);
+		user.setPassword(pwd);
+		user.setPhone(phone);
+		user.setRank(1);
+		user.setUserIcon(DEFAULT_ICON);
+
+		int id = userService.insert(user);
+		/*TUser tUser = userService.selectByName(name);*/
 		TAddress tAddress = new TAddress();
 		tAddress.setAddress(address);
-		tAddress.setUserId(tUser.getId());
+		tAddress.setUserId(id);
 		addressService.insert(tAddress);
 		return Result.ok();
 	}

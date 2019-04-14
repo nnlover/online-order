@@ -101,17 +101,20 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.sust.onlineorder.entity.TActivity" >
-    insert into t_activity (id, activity_name, preferential_type, 
-      discount, on_sale)
-    values (#{id,jdbcType=INTEGER}, #{activityName,jdbcType=VARCHAR}, #{preferentialType,jdbcType=INTEGER}, 
-      #{discount,jdbcType=INTEGER}, #{onSale,jdbcType=INTEGER})
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_activity (activity_name, preferential_type, discount, 
+      on_sale)
+    values (#{activityName,jdbcType=VARCHAR}, #{preferentialType,jdbcType=INTEGER}, #{discount,jdbcType=INTEGER}, 
+      #{onSale,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.sust.onlineorder.entity.TActivity" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into t_activity
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
       <if test="activityName != null" >
         activity_name,
       </if>
@@ -126,9 +129,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
       <if test="activityName != null" >
         #{activityName,jdbcType=VARCHAR},
       </if>

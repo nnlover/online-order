@@ -74,7 +74,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, shop_id, category, item_name, item_title, picture, count, praise_num, month_sale, 
+    id, shop_id, category, item_name, item_title, picture, `count`, praise_num, month_sale, 
     price, orgin_price, activity_id
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sust.onlineorder.entity.TFoodExample" >
@@ -109,23 +109,24 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.sust.onlineorder.entity.TFood" >
-    insert into t_food (id, shop_id, category, 
-      item_name, item_title, picture, 
-      count, praise_num, month_sale, 
-      price, orgin_price, activity_id
-      )
-    values (#{id,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, #{category,jdbcType=VARCHAR}, 
-      #{itemName,jdbcType=VARCHAR}, #{itemTitle,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, 
-      #{count,jdbcType=INTEGER}, #{praiseNum,jdbcType=INTEGER}, #{monthSale,jdbcType=INTEGER}, 
-      #{price,jdbcType=DECIMAL}, #{orginPrice,jdbcType=DECIMAL}, #{activityId,jdbcType=INTEGER}
-      )
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_food (shop_id, category, item_name, 
+      item_title, picture, `count`, 
+      praise_num, month_sale, price, 
+      orgin_price, activity_id)
+    values (#{shopId,jdbcType=INTEGER}, #{category,jdbcType=VARCHAR}, #{itemName,jdbcType=VARCHAR}, 
+      #{itemTitle,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, #{count,jdbcType=INTEGER}, 
+      #{praiseNum,jdbcType=INTEGER}, #{monthSale,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, 
+      #{orginPrice,jdbcType=DECIMAL}, #{activityId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.sust.onlineorder.entity.TFood" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into t_food
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
       <if test="shopId != null" >
         shop_id,
       </if>
@@ -142,7 +143,7 @@
         picture,
       </if>
       <if test="count != null" >
-        count,
+        `count`,
       </if>
       <if test="praiseNum != null" >
         praise_num,
@@ -161,9 +162,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
       <if test="shopId != null" >
         #{shopId,jdbcType=INTEGER},
       </if>
@@ -227,7 +225,7 @@
         picture = #{record.picture,jdbcType=VARCHAR},
       </if>
       <if test="record.count != null" >
-        count = #{record.count,jdbcType=INTEGER},
+        `count` = #{record.count,jdbcType=INTEGER},
       </if>
       <if test="record.praiseNum != null" >
         praise_num = #{record.praiseNum,jdbcType=INTEGER},
@@ -257,7 +255,7 @@
       item_name = #{record.itemName,jdbcType=VARCHAR},
       item_title = #{record.itemTitle,jdbcType=VARCHAR},
       picture = #{record.picture,jdbcType=VARCHAR},
-      count = #{record.count,jdbcType=INTEGER},
+      `count` = #{record.count,jdbcType=INTEGER},
       praise_num = #{record.praiseNum,jdbcType=INTEGER},
       month_sale = #{record.monthSale,jdbcType=INTEGER},
       price = #{record.price,jdbcType=DECIMAL},
@@ -286,7 +284,7 @@
         picture = #{picture,jdbcType=VARCHAR},
       </if>
       <if test="count != null" >
-        count = #{count,jdbcType=INTEGER},
+        `count` = #{count,jdbcType=INTEGER},
       </if>
       <if test="praiseNum != null" >
         praise_num = #{praiseNum,jdbcType=INTEGER},
@@ -313,7 +311,7 @@
       item_name = #{itemName,jdbcType=VARCHAR},
       item_title = #{itemTitle,jdbcType=VARCHAR},
       picture = #{picture,jdbcType=VARCHAR},
-      count = #{count,jdbcType=INTEGER},
+      `count` = #{count,jdbcType=INTEGER},
       praise_num = #{praiseNum,jdbcType=INTEGER},
       month_sale = #{monthSale,jdbcType=INTEGER},
       price = #{price,jdbcType=DECIMAL},

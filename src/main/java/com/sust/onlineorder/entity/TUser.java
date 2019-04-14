@@ -1,8 +1,5 @@
 package com.sust.onlineorder.entity;
 
-import lombok.Builder;
-
-@Builder
 public class TUser {
     private Integer id;
 
@@ -12,9 +9,9 @@ public class TUser {
 
     private String password;
 
-    private Integer rank;
-
     private String phone;
+
+    private Integer rank;
 
     public Integer getId() {
         return id;
@@ -48,19 +45,19 @@ public class TUser {
         this.password = password == null ? null : password.trim();
     }
 
-    public Integer getRank() {
-        return rank;
-    }
-
-    public void setRank(Integer rank) {
-        this.rank = rank;
-    }
-
     public String getPhone() {
         return phone;
     }
 
     public void setPhone(String phone) {
         this.phone = phone == null ? null : phone.trim();
+    }
+
+    public Integer getRank() {
+        return rank;
+    }
+
+    public void setRank(Integer rank) {
+        this.rank = rank;
     }
 }

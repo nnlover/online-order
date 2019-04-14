@@ -11,6 +11,13 @@
         <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
         <!-- 格式化XML代码 -->
         <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
+
+        <!-- 数据库关键字冲突,自动处理 -->
+        <property name="autoDelimitKeywords" value="true"/>
+        <!-- 用反引号`包裹,默认是双引号"-->
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
         <commentGenerator>
             <property name="suppressDate" value="false"/>
             <property name="suppressAllComments" value="true"/>
@@ -54,24 +61,31 @@
 
         <table tableName="t_activity" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
             <property name="useActualColumnNames" value="false" />
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
         <table tableName="t_address" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
             <property name="useActualColumnNames" value="false" />
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
         <table tableName="t_collection" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
             <property name="useActualColumnNames" value="false" />
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
         <table tableName="t_food" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
             <property name="useActualColumnNames" value="false" />
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
         <table tableName="t_order" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
             <property name="useActualColumnNames" value="false" />
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
         <table tableName="t_shop" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
             <property name="useActualColumnNames" value="false" />
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
         <table tableName="t_user" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
             <property name="useActualColumnNames" value="false" />
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
 
     </context>

@@ -112,25 +112,26 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.sust.onlineorder.entity.TShop" >
-    insert into t_shop (id, shop_name, title, 
-      dispatch_pay, dispatch_time, assess_rate, 
-      address, dispatch_price, salesroom_price, 
-      phone, business_time, main_picture, 
-      average, month_pay, shop_type
-      )
-    values (#{id,jdbcType=INTEGER}, #{shopName,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
-      #{dispatchPay,jdbcType=INTEGER}, #{dispatchTime,jdbcType=INTEGER}, #{assessRate,jdbcType=DECIMAL}, 
-      #{address,jdbcType=VARCHAR}, #{dispatchPrice,jdbcType=DECIMAL}, #{salesroomPrice,jdbcType=DECIMAL}, 
-      #{phone,jdbcType=VARCHAR}, #{businessTime,jdbcType=VARCHAR}, #{mainPicture,jdbcType=VARCHAR}, 
-      #{average,jdbcType=INTEGER}, #{monthPay,jdbcType=INTEGER}, #{shopType,jdbcType=INTEGER}
-      )
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_shop (shop_name, title, dispatch_pay, 
+      dispatch_time, assess_rate, address, 
+      dispatch_price, salesroom_price, phone, 
+      business_time, main_picture, average, 
+      month_pay, shop_type)
+    values (#{shopName,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{dispatchPay,jdbcType=INTEGER}, 
+      #{dispatchTime,jdbcType=INTEGER}, #{assessRate,jdbcType=DECIMAL}, #{address,jdbcType=VARCHAR}, 
+      #{dispatchPrice,jdbcType=DECIMAL}, #{salesroomPrice,jdbcType=DECIMAL}, #{phone,jdbcType=VARCHAR}, 
+      #{businessTime,jdbcType=VARCHAR}, #{mainPicture,jdbcType=VARCHAR}, #{average,jdbcType=INTEGER}, 
+      #{monthPay,jdbcType=INTEGER}, #{shopType,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.sust.onlineorder.entity.TShop" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into t_shop
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
       <if test="shopName != null" >
         shop_name,
       </if>
@@ -175,9 +176,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
       <if test="shopName != null" >
         #{shopName,jdbcType=VARCHAR},
       </if>

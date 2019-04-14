@@ -22,9 +22,9 @@ public interface TAddressMapper {
 
     TAddress selectByPrimaryKey(Integer id);
 
-    int updateByExampleSelective(@Param("record") TAddress record, @Param("model") TAddressExample example);
+    int updateByExampleSelective(@Param("record") TAddress record, @Param("example") TAddressExample example);
 
-    int updateByExample(@Param("record") TAddress record, @Param("model") TAddressExample example);
+    int updateByExample(@Param("record") TAddress record, @Param("example") TAddressExample example);
 
     int updateByPrimaryKeySelective(TAddress record);
 
