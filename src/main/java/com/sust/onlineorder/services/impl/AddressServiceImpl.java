@@ -25,4 +25,10 @@ public class AddressServiceImpl implements AddressService {
 		example.createCriteria().andUserIdEqualTo(userId);
 		return  addressMapper.selectByExample(example);
 	}
+
+	@Override
+	public int insert(TAddress tAddress) {
+		return addressMapper.insert(tAddress);
+
+	}
 }

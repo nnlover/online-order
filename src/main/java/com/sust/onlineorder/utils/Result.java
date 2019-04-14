@@ -5,9 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.List;
 
-/**
- * 2018/4/23
- */
 public class Result {
 
     // 定义jackson对象

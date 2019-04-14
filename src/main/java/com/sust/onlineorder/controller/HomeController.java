@@ -1,11 +1,8 @@
 package com.sust.onlineorder.controller;
 
-import com.sust.onlineorder.constants.CartConts;
-import com.sust.onlineorder.constants.UserConts;
 import com.sust.onlineorder.entity.TFood;
 import com.sust.onlineorder.entity.TShop;
 import com.sust.onlineorder.model.CartModel;
-import com.sust.onlineorder.model.UserModel;
 import com.sust.onlineorder.services.FoodService;
 import com.sust.onlineorder.services.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,15 +19,10 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import static com.sust.onlineorder.constants.CartConts.CART;
-import static com.sust.onlineorder.constants.UserConts.USER;
 import static com.sust.onlineorder.model.UserModel.setUserSession;
 import static com.sust.onlineorder.utils.SessionUtils.getAttr;
 import static com.sust.onlineorder.utils.SessionUtils.setAttr;
 
-/**
- * @Author: wangzongyu
- * @Date: 2019/2/13 21:32
- */
 @Controller
 public class HomeController {
 
@@ -73,12 +65,12 @@ public class HomeController {
 	@ResponseBody
 	public List<TFood> inShop(@RequestParam(value = "id") Integer id, HttpServletRequest request) {
 		CartModel cart;
-		if((cart = getAttr(request,CART)) == null) {
+		if ((cart = getAttr(request, CART)) == null) {
 			cart = CartModel.createCart();
 			cart.setShopId(id);
 			setAttr(request, CART, cart);
-		}else {
-			if(!id.equals(cart.getShopId())){
+		} else {
+			if (!id.equals(cart.getShopId())) {
 				cart.setShopId(id);
 				setAttr(request, CART, cart);
 			}

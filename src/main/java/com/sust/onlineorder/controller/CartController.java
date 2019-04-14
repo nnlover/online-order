@@ -30,10 +30,7 @@ import static com.sust.onlineorder.utils.IdUtils.buildAOrderNo;
 import static com.sust.onlineorder.utils.SessionUtils.getAttr;
 import static com.sust.onlineorder.utils.SessionUtils.setAttr;
 
-/**
- * @Author: wangzongyu
- * @Date: 2019/3/24 21:52
- */
+
 @Slf4j
 @Controller
 public class CartController {

@@ -8,9 +8,6 @@ import java.util.List;
 
 /**
  * 订餐系统自定义响应结构
- * OnlineOrder
- * com.sust.utils
- * 2018/4/23
  */
 public class JsonUtils {
 

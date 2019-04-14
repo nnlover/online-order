@@ -1,5 +1,8 @@
 package com.sust.onlineorder.entity;
 
+import lombok.Builder;
+
+@Builder
 public class TUser {
     private Integer id;
 

@@ -3,9 +3,6 @@ package com.sust.onlineorder.utils;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-/**
- * 2018/4/23
- */
 public class ExceptionUtil {
     /**
      * 获取异常的堆栈信息
