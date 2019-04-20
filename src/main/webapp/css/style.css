@@ -1254,6 +1254,8 @@ a.morebtn {
     -ms-border-radius: 3px;
     width: 80px;
     margin-bottom: 10px;
+    position: relative ;
+    left: 80%;
 }
 .b-search:after {
   content: url(../images/arow.png) 0px 0px;

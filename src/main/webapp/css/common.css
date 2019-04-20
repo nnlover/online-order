@@ -1,5 +1,5 @@
 
-.sub_btn{
+.sub_btn {
     height: 40px;
     width: 150px;
     background: #5fa022;
@@ -8,7 +8,7 @@
     padding: 0.7em 1.2em;
 }
 
-.login_btn{
+.login_btn {
     height: 40px;
     width: 80px;
     background: #5fa022;
@@ -18,3 +18,154 @@
     display: inline-block;
     text-transform: uppercase;
 }
+
+div {
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+.fl {
+    float: left;
+}
+
+/*订单列表*/
+.order-list {
+    box-shadow: 1px 1px 2px #e2e3e3;
+    font-size: 12px;
+    color: #333;
+    border: 1px solid #e0e0e0;
+    background: #f8f8f8;
+    margin-left: 10%;
+    margin-bottom: 16px;
+    height: 160px;
+    width: 780px;
+
+}
+
+.order-hd {
+    height: 40px;
+    line-height: 40px;
+    padding-left: 10px;
+}
+
+.order-hd span {
+    margin-right: 65px;
+}
+
+.order-hd i {
+    color: #999;
+}
+
+.order-bd {
+    overflow: hidden;
+    background: #fff;
+}
+
+.order-bd .restaurant-msg {
+    width: 235px;
+}
+
+.order-bd .restaurant-msg div {
+    display: table-cell;
+    height: 55px;
+    padding-top: 12px;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.order-bd .restaurant-msg p {
+    min-height: 19px;
+    padding: 8px 0 6px 9px;
+    line-height: 1.8;
+    word-break: break-all;
+    word-warp: break-word;
+}
+
+.order-bd .restaurant-msg p i {
+    margin: 0 5px 0 0px;
+    background: url(../images/icon.png) 0px -94px no-repeat;
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+}
+
+.order-bd .restaurant-msg p span {
+    width: 200px;
+}
+
+.order-bd .restaurant-msg img {
+    margin: 0 10px 0 15px;
+    vertical-align: middle;
+}
+
+.order-bd .restaurant-msg i {
+    font-weight: bold;
+    font-size: 14px;
+    width: 165px;
+    line-height: 1.6;
+}
+
+.order-bd .order-type {
+    width: 145px;
+    border: 1px solid #e6e6e6;
+    border-top: 0;
+    border-bottom: 0;
+    padding-top: 20px;
+    padding-left: 24px;
+}
+
+.order-bd .order-type p, .order-bd .order-total p {
+    margin-bottom: 14px;
+}
+
+.order-bd .order-total {
+    text-align: center;
+    width: 180px;
+    padding-top: 20px;
+}
+
+.order-bd .order-total i {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.order-bd .order-operate {
+    border-left: 1px solid #e6e6e6;
+    width: 185px;
+    text-align: center;
+}
+
+.padding-margin {
+    margin-bottom: -10000px;
+    padding-bottom: 10000px;
+    padding-top: 14px;
+}
+
+.order-operate .btn {
+    background: #64b93c;
+    padding: 7px 13px;
+    border-radius: 2px;
+}
+
+.order-operate p {
+    padding-bottom: 10px;
+}
+
+.order-details {
+    padding: 9px;
+    border-top: 1px solid #e6e6e6;
+    display: none;
+}
+
+.order-menu-info {
+    width: 472px;
+    border: 1px solid #e6e6e6;
+    background: #fff;
+}
+.btn_a{color:#e38454;}
+see-details i{background: url(../images/icon.png) -50px -22px no-repeat;width:9px;margin-left:2px;height:7px;display: inline-block;}
+.see-details.down i{background-position: -50px -29px;}
+
+.order-details{padding:9px;border-top:1px solid #e6e6e6;display: none;}
+

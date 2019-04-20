@@ -1,239 +1,198 @@
-<!DOCTYPE html>
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE HTML>
 <html>
 <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
-    <meta name="description" content="" />
-    <meta name="viewport" content="user-scalable=no">
-    
-    <meta name="google-site-verification" content="BstJA3X9z6f9HcvoN9AZTwaKo_9Abj_j7dVBPfy640s" />
-    <meta name="baidu-site-verification" content="IYCrtVH0i1" />
-    <meta property="wb:webmaster" content="239d3d1dbdde1b2c" />
-    <link rel="icon" type="image/png" href="images/favicon.ico"/>
-    
-    <script type="text/javascript">
-        
-        (function(document, screen) {if (screen.width < 760) {document.location.href="/mobile/";}}(document, screen));
-    </script>
-    
-    <link rel="stylesheet" href="css/common.css?v=2015-5-20"/>
-    
-    <link rel="stylesheet" href="css/confirm.css"/>
+    <title>Spicemystery a Hotel and Resturant Category Flat Bootstarp Responsive Website Template | Checkout ::
+        w3layouts</title>
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
+    <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="Spicemystery Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design"/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
 
-    <!--[if lte IE 7]><script>window.onload=function(){location.href="/ie6warning/"}</script><![endif]-->
-    <!--[if lt IE 9]>
-    <script src="js/respond.js"></script>
-    <script>
-        var e = "abbr, article, aside, audio, canvas, datalist, details, dialog, eventsource, figure, footer, header, hgroup, mark, menu, meter, nav, output, progress, section, time, video, dh-dialog, dh-checkbox".split(', ');
-         var i= e.length;while (i--){document.createElement(e[i])}
-    </script>
-    <![endif]-->
-    <title>下订单成功</title>
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+    <link href='http://fonts.adminun/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.adminun/css?family=Libre+Baskerville:400,700' rel='stylesheet' type='text/css'>
+    <script src="js/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen"/>
+    <script src="js/simpleCart.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/xcConfirm.css"/>
+    <link rel="stylesheet" href="css/common.css">
+    <script src="js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/xcConfirm.js" type="text/javascript" charset="utf-8"></script>
+    <style type="text/css">
+        .sgBtn {
+            width: 135px;
+            height: 35px;
+            line-height: 35px;
+            margin-left: 10px;
+            margin-top: 10px;
+            text-align: center;
+            background-color: #0095D9;
+            color: #FFFFFF;
+            float: left;
+            border-radius: 5px;
+        }
+    </style>
 </head>
-<body class="day " ng-controller="bodyCtrl"  day-or-night>
-    <section class="common-back" id="wrapBackground">
-        
-            <header id="header">
-                <div class="common-width clearfix">
-                    <h1 class="fl">
-                        <a class="logo base-logo" href="index.html">外卖超人</a>
-                    </h1>
-                    
-                        <ul class="member logging" ng-init="loginInfo=true">
-                            <li><a href="index.html" class="index">首页</a></li>
-                            <li class="userName">
-                                <a href="/account/center/manage/" rel="nofollow" draw-user>18005151538<em></em></a>
-                                <div>
-                                    <p><a href="/account/center/manage/"  rel="nofollow">账号管理</a></p>
-                                    <p><a href="/account/center/address/"  rel="nofollow">地址管理</a></p>
-                                    <p class="no-bo"><a id="logout" href="/account/logout/" referer-url rel="nofollow">退出</a></p>
-                                </div>
-                            </li>
-                            <li class=""><a href="/account/center/orders/" class="order-center"  rel="nofollow">我的订单</a></li>
-                            <li class=""><a href="/account/center/favorite/"  rel="nofollow">我的收藏</a></li>
-                            <li class=""><a href="/account/gift/center/"  rel="nofollow">氪星礼品站</a></li>
-                            <li class="phone-client "><a href="/app/"  rel="nofollow" target="_blank"><span>手机客户端</span></a></li>
-                        </ul>
-                    
-                </div>
-            </header>
-        
-        <div id="main-box">
-             <!--二维码-->
-            <div class="qrCode-frame" ng-hide="qrCodeStatus">
-                <img src="images/wx.png" alt="扫描二维码" />
-                <em ng-click="qrCodeStatus=true">X</em>
-            </div>
-        
-            <div ng-controller="colorAction">
-                <div class="dayColor_two"></div>
-                <div class="dayColor_one"></div>
-                <div class="dayColor_three" ng-class="{dayColor_threeActive:threeActive}"></div>
-            </div>
-        
-            
-	<section class="confirm-main common-width clearfix">
-        <div class="confirm-content fl">
-            <div class="content">
-                <h3>订单已成功提交</h3>
-                <p>请保持手机13851435593畅通，稍后超人客服或餐厅会与您联系。</p>
-                <p>感谢使用外卖超人。</p>
-                
-                    
-                    <p>获得氪星币：<span class="c_xkb">320</span>个</p>
-                    
-                
-                <a href="/account/center/orders/" class="order">查看订单</a>
-                
-            </div>
-        </div>
-        <div class="app_download fl">
-            <h4>下载外卖超人手机App</h4>
-            <p>用手机扫描下方二维码</p>
-            <p><img src="images/confirm_code.png" alt="App二维码" class="code-img"/></p>
-            <p>或电脑直接下载</p>
-            <div class="down-btn">
-                <a href="/marketing/imessage/" target="_blank" class="ios" title="iOS下载">iOS下载</a>
-                <a href="/marketing/android/" target="_blank" class="Android" title="Android下载">Android下载</a>
-            </div>
-            <p>也可以从各大应用市场搜索下载外卖超人</p>
-            <div class="chaoren-weixin">
-                <img src="images/confirm_code_small.png" class="code-img"/>
-                <p>关注外卖超人微信公共账号微信也可以订外卖</p>
-            </div>
-        </div>
-    </section>
-    
-    <!--one tip-->
-    
-        
-        <div class="common-layer" id="layer-tip"></div>
-        <div id="gift-tip" class="gift-tip">
-            <em ng-click="closeTip()"></em>
-            <div>
-                您获得了320个氪星币！
-                <p>您可以查看<a href="/account/gift/center/">氪星礼品站</a></p>
-            </div>
-        </div>
-        
-    
-
-        </div>
-    </section>
-    
-        <footer id="footer">
-        <div class="footer-first gray">
-            <div class="company-info clearfix fs14 gray">
-                <a href="/about_us/" target="_blank"  rel="nofollow">关于我们</a>
-                <a href="/help/" target="_blank"  rel="nofollow">帮助中心</a>
-                <a href="/terms-and-conditions/" target="_blank"  rel="nofollow">法律声明</a>
-                <a href="/jobs/" target="_blank"  rel="nofollow">人才招聘</a>
-                <a href="/contact/" target="_blank"  rel="nofollow">联系我们</a>
-                <a href="javascript:;" user-feedback ng-click="userFeedback=true" class="last" rel="nofollow">意见反馈</a>
-                <a href="/restaurant/list/shanghai/1/" class="last" target="_blank" style="display:none">上海餐厅导航</a>
-            </div>
-        </div>
-        <div class="footer-last">
-            <a target="_blank" class="foot-logo-1 base-logo" href="index.html"></a>
-            <div class="tc fs14 light-gray mb10">
-              ©2014 www.sucainiu.com All Rights Reserved - 素材牛 - <a href="http://www.sucainiu.com/templates" target="_blank">模板免费下载</a>
-            </div>
-        </div>
-    </footer>
-    
-    
-    <dh-dialog class="disnone" height="500" feeedbackclass="userFeedback" type="user-feedback" header="意见反馈" show="userFeedback">
-        <div ng-controller="feedbackCtrl">
-            <form novalidate="true" name="feedbackForm" class="inline">
-                <div class="form-group row mb10">
-                    <label class="col-3">联系方式：</label>
-                    <div class="col-8">
-                        <input type="text" maxlength="20" name="userContact" required ng-focus="userContactFocus()" ng-class="{error:feedback.phoneMessage}" placeholder="请输入您的手机号码" ng-model="feedback.userContact"/>
-                    </div>
-                </div>
-                <div class="row mb10">
-                    <div class="clo-8 col-offset-3" ng-if="feedback.phoneMessage">
-                        <span class="vaildate-error">联系方式不能为空</span>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-3 vt">反馈信息：</label>
-                    <div class="col-8">
-                        <textarea name="feedbackMessage"  placeholder="可以说说您对外卖超人的意见" ng-focus="feedbacFocus()" required ng-class="{error:feedback.feedbackMessageTip}" ng-model="feedback.feedbackMessage" maxlength="300" cols="25" rows="7"></textarea>
-                    </div>
-                </div>
-                <div class="row mb10">
-                    <div class="clo-8 col-offset-3" ng-if="feedback.feedbackMessageTip">
-                        <span class="vaildate-error">反馈信息不能为空</span>
-                    </div>
-                </div>
-                <div class="tc">
-                    <button class="btn normal-btn btn-success" ng-click="feedbackSubmit()">确认</button>
-                    <button class="btn normal-btn btn-cancel" ng-click="feedbackCancel()">取消</button>
-                </div>
-            </form>
-        </div>
-        <div class="common-dialog-footer">
-            咨询加QQ群：337212031
-        </div>
-    </dh-dialog>
-    
-     <ul class="site-fixed">
-        <li class="scroll-top"><img src="images/scroll_top1.png" alt=""/> </li>
-        <li class="scorll-feekback" ng-click="userFeedback=true">
-            <img src="images/scorll_feekback.png" alt=""/>
-            <div>意见反馈</div>
-        </li>
-        <li class="scroll-wx">
-            <img src="images/scroll_wx.png" alt=""/>
-             <div><img src="images/wx.png" alt=""/></div>
-        </li>
-    </ul>
-    
-    <script type="text/javascript" src="js/angular.min.js"></script>
-    <script src="js/common.js"></script>
-    
-     
-    <script src="js/service.js"></script>
-    
-    <script>var feedbackUrl = '/ajax/feedback/';var app = angular.module("app", ["dh.dialog", "dh.form", 'dh.service', 'dh.other']);</script>
-    <!--[if lt IE 9]><script src="js/fix.js"></script><![endif]-->
-    
-    
-<script src="js/confirm.js"></script>
-
-    
-    <script>angular.bootstrap(document, ["app"]);</script>
-
-    <!-- Baidu Analytics -->
-
-<!-- End Baidu Tracking Code -->
-
-<!-- Baidu Remarketing code -->
-<script type="text/javascript">
-<!--
-(function (d) {
-window.bd_cpro_rtid="rHDzrHT";
-var s = d.createElement("script");s.type = "text/javascript";s.async = true;s.src = location.protocol + "//cpro.baidu.com/cpro/ui/rt.js";
-var s0 = d.getElementsByTagName("script")[0];s0.parentNode.insertBefore(s, s0);
-})(document);
-//-->
-</script>
-<!-- End Baidu Remarketing code -->
-
-<!-- Google Analytics Code -->
+<body>
+<!-- header -->
+<div class="header-item"></div>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-33138478-1', 'waimaichaoren.com');
-  ga('send', 'pageview');
-  ga('require', 'ecommerce', 'ecommerce.js');
+    $(document).load($('.header-item').load('header.html'));
 </script>
-<!-- End Google Analytics Code -->
+<!--
+<!-- header -->
+<div class="cart-items">
+    <div id="checked_items" class="container">
+        <h1>My order List</h1>
+        <script>$(document).ready(function (c) {
+            $('.close1').on('click', function (c) {
+                $('.cart-header').fadeOut('slow', function (c) {
+                    $('.cart-header').remove();
+                });
+            });
+        });
+        </script>
+        <!--TODO::订单列表-->
+        <div class="order-list ">
+            <div class="order-hd">
+                <span><i>订单编号：D-03788798</i></span><i>创建时间：2015-05-03 09:26:52</i>
+            </div>
+            <div class="order-bd clearfix">
+                <div class="fl restaurant-msg">
+                    <div>
+                        <img src="http://dhcrestaurantlogo.dhero.cn/1019?v=1402245333" alt="" width="43" height="43"
+                             class="fl">
+                        <i class="fl">吉祥馄饨 (高安路店)</i>
+                    </div>
+                    <p class="clearfix">
+                        <i class="fl"></i>
+                        <span class="fl">餐厅电话：021-64738871, 18019138185</span>
+                    </p>
+                </div>
+                <div class="fl order-type padding-margin">
+                    <p>订单类型：餐到付款</p>
+                    <p>订单状态：等待确认</p>
+                </div>
+                <div class="fl order-total padding-margin">
+                    <p>订单金额</p>
+                    <p><i>￥32.00</i></p>
+                </div>
+                <div class="order-operate fl padding-margin">
+                    <!--TODO:: 查看详情需要能附加一段 HTML 在当前的 div 内-->
+                    <p>
+                        <a href="javascript:" order-number="" orderid="3788798"
+                           class="btn_a see-details">查看详情<i></i></a>
+                    </p>
+                </div>
+            </div>
+            <div class="order-details clearfix">
+                <div ng-hide="orderStatus['3788798']" class="order-loading">
+                    <span ng-show="orderStatus['3788798_error']" class="order-hide ng-hide">访问出错，请重新加载！</span>
+                </div>
+                <div ng-show="orderStatus['3788798']" class="ng-hide">
+                    <div class="order-menu-info fl">
+                        <div class="order-menu-inner">
+                            <div class="cart-thead clearfix">
+                                <div class="goods-name">商品</div>
+                                <div class="goods-count">份数</div>
+                                <div class="goods-price">单价</div>
+                                <div class="goods-subtotal">小计</div>
+                            </div>
+                            <div class="cart-body">
+                                <!-- ngRepeat: menu_item in order['3788798'].menu_items_data -->
+                                <!-- ngRepeat: add_item in order['3788798'].total_additions -->
+                            </div>
+                            <div class="cart-footer clearfix">
+                                <div class="order-adress fl">
+                                    <!-- ngIf: order['3788798'].preorder_time -->
+                                    <div><label for="">送餐电话：</label><span ng-bind="order['3788798'].customer_phone"
+                                                                          class="ng-binding"></span></div>
+                                    <div class="clearfix">
+                                        <label for="" class="fl">送餐地址：</label>
+                                        <p class="fl ng-binding" ng-bind="order['3788798'].address_text"></p>
+                                    </div>
+                                    <!-- ngIf: order['3788798'].comment -->
+                                </div>
+                                <div class="total fr">
+                                    <p>配送费：<span ng-bind="order['3788798'].delivery_fee|currency:'￥'"
+                                                 class="ng-binding"></span></p>
+                                    <p>优惠券：<span ng-bind="order['3788798'].coupon_amount|currency:'￥'"
+                                                 class="ng-binding"></span></p>
+                                    <p class="order-total">实付金额：<span
+                                            ng-bind="order['3788798'].order_total|currency:'￥'"
+                                            class="ng-binding"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="order-logistics fl">
+                        <!-- ngRepeat: workflow in order['3788798'].status_workflow -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 遮罩层 -->
+    <div id="cover"
+         style="background: #000; position: absolute; left: 0px; top: 0px; width: 100%; filter: alpha(opacity=30); opacity: 0.3; display: none; z-index: 2 ">
 
+    </div>
+    <!-- 弹窗 -->
+    <div id="showdiv"
+         style="width: 80%; margin: 0 auto; height: 9.5rem; border: 1px solid #999; display: none; position: absolute; top: 40%; left: 10%; z-index: 3; background: #fff">
+        <!-- 标题 -->
+        <div style="background: #F8F7F7; width: 100%; height: 2rem; font-size: 0.65rem; line-height: 2rem; border: 1px solid #999; text-align: center;">
+            订单已成功提交
+        </div>
+        <!-- 内容 -->
+        <div style="text-indent: 50px; height: 4rem; font-size: 0.5rem; padding: 0.5rem; line-height: 1rem; ">
+            请保持手机13851435593畅通，稍后超人客服或餐厅会与您联系。
 
+            感谢使用。
+
+        </div>
+        <!-- 按钮 -->
+        <div style="background: #418BCA; width: 80%; margin: 0 auto; height: 1.5rem; line-height: 1.5rem; text-align: center;color: #fff;margin-top: 1rem; -moz-border-radius: .128rem; -webkit-border-radius: .128rem; border-radius: .128rem;font-size: .59733rem;"
+             onclick="closeWindow()">
+            <a id="order-detail" class="" href="orders.html" onclick="">查看订单</a>
+        </div>
+    </div>
+    <!-- checkout -->
+    <!-- footer-->
+    <div class="footer">
+        <div class="container">
+            <div class="footer-left">
+                <p>Copyrights © 2015 SpiceMystery All rights reserved | Design by <a
+                        href="http://w3layouts.com/">W3layouts</a></p>
+            </div>
+            <div class="footer-right">
+                <ul>
+                    <li><a href="#"><i class="fbk"></i></a></li>
+                    <li><a href="#"><i class="googpl"></i></a></li>
+                    <li><a href="#"><i class="link"></i></a></li>
+                    <li><a href="#"><i class="rss"></i></a></li>
+                    <li><a href="#"><i class="twt"></i></a></li>
+                </ul>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <!-- footer-->
+    <script>
+
+    </script>
 </body>
 </html>
