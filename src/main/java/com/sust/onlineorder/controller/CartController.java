@@ -28,6 +28,7 @@ import static com.sust.onlineorder.constants.UserConts.USER;
 import static com.sust.onlineorder.model.UserModel.setUserSession;
 import static com.sust.onlineorder.utils.IdUtils.buildAOrderNo;
 import static com.sust.onlineorder.utils.SessionUtils.getAttr;
+import static com.sust.onlineorder.utils.SessionUtils.removeAttr;
 import static com.sust.onlineorder.utils.SessionUtils.setAttr;
 
 
@@ -113,6 +114,7 @@ public class CartController {
 		String orderNo = buildAOrderNo();
 		int i = orderService.create(cart, user, orderNo);
 		if(i > 0){
+			removeAttr(request,CART);
 			return Result.ok(orderNo);
 		}
 		return Result.build(400, "订单出现异常");

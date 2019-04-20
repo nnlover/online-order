@@ -14,4 +14,9 @@ public class SessionUtils {
 		HttpSession session = request.getSession();
 		session.setAttribute(name, val);
 	}
+
+	public static void removeAttr(HttpServletRequest request, String name){
+		HttpSession session = request.getSession();
+		session.removeAttribute(name);
+	}
 }
