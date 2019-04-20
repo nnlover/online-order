@@ -27,4 +27,14 @@ public class UserServiceImpl implements UserService {
 		example.createCriteria().andUserNameEqualTo(name);
 		return userMapper.selectByExample(example).get(0);
 	}
+
+	@Override
+	public TUser selectByPhone(String phone, String pwd) {
+		TUserExample example = new TUserExample();
+		example.createCriteria().
+				andPhoneEqualTo(phone).
+				andPasswordEqualTo(pwd);
+		List<TUser> userList = userMapper.selectByExample(example);
+		return userList.size() > 0 ? userList.get(0) : new TUser();
+	}
 }

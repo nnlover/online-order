@@ -8,4 +8,6 @@ public interface UserService {
 	int insert(TUser user);
 
 	TUser selectByName(String name);
+
+	TUser selectByPhone(String phone, String pwd);
 }

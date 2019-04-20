@@ -26,6 +26,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href='http://fonts.adminun/css?family=Libre+Baskerville:400,700' rel='stylesheet' type='text/css'>
     <script src="js/jquery.min.js"></script>
     <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="css/common.css" type="text/css" media="screen"/>
     <script src="js/simpleCart.min.js"></script>
 </head>
 <body>
@@ -116,7 +117,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="clearfix"></div>
             <div class="register-but">
                 <form id="register_id">
-                    <input type="submit" value="submit" onsubmit="say()">
+                    <input type="button" class="sub_btn" value="register" onclick="register_sum()">
                     <div class="clearfix"></div>
                 </form>
             </div>
@@ -146,52 +147,37 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </div>
 <!-- footer-->
 <script>
-    $(document).ready(function () {
-        $("#register_id").submit(function () {
-            var name = $("#real_name").val();
-            var phone = $("#phone_num").val();
-            var address = $("#address").val();
-            var pwd = $("#password").val();
-            var confirm_pwd = $("#confirm_pwd").val();
+    function register_sum(){
+        var name = $("#real_name").val();
+        var phone = $("#phone_num").val();
+        var address = $("#address").val();
+        var pwd = $("#password").val();
+        var confirm_pwd = $("#confirm_pwd").val();
 
-           /* if(name == "" || phone == "" || address == ""){
-                alert("有选项为空！");
-                return;
-            }*/
-            if(pwd.trim() != confirm_pwd.trim()){
-                alert("两个输入密码不一致！");
-                return;
-            }
+        /* if(name == "" || phone == "" || address == ""){
+             alert("有选项为空！");
+             return;
+         }*/
+        /* if(pwd.trim() != confirm_pwd.trim()){
+             alert("两个输入密码不一致！");
+             return;
+         }*/
 
-            $.post("/register/user",
-                {
-                    name: name,
-                    phone: phone,
-                    address: address,
-                    pwd: pwd
-                },
-                function(data){
-                    alert("即将为您跳转到登录页面！！" + data);
-                    window.open("http://localhost:8011/login.html");
-                    /*function jumurl(){
-                        window.location.href = 'login.html';
+        $.post("/register/user",
+            {
+                name: name,
+                phone: phone,
+                address: address,
+                pwd: pwd
+            },
+            function(data){
+                function jumurl(){
+                    window.location.href = 'login.html';
 
-                    }
-                    setTimeout(jumurl,500);
-                    return false;*/
-                });
-           /* alert("即将为您跳转到登录页面！！");
-            function jumurl(){
-                window.location.href = 'login.html';
-            }
-            setTimeout(jumurl,500);
-            return false;*/
-           // window.open("http://localhost:8011/login.html");
-        });
-
-    });
-    function say(){
-        alert("hahah");
+                }
+                setTimeout(jumurl,50);
+                return true;
+            });
     }
 </script>
 </body>

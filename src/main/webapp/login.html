@@ -19,6 +19,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href='http://fonts.adminun/css?family=Libre+Baskerville:400,700' rel='stylesheet' type='text/css'>
 <script src="js/jquery.min.js"></script>
 <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="css/common.css" type="text/css" media="screen"/>
 <script src="js/simpleCart.min.js"> </script>		
 </head>
 <body>
@@ -81,15 +82,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<p>If you have an account with us, please log in.</p>
 					<form>
 						<div>
-							<span>Email Address<label>*</label></span>
-							<input type="text"> 
+							<span>phone<label>*</label></span>
+							<input id="phone" type="text">
 						</div>
 						<div>
 							<span>Password<label>*</label></span>
-							<input type="password"> 
+							<input id="pwd" type="password">
 						</div>
 						<a class="forgot" href="#">Forgot Your Password?</a>
-						<input type="submit" value="Login">
+						<!--<input type="submit" value="Login" onclick="login_fun()">-->
+						<input type="button" class="login_btn" value="Login" onclick="login_fun()">
 					</form>
 			   </div>	
 				<div class="clearfix"> </div>
@@ -117,6 +119,29 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="clearfix"></div>
 		</div>
 	</div>
-<!-- footer-->	
+<!-- footer-->
+<script>
+	function login_fun() {
+		//alert("hah")
+		var phone = $("#phone").val();
+		var pwd = $("#pwd").val();
+        $.post("/login/user",
+            {
+                phone: phone,
+                pwd: pwd
+            },
+            function(data){
+            	if(data.status == 200) {
+                    function jumurl() {
+                        window.location.href = '/index.html';
+                    }
+                    setTimeout(jumurl, 50);
+                    return true;
+                }else {
+            	    alert("用户名或密码错误");
+				}
+            });
+    }
+</script>
 </body>
 </html>

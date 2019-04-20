@@ -31,6 +31,10 @@ public class Result {
         return new Result(null);
     }
 
+    public static Result failed(String msg) {
+        return Result.build(400, msg);
+    }
+
     public Result() {
 
     }

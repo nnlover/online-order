@@ -1,0 +1,20 @@
+
+.sub_btn{
+    height: 40px;
+    width: 150px;
+    background: #5fa022;
+    color: #FFF;
+    font-size: 1em;
+    padding: 0.7em 1.2em;
+}
+
+.login_btn{
+    height: 40px;
+    width: 80px;
+    background: #5fa022;
+    color: #FFF;
+    font-size: 1em;
+    padding: 0.7em 1.2em;
+    display: inline-block;
+    text-transform: uppercase;
+}
