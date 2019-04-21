@@ -25,11 +25,8 @@ import java.util.stream.Collectors;
 
 import static com.sust.onlineorder.constants.CartConts.CART;
 import static com.sust.onlineorder.constants.UserConts.USER;
-import static com.sust.onlineorder.model.UserModel.setUserSession;
 import static com.sust.onlineorder.utils.IdUtils.buildAOrderNo;
-import static com.sust.onlineorder.utils.SessionUtils.getAttr;
-import static com.sust.onlineorder.utils.SessionUtils.removeAttr;
-import static com.sust.onlineorder.utils.SessionUtils.setAttr;
+import static com.sust.onlineorder.utils.SessionUtils.*;
 
 
 @Slf4j
@@ -87,7 +84,6 @@ public class CartController {
 	@RequestMapping("/cart/cart-list.json")
 	@ResponseBody
 	public CheckoutDetailDTO cartList(String shopId, HttpServletRequest request) {
-		setUserSession(request);
 		CartModel cart = getAttr(request, CART);
 		List<OutputCartItem> items = new ArrayList<>();
 		if (cart != null) {
@@ -111,10 +107,13 @@ public class CartController {
 			return Result.build(400, "订单出现异常");
 		}
 		UserModel user = getAttr(request, USER);
+		if (user == null || user.getId() == null || user.getId() == 0) {
+			return Result.build(400, "请先登录");
+		}
 		String orderNo = "D-" + buildAOrderNo().substring(0, 8);
 		int i = orderService.create(cart, user, orderNo);
-		if(i > 0){
-			removeAttr(request,CART);
+		if (i > 0) {
+			removeAttr(request, CART);
 			return Result.ok(orderNo);
 		}
 		return Result.build(400, "订单出现异常");

@@ -205,26 +205,31 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
     <!-- footer-->
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $.getJSON("order/user-order-list.json",
-                function(res){
-                var order_list = "";
-                    $.each(res, function (i, order){
+                function (res) {
+                    var order_list = "";
+                    if(res.status != 200){
+                        alert(res.msg);
+                        return ;
+                    }
+                    var data = res.data;
+                    $.each(data, function (i, order) {
                         var oneOrder =
                             "<div class=\"order-list \">" +
                             "    <div class=\"order-hd\">" +
-                            "        <span><i>订单编号："+order.orderNo+"</i></span><i>创建时间："+order.createTime+"</i>" +
+                            "        <span><i>订单编号：" + order.orderNo + "</i></span><i>创建时间：" + order.createTime + "</i>" +
                             "    </div>" +
                             "    <div class=\"order-bd clearfix\">" +
                             "        <div class=\"fl restaurant-msg\">" +
                             "            <div>" +
                             "                <img src=\"http://dhcrestaurantlogo.dhero.cn/1019?v=1402245333\" alt=\"\" width=\"43\" height=\"43\"" +
                             "                     class=\"fl\">" +
-                            "                <i class=\"fl\">"+order.shopName+"</i>" +
+                            "                <i class=\"fl\">" + order.shopName + "</i>" +
                             "            </div>" +
                             "            <p class=\"clearfix\">" +
                             "                <i class=\"fl\"></i>" +
-                            "                <span class=\"fl\">餐厅电话："+order.shopPhone+"</span>" +
+                            "                <span class=\"fl\">餐厅电话：" + order.shopPhone + "</span>" +
                             "            </p>" +
                             "        </div>" +
                             "        <div class=\"fl order-type padding-margin\">" +
@@ -233,7 +238,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             "        </div>" +
                             "        <div class=\"fl order-total padding-margin\">" +
                             "            <p>订单金额</p>" +
-                            "            <p><i>￥"+order.orderPrice+"</i></p>" +
+                            "            <p><i>￥" + order.totalPrice + "</i></p>" +
                             "        </div>" +
                             "        <div class=\"order-operate fl padding-margin\">" +
                             "            <!--TODO:: 查看详情需要能附加一段 HTML 在当前的 div 内-->" +
@@ -245,16 +250,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             "    </div>" +
                             "</div>";
 
-                         order_list += oneOrder;
+                        order_list += oneOrder;
                     });
                     $("#checked_items").html(order_list);
                 }
             );
-            
+
             var order_list =
                 "<div class=\"order-list \">" +
                 "    <div class=\"order-hd\">" +
-                "        <span><i>订单编号："+"D-03788798"+"</i></span><i>创建时间："+"2015-05-03 09:26:52"+"</i>" +
+                "        <span><i>订单编号：" + "D-03788798" + "</i></span><i>创建时间：" + "2015-05-03 09:26:52" + "</i>" +
                 "    </div>" +
                 "    <div class=\"order-bd clearfix\">" +
                 "        <div class=\"fl restaurant-msg\">" +

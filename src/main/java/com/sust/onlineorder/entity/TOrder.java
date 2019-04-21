@@ -30,6 +30,8 @@ public class TOrder {
 
     private String shopName;
 
+    private Integer shopId;
+
     public Integer getId() {
         return id;
     }
@@ -132,5 +134,13 @@ public class TOrder {
 
     public void setShopName(String shopName) {
         this.shopName = shopName == null ? null : shopName.trim();
+    }
+
+    public Integer getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(Integer shopId) {
+        this.shopId = shopId;
     }
 }

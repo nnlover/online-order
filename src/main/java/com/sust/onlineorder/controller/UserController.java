@@ -2,7 +2,10 @@ package com.sust.onlineorder.controller;
 
 import com.sust.onlineorder.entity.TAddress;
 import com.sust.onlineorder.entity.TUser;
+import com.sust.onlineorder.model.OutputOrder;
+import com.sust.onlineorder.model.UserModel;
 import com.sust.onlineorder.services.AddressService;
+import com.sust.onlineorder.services.OrderService;
 import com.sust.onlineorder.services.UserService;
 import com.sust.onlineorder.utils.Result;
 import lombok.extern.slf4j.Slf4j;
@@ -13,9 +16,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
+import static com.sust.onlineorder.constants.UserConts.USER;
 import static com.sust.onlineorder.model.UserModel.convertFrom;
 import static com.sust.onlineorder.model.UserModel.setUserSession;
+import static com.sust.onlineorder.utils.SessionUtils.getAttr;
 
 
 @Slf4j
@@ -26,6 +32,8 @@ public class UserController {
 	private UserService userService;
 	@Resource
 	private AddressService addressService;
+	@Resource
+	private OrderService orderService;
 
 	@RequestMapping("/register/user")
 	@ResponseBody
@@ -57,7 +65,7 @@ public class UserController {
 	public Result login(@RequestParam("phone") String phone,
 	                    @RequestParam("pwd") String pwd,
 	                    HttpServletRequest request
-	                    ) {
+	) {
 		if (phone == null || "".equals(phone)) {
 			return Result.failed("电话号码为空");
 		}
@@ -65,12 +73,28 @@ public class UserController {
 			return Result.failed("密码为空");
 		}
 
-		TUser user = userService.selectByPhone(phone,pwd);
+		TUser user = userService.selectByPhone(phone, pwd);
 		if (phone.equals(user.getPhone()) && pwd.equals(user.getPassword())) {
-			setUserSession(request,convertFrom(user));
+			//TODO::只能在登录的地方设置 userSession
+			setUserSession(request, convertFrom(user));
 			return Result.ok();
 		}
 		return Result.failed("电话或者密码错误");
+	}
+
+	@RequestMapping("/order/user-order-list.json")
+	@ResponseBody
+	public Result userOrderList(
+			HttpServletRequest request
+	) {
+
+		UserModel user = getAttr(request, USER);
+		if (user == null || user.getId() == null || user.getId() == 0) {
+			Result.failed("未登录");
+		}
+		List<OutputOrder> orderList = orderService.selectByUser(user.getId());
+
+		return Result.ok(orderList);
 	}
 
 	private boolean checkParam(String name, String phone, String address, String pwd) {

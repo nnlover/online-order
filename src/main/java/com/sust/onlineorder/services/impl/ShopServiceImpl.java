@@ -31,4 +31,12 @@ public class ShopServiceImpl implements ShopService {
 		return tShops.get(0);
 
 	}
+
+	@Override
+	public List<TShop> getShopByIds(List<Integer> shopIds) {
+		TShopExample example = new TShopExample();
+		example.createCriteria().andIdIn(shopIds);
+		return shopMapper.selectByExample(example);
+
+	}
 }

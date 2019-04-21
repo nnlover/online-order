@@ -5,6 +5,7 @@ import com.sust.onlineorder.entity.TShop;
 import com.sust.onlineorder.model.CartModel;
 import com.sust.onlineorder.services.FoodService;
 import com.sust.onlineorder.services.ShopService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,11 +20,11 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import static com.sust.onlineorder.constants.CartConts.CART;
-import static com.sust.onlineorder.model.UserModel.setUserSession;
 import static com.sust.onlineorder.utils.SessionUtils.getAttr;
 import static com.sust.onlineorder.utils.SessionUtils.setAttr;
 
 @Controller
+@Slf4j
 public class HomeController {
 
 	@Autowired
@@ -33,7 +34,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/index")
 	public String home(HttpServletRequest request) {
-		setUserSession(request);
+		//setUserSession(request);
 		return "index";
 	}
 
@@ -75,7 +76,7 @@ public class HomeController {
 				setAttr(request, CART, cart);
 			}
 		}
-		setUserSession(request);
+		log.info("shopId:{}", id);
 		List<TFood> foodList = foodService.getFoodsWithShopId(id);
 
 		return foodList;
@@ -89,7 +90,6 @@ public class HomeController {
 		model.addAttribute("foodsGroup", foodsGroup);
 		return "shop_detail";
 	}
-
 
 	@RequestMapping(value = "/home/page")
 	@ResponseBody
