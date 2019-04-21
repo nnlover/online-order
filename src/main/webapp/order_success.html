@@ -144,31 +144,44 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </div>
             </div>
         </div>
+        <div class="order-list ">
+            <div class="order-hd">
+                <span><i>订单编号：D-03788798</i></span><i>创建时间：2015-05-03 09:26:52</i>
+            </div>
+            <div class="order-bd clearfix">
+                <div class="fl restaurant-msg">
+                    <div>
+                        <img src="http://dhcrestaurantlogo.dhero.cn/1019?v=1402245333" alt="" width="43" height="43"
+                             class="fl">
+                        <i class="fl">吉祥馄饨 (高安路店)</i>
+                    </div>
+                    <p class="clearfix">
+                        <i class="fl"></i>
+                        <span class="fl">餐厅电话：021-64738871, 18019138185</span>
+                    </p>
+                </div>
+                <div class="fl order-type padding-margin">
+                    <p>订单类型：餐到付款</p>
+                    <p>订单状态：等待确认</p>
+                </div>
+                <div class="fl order-total padding-margin">
+                    <p>订单金额</p>
+                    <p><i>￥32.00</i></p>
+                </div>
+                <div class="order-operate fl padding-margin">
+                    <!--TODO:: 查看详情需要能附加一段 HTML 在当前的 div 内-->
+                    <p>
+                        <a href="javascript:" order-number="" orderid="3788798"
+                           class="btn_a see-details">查看详情<i></i></a>
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- 遮罩层 -->
     <div id="cover"
          style="background: #000; position: absolute; left: 0px; top: 0px; width: 100%; filter: alpha(opacity=30); opacity: 0.3; display: none; z-index: 2 ">
 
-    </div>
-    <!-- 弹窗 -->
-    <div id="showdiv"
-         style="width: 80%; margin: 0 auto; height: 9.5rem; border: 1px solid #999; display: none; position: absolute; top: 40%; left: 10%; z-index: 3; background: #fff">
-        <!-- 标题 -->
-        <div style="background: #F8F7F7; width: 100%; height: 2rem; font-size: 0.65rem; line-height: 2rem; border: 1px solid #999; text-align: center;">
-            订单已成功提交
-        </div>
-        <!-- 内容 -->
-        <div style="text-indent: 50px; height: 4rem; font-size: 0.5rem; padding: 0.5rem; line-height: 1rem; ">
-            请保持手机13851435593畅通，稍后超人客服或餐厅会与您联系。
-
-            感谢使用。
-
-        </div>
-        <!-- 按钮 -->
-        <div style="background: #418BCA; width: 80%; margin: 0 auto; height: 1.5rem; line-height: 1.5rem; text-align: center;color: #fff;margin-top: 1rem; -moz-border-radius: .128rem; -webkit-border-radius: .128rem; border-radius: .128rem;font-size: .59733rem;"
-             onclick="closeWindow()">
-            <a id="order-detail" class="" href="orders.html" onclick="">查看订单</a>
-        </div>
     </div>
     <!-- checkout -->
     <!-- footer-->
@@ -192,7 +205,88 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
     <!-- footer-->
     <script>
+        $(document).ready(function() {
+            $.getJSON("order/user-order-list.json",
+                function(res){
+                var order_list = "";
+                    $.each(res, function (i, order){
+                        var oneOrder =
+                            "<div class=\"order-list \">" +
+                            "    <div class=\"order-hd\">" +
+                            "        <span><i>订单编号："+order.orderNo+"</i></span><i>创建时间："+order.createTime+"</i>" +
+                            "    </div>" +
+                            "    <div class=\"order-bd clearfix\">" +
+                            "        <div class=\"fl restaurant-msg\">" +
+                            "            <div>" +
+                            "                <img src=\"http://dhcrestaurantlogo.dhero.cn/1019?v=1402245333\" alt=\"\" width=\"43\" height=\"43\"" +
+                            "                     class=\"fl\">" +
+                            "                <i class=\"fl\">"+order.shopName+"</i>" +
+                            "            </div>" +
+                            "            <p class=\"clearfix\">" +
+                            "                <i class=\"fl\"></i>" +
+                            "                <span class=\"fl\">餐厅电话："+order.shopPhone+"</span>" +
+                            "            </p>" +
+                            "        </div>" +
+                            "        <div class=\"fl order-type padding-margin\">" +
+                            "            <p>订单类型：餐到付款</p>" +
+                            "            <p>订单状态：等待确认</p>" +
+                            "        </div>" +
+                            "        <div class=\"fl order-total padding-margin\">" +
+                            "            <p>订单金额</p>" +
+                            "            <p><i>￥"+order.orderPrice+"</i></p>" +
+                            "        </div>" +
+                            "        <div class=\"order-operate fl padding-margin\">" +
+                            "            <!--TODO:: 查看详情需要能附加一段 HTML 在当前的 div 内-->" +
+                            "            <p>" +
+                            "                <a href=\"javascript:\" order-number=\"\" orderid=\"3788798\"" +
+                            "                   class=\"btn_a see-details\">查看详情<i></i></a>" +
+                            "            </p>" +
+                            "        </div>" +
+                            "    </div>" +
+                            "</div>";
 
+                         order_list += oneOrder;
+                    });
+                    $("#checked_items").html(order_list);
+                }
+            );
+            
+            var order_list =
+                "<div class=\"order-list \">" +
+                "    <div class=\"order-hd\">" +
+                "        <span><i>订单编号："+"D-03788798"+"</i></span><i>创建时间："+"2015-05-03 09:26:52"+"</i>" +
+                "    </div>" +
+                "    <div class=\"order-bd clearfix\">" +
+                "        <div class=\"fl restaurant-msg\">" +
+                "            <div>" +
+                "                <img src=\"http://dhcrestaurantlogo.dhero.cn/1019?v=1402245333\" alt=\"\" width=\"43\" height=\"43\"" +
+                "                     class=\"fl\">" +
+                "                <i class=\"fl\">吉祥馄饨 (高安路店)</i>" +
+                "            </div>" +
+                "            <p class=\"clearfix\">" +
+                "                <i class=\"fl\"></i>" +
+                "                <span class=\"fl\">餐厅电话：021-64738871, 18019138185</span>" +
+                "            </p>" +
+                "        </div>" +
+                "        <div class=\"fl order-type padding-margin\">" +
+                "            <p>订单类型：餐到付款</p>" +
+                "            <p>订单状态：等待确认</p>" +
+                "        </div>" +
+                "        <div class=\"fl order-total padding-margin\">" +
+                "            <p>订单金额</p>" +
+                "            <p><i>￥32.00</i></p>" +
+                "        </div>" +
+                "        <div class=\"order-operate fl padding-margin\">" +
+                "            <!--TODO:: 查看详情需要能附加一段 HTML 在当前的 div 内-->" +
+                "            <p>" +
+                "                <a href=\"javascript:\" order-number=\"\" orderid=\"3788798\"" +
+                "                   class=\"btn_a see-details\">查看详情<i></i></a>" +
+                "            </p>" +
+                "        </div>" +
+                "    </div>" +
+                "</div>"
+
+        });
     </script>
 </body>
 </html>

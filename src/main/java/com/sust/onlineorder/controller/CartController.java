@@ -111,7 +111,7 @@ public class CartController {
 			return Result.build(400, "订单出现异常");
 		}
 		UserModel user = getAttr(request, USER);
-		String orderNo = buildAOrderNo();
+		String orderNo = "D-" + buildAOrderNo().substring(0, 8);
 		int i = orderService.create(cart, user, orderNo);
 		if(i > 0){
 			removeAttr(request,CART);
