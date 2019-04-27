@@ -122,21 +122,14 @@
                      <p><i>￥32.00</i></p>
                  </div>
                  <div class="order-operate fl padding-margin">
-                    
-                         
-                    
-                    
-                    
+
                     <p>
-                        <a href="javascript:" order-number orderId="3788798" class="btn_a see-details">查看详情<i></i></a>
+                        <a href="javascript:show_order_detail();" class="btn_a see-details">查看详情<i></i></a>
                     </p>
                  </div>
              </div>
-             <div class="order-details clearfix">
-                <div ng-hide="orderStatus['3788798']" class="order-loading">
-                    <span ng-show="orderStatus['3788798_error']" class="order-hide">访问出错，请重新加载！</span>
-                </div>
-                <div ng-show="orderStatus['3788798']" class="">
+             <div class="order-details clearfix" >
+                <div ng-show="orderStatus" class="">
                     <div class="order-menu-info fl">
                         <div class="order-menu-inner">
                             <div class="cart-thead clearfix">

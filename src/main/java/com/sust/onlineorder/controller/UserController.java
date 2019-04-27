@@ -75,8 +75,9 @@ public class UserController {
 
 		TUser user = userService.selectByPhone(phone, pwd);
 		if (phone.equals(user.getPhone()) && pwd.equals(user.getPassword())) {
+			List<TAddress> addrList = addressService.getByUserId(user.getId());
 			//TODO::只能在登录的地方设置 userSession
-			setUserSession(request, convertFrom(user));
+			setUserSession(request, convertFrom(user, addrList.get(0)));
 			return Result.ok();
 		}
 		return Result.failed("电话或者密码错误");

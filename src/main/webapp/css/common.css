@@ -169,3 +169,51 @@ see-details i{background: url(../images/icon.png) -50px -22px no-repeat;width:9p
 
 .order-details{padding:9px;border-top:1px solid #e6e6e6;display: none;}
 
+.cart-title{
+    padding:9px;border-top:1px solid #e6e6e6;
+}
+.goods-name{
+    height: 30px;
+    line-height: 40px;
+    padding-left: 10px;
+    width: 200px;
+    font-style: italic;
+}
+
+.goods-count{
+    height: 30px;
+    line-height: 40px;
+    padding-left: 10px;
+    padding-right: 20px;
+    width: 145px;
+    font-style: italic;
+}
+.goods-price{
+    height: 30px;
+    line-height: 40px;
+    padding-left: 10px;
+    width: 185px;
+}
+.goods-subtotal{
+    height: 30px;
+    line-height: 40px;
+    padding-left: 10px;
+    width: 185px;
+    font-style: italic;
+}
+
+.goods-font{
+    font-style: italic;
+    font-size: 14px;
+    text-align: center;
+}
+
+.goods-font2{
+    font-style: italic;
+    font-size: 12px;
+    text-align: center;
+}
+
+.cart-detail{
+    padding:9px;border-top:1px solid #e6e6e6;
+}

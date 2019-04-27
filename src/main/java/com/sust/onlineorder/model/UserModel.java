@@ -1,5 +1,6 @@
 package com.sust.onlineorder.model;
 
+import com.sust.onlineorder.entity.TAddress;
 import com.sust.onlineorder.entity.TUser;
 import lombok.Data;
 
@@ -40,12 +41,13 @@ public class UserModel implements Serializable {
 		setAttr(request, USER, userModel);
 	}
 
-	public static UserModel convertFrom(TUser user){
+	public static UserModel convertFrom(TUser user, TAddress address){
 		UserModel userModel = new UserModel();
 		userModel.setUserName(user.getUserName());
 		userModel.setPhone(user.getPhone());
 		userModel.setRank(user.getRank());
 		userModel.setId(user.getId());
+		userModel.setSelectAddrId(address.getId());
 		return userModel;
 	}
 

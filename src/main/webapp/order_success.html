@@ -171,7 +171,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="order-operate fl padding-margin">
                     <!--TODO:: 查看详情需要能附加一段 HTML 在当前的 div 内-->
                     <p>
-                        <a href="javascript:" order-number="" orderid="3788798"
+                        <a href="javascript:void(0);" order-number="" orderid="3788798"
                            class="btn_a see-details">查看详情<i></i></a>
                     </p>
                 </div>
@@ -205,6 +205,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
     <!-- footer-->
     <script>
+
+        var order_items = new Array();
         $(document).ready(function () {
             $.getJSON("order/user-order-list.json",
                 function (res) {
@@ -215,62 +217,47 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     }
                     var data = res.data;
                     $.each(data, function (i, order) {
-                        var oneOrder =
-                            "<div class=\"order-list \">" +
-                            "    <div class=\"order-hd\">" +
-                            "        <span><i>订单编号：" + order.orderNo + "</i></span><i>创建时间：" + order.createTime + "</i>" +
-                            "    </div>" +
-                            "    <div class=\"order-bd clearfix\">" +
-                            "        <div class=\"fl restaurant-msg\">" +
-                            "            <div>" +
-                            "                <img src=\"http://dhcrestaurantlogo.dhero.cn/1019?v=1402245333\" alt=\"\" width=\"43\" height=\"43\"" +
-                            "                     class=\"fl\">" +
-                            "                <i class=\"fl\">" + order.shopName + "</i>" +
-                            "            </div>" +
-                            "            <p class=\"clearfix\">" +
-                            "                <i class=\"fl\"></i>" +
-                            "                <span class=\"fl\">餐厅电话：" + order.shopPhone + "</span>" +
-                            "            </p>" +
-                            "        </div>" +
-                            "        <div class=\"fl order-type padding-margin\">" +
-                            "            <p>订单类型：餐到付款</p>" +
-                            "            <p>订单状态：等待确认</p>" +
-                            "        </div>" +
-                            "        <div class=\"fl order-total padding-margin\">" +
-                            "            <p>订单金额</p>" +
-                            "            <p><i>￥" + order.totalPrice + "</i></p>" +
-                            "        </div>" +
-                            "        <div class=\"order-operate fl padding-margin\">" +
-                            "            <!--TODO:: 查看详情需要能附加一段 HTML 在当前的 div 内-->" +
-                            "            <p>" +
-                            "                <a href=\"javascript:\" order-number=\"\" orderid=\"3788798\"" +
-                            "                   class=\"btn_a see-details\">查看详情<i></i></a>" +
-                            "            </p>" +
-                            "        </div>" +
-                            "    </div>" +
-                            "</div>";
-
-                        order_list += oneOrder;
+                        order_list += set_one_order(i,order);
+                        order_items[i] = order.items;
                     });
                     $("#checked_items").html(order_list);
                 }
             );
+        });
 
-            var order_list =
+        function show_order_detail(index) {
+            disable_a(index);
+            //根据 items的大小来扩大 DIV 的高度
+            var items = order_items[index];
+            //扩大 div 的高度
+            $('.order-list').height(160 + 80 * items.length);
+            var order_title = set_order_title();
+            var details = "";
+            $.each(items, function (i, item) {
+                details += set_item_detail(item);
+            });
+            //将订单详情写入里面
+            $('.order-bd').after(order_title + details);
+
+        }
+
+
+        function set_one_order(index,order){
+            var oneOrder =
                 "<div class=\"order-list \">" +
                 "    <div class=\"order-hd\">" +
-                "        <span><i>订单编号：" + "D-03788798" + "</i></span><i>创建时间：" + "2015-05-03 09:26:52" + "</i>" +
+                "        <span><i>订单编号：" + order.orderNo + "</i></span><i>创建时间：" + order.createTime + "</i>" +
                 "    </div>" +
                 "    <div class=\"order-bd clearfix\">" +
                 "        <div class=\"fl restaurant-msg\">" +
                 "            <div>" +
                 "                <img src=\"http://dhcrestaurantlogo.dhero.cn/1019?v=1402245333\" alt=\"\" width=\"43\" height=\"43\"" +
                 "                     class=\"fl\">" +
-                "                <i class=\"fl\">吉祥馄饨 (高安路店)</i>" +
+                "                <i class=\"fl\">" + order.shopName + "</i>" +
                 "            </div>" +
                 "            <p class=\"clearfix\">" +
                 "                <i class=\"fl\"></i>" +
-                "                <span class=\"fl\">餐厅电话：021-64738871, 18019138185</span>" +
+                "                <span class=\"fl\">餐厅电话：" + order.shopPhone + "</span>" +
                 "            </p>" +
                 "        </div>" +
                 "        <div class=\"fl order-type padding-margin\">" +
@@ -279,19 +266,57 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 "        </div>" +
                 "        <div class=\"fl order-total padding-margin\">" +
                 "            <p>订单金额</p>" +
-                "            <p><i>￥32.00</i></p>" +
+                "            <p><i>￥" + order.totalPrice + "</i></p>" +
                 "        </div>" +
                 "        <div class=\"order-operate fl padding-margin\">" +
                 "            <!--TODO:: 查看详情需要能附加一段 HTML 在当前的 div 内-->" +
                 "            <p>" +
-                "                <a href=\"javascript:\" order-number=\"\" orderid=\"3788798\"" +
-                "                   class=\"btn_a see-details\">查看详情<i></i></a>" +
+                "                <a href=\"javascript:void(0);\""+
+                "                   class=\"btn_a see-details\"  id=\"see_detail"+index+"\"  onclick=\"show_order_detail("+index+")\">查看详情<i></i></a>" +
                 "            </p>" +
                 "        </div>" +
                 "    </div>" +
-                "</div>"
+                "</div>";
+            return oneOrder;
+        }
 
-        });
+
+        function set_order_title() {
+
+            var order_title =
+                "<div class=\"cart-title clearfix\">" +
+                "<div class=\"goods-name fl goods-font\">商品</div>" +
+                "<div class=\"goods-count fl goods-font\">份数</div>" +
+                "<div class=\"goods-price fl goods-font\">单价</div>" +
+                "<div class=\"goods-subtotal fl goods-font\">小计</div>" +
+                "</div>";
+            return order_title;
+        }
+
+        /**
+         * 将 A 标签置为不可选的状态
+         * @param index
+         */
+        function disable_a(index) {
+            var a_id = "#see_detail" + index;
+            $(a_id).attr("disabled",true);
+            $(a_id).css("pointer-events","none");
+        }
+
+        /**
+         * 设置订单中商品的内容
+         * @param item
+         */
+        function set_item_detail(item) {
+            var total = item.price * item.cnt;
+            var detail =  "<div class=\"cart-detail clearfix\">" +
+                "<div class=\"goods-name fl goods-font2\">"+item.itemName+"</div>" +
+                "<div class=\"goods-count fl goods-font2\">"+item.cnt+"</div>" +
+                "<div class=\"goods-price fl goods-font2\">￥："+item.price+"</div>" +
+                "<div class=\"goods-subtotal fl goods-font2\">￥："+total+"</div>" +
+                "</div>";
+            return detail;
+        }
     </script>
 </body>
 </html>
