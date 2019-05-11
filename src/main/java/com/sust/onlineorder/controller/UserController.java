@@ -8,6 +8,7 @@ import com.sust.onlineorder.services.AddressService;
 import com.sust.onlineorder.services.OrderService;
 import com.sust.onlineorder.services.UserService;
 import com.sust.onlineorder.utils.Result;
+import com.sust.onlineorder.utils.SessionUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -97,6 +98,28 @@ public class UserController {
 
 		return Result.ok(orderList);
 	}
+
+	@RequestMapping("/user/query-user.json")
+	@ResponseBody
+	public Result queryUser(HttpServletRequest request) {
+
+		UserModel user = getAttr(request, USER);
+		if (user == null || user.getId() == null || user.getId() == 0) {
+			Result.failed("未登录");
+		}
+
+		return Result.ok(user);
+	}
+
+
+	@RequestMapping("/user/login-out")
+	@ResponseBody
+	public Result loginOut(HttpServletRequest request) {
+		//将session 去掉就算是登出了
+		SessionUtils.removeAttr(request, USER);
+		return Result.ok();
+	}
+
 
 	private boolean checkParam(String name, String phone, String address, String pwd) {
 		if (name == null || "".equals(name)) {

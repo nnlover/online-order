@@ -63,7 +63,8 @@ body a{
   
 }
 .header-left {
-  float: right;
+    margin-left: 100px;
+  float: left;
   width: 62%;
 }
 .header-right1 li {
@@ -90,6 +91,12 @@ body a{
   float: right;
   vertical-align: middle;
 }
+.header-right2{
+    float: left;
+    margin-left: 20px;
+    vertical-align: middle;
+}
+
 .banner {
   background: url(../images/16.jpg) no-repeat;
   background-size: cover;
@@ -793,6 +800,15 @@ a.cpns{
 a.cpns:hover{
 	background: #615c85;
 }
+.shop-and-user-addr{
+    width: 70%;
+    height: 100px;
+    background: #00BFF0;
+}
+
+
+
+
 .total-item p{
 	font-size:0.9em;
 	font-weight:400;
