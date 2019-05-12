@@ -32,6 +32,8 @@ public class TOrder {
 
     private Integer shopId;
 
+    private BigDecimal deliveryPay;
+
     public Integer getId() {
         return id;
     }
@@ -144,6 +146,14 @@ public class TOrder {
         this.shopId = shopId;
     }
 
+    public BigDecimal getDeliveryPay() {
+        return deliveryPay;
+    }
+
+    public void setDeliveryPay(BigDecimal deliveryPay) {
+        this.deliveryPay = deliveryPay;
+    }
+
     @Override
     public String toString() {
         return "TOrder{" +
@@ -161,6 +171,7 @@ public class TOrder {
                 ", comments='" + comments + '\'' +
                 ", shopName='" + shopName + '\'' +
                 ", shopId=" + shopId +
+                ", deliveryPay=" + deliveryPay +
                 '}';
     }
 }

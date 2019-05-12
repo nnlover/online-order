@@ -995,6 +995,66 @@ public class TOrderExample {
             addCriterion("shop_id not between", value1, value2, "shopId");
             return (Criteria) this;
         }
+
+        public Criteria andDeliveryPayIsNull() {
+            addCriterion("delivery_pay is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeliveryPayIsNotNull() {
+            addCriterion("delivery_pay is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeliveryPayEqualTo(BigDecimal value) {
+            addCriterion("delivery_pay =", value, "deliveryPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeliveryPayNotEqualTo(BigDecimal value) {
+            addCriterion("delivery_pay <>", value, "deliveryPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeliveryPayGreaterThan(BigDecimal value) {
+            addCriterion("delivery_pay >", value, "deliveryPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeliveryPayGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("delivery_pay >=", value, "deliveryPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeliveryPayLessThan(BigDecimal value) {
+            addCriterion("delivery_pay <", value, "deliveryPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeliveryPayLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("delivery_pay <=", value, "deliveryPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeliveryPayIn(List<BigDecimal> values) {
+            addCriterion("delivery_pay in", values, "deliveryPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeliveryPayNotIn(List<BigDecimal> values) {
+            addCriterion("delivery_pay not in", values, "deliveryPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeliveryPayBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("delivery_pay between", value1, value2, "deliveryPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeliveryPayNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("delivery_pay not between", value1, value2, "deliveryPay");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
