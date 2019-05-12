@@ -47,7 +47,7 @@ public class OrderServiceImpl implements OrderService {
 
 		Map<String, CartModel.SimpleItem> cartMap = cartModel.getCartMap();
 		TShop shop = shopService.getShopById(cartModel.getShopId());
-
+		log.info("[shop] --> {}", shop.toString());
 		return orderMapper.insert(buildOrder(userModel, cartMap, shop, orderNo));
 	}
 
@@ -60,6 +60,7 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public List<OutputOrder> selectByUser(Integer userId) {
 		TOrderExample example = new TOrderExample();
+		example.setOrderByClause("create_time desc");
 		example.createCriteria().andUserIdEqualTo(userId);
 		List<TOrder> orderList = orderMapper.selectByExample(example);
 		List<Integer> shopIds = orderList.stream().map(TOrder::getShopId).collect(Collectors.toList());
@@ -87,20 +88,28 @@ public class OrderServiceImpl implements OrderService {
 		order.setCreateTime(new Date());
 		order.setPayType("支付宝");
 		//设置店铺信息
-		order.setTotalPrice(calTotalPrice(cartMap, shop.getDispatchPrice()));
+		order.setTotalPrice(calTotalPrice(cartMap, shop.getDispatchPay()));
+		log.info("[order-price] -->{}", order.getTotalPrice());
 		Date date = new Date();
 		order.setDeliveryTime(new Date(date.toInstant().plusSeconds(shop.getDispatchTime() * 60).toEpochMilli()));
 		order.setComments("");
 		order.setShopName(shop.getShopName());
 		order.setShopId(shop.getId());
+		order.setDeliveryPay(BigDecimal.valueOf(shop.getDispatchPay()));
 		log.info("[order]-->{}", order.toString());
 		log.info("[user]-->{}", userModel.toString());
 		return order;
 	}
 
 	//计算总价  订单价格+ 快递费
-	private BigDecimal calTotalPrice(Map<String, CartModel.SimpleItem> cartMap, BigDecimal dispatchPrice) {
-		return BigDecimal.valueOf(cartMap.values().stream().mapToDouble(item -> item.getPrice() * item.getCnt()).sum() + dispatchPrice.doubleValue());
+	private BigDecimal calTotalPrice(Map<String, CartModel.SimpleItem> cartMap, Integer dispatchPay) {
+		log.info("[cart]--->{}", cartMap.values().toString());
+		Double total = 0.0 + dispatchPay;
+		for (CartModel.SimpleItem item : cartMap.values()) {
+			total += item.getCnt() * item.getPrice();
+		}
+		log.info("[total]-->{}", total);
+		return new BigDecimal(total);
 	}
 
 
