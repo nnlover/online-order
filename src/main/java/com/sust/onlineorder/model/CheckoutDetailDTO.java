@@ -17,5 +17,5 @@ public class CheckoutDetailDTO implements Serializable {
 
 	List<OutputCartItem> items;
 	TShop shop;
-
+	UserAndAddrModel user;
 }

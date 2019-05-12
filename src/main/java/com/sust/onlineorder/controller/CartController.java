@@ -1,11 +1,10 @@
 package com.sust.onlineorder.controller;
 
+import com.sust.onlineorder.entity.TAddress;
 import com.sust.onlineorder.entity.TFood;
 import com.sust.onlineorder.entity.TShop;
-import com.sust.onlineorder.model.CartModel;
-import com.sust.onlineorder.model.CheckoutDetailDTO;
-import com.sust.onlineorder.model.OutputCartItem;
-import com.sust.onlineorder.model.UserModel;
+import com.sust.onlineorder.model.*;
+import com.sust.onlineorder.services.AddressService;
 import com.sust.onlineorder.services.FoodService;
 import com.sust.onlineorder.services.OrderService;
 import com.sust.onlineorder.services.ShopService;
@@ -39,6 +38,8 @@ public class CartController {
 	private ShopService shopService;
 	@Resource
 	private OrderService orderService;
+	@Resource
+	private AddressService addressService;
 
 	public static List<OutputCartItem> TransToCartItem(List<TFood> foods, CartModel cart) {
 		return foods.stream().map(food -> convert(food, cart)).collect(Collectors.toList());
@@ -85,6 +86,7 @@ public class CartController {
 	@ResponseBody
 	public CheckoutDetailDTO cartList(String shopId, HttpServletRequest request) {
 		CartModel cart = getAttr(request, CART);
+		UserModel user = getAttr(request, USER);
 		List<OutputCartItem> items = new ArrayList<>();
 		if (cart != null) {
 			Map<String, CartModel.SimpleItem> cartMap = cart.getCartMap();
@@ -92,10 +94,15 @@ public class CartController {
 			List<TFood> foods = foodService.getFoodsWithIds(ids);
 			items = TransToCartItem(foods, cart);
 		}
-
 		TShop shop = shopService.getShopById(items.get(0).getShopId());
 
-		return CheckoutDetailDTO.builder().items(items).shop(shop).build();
+		List<TAddress> addressList = addressService.getByUserId(user.getId());
+		TAddress tAddress = addressList.get(0);
+		UserAndAddrModel userAndAddrModel = UserAndAddrModel.builder().
+				userName(user.getUserName()).phone(user.getPhone()).
+				addrId(tAddress.getId()).address(tAddress.getAddress()).
+				build();
+		return CheckoutDetailDTO.builder().items(items).shop(shop).user(userAndAddrModel).build();
 	}
 
 

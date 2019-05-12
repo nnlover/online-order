@@ -772,9 +772,44 @@ a.order {
 a.order:hover{
 	background:#615c85;
 }
+.delivery-info{
+    margin-top: 2em;
+    width: 90%;
+    height: 30px;
+    margin-left: 10%;
+    background: #8a6d3b;
+}
+
 .total-item,.cart-items{
 	margin-top:0em;
-	padding:5em 0;
+	padding:2em 0;
+    width: 70%;
+    margin-left: 10%;
+}
+
+.total-checkout{
+
+}
+
+.total-cart{
+    width: 100%;
+    margin-left: 20%;
+    height: 150px;
+}
+.total-cart span{
+    float: right;
+    width: 120px;
+    height: 30px;
+    margin-right: 10%;
+    font-size: 22px;
+}
+.total-price{
+    float: right;
+    width: 100px;
+    height: 50px;
+    margin-top: 10px;
+    margin-right: 8%;
+    font-size: 20px;
 }
 
 .total-item h3 {
@@ -800,20 +835,59 @@ a.cpns{
 a.cpns:hover{
 	background: #615c85;
 }
+
+
 .shop-and-user-addr{
     width: 70%;
-    height: 100px;
-    background: #00BFF0;
+    height: 150px;
+    margin-left: 15%;
+    margin-top: 3em ;
+}
+.left-title{
+    font-size: 18px;
+    width: 20%;
+    position: center;
 }
 
+.delivery-addr-p{
+    font-size: 22px;
+}
+.right-value{
+    width: 65%;
+    font-size: 18px;
+}
+.other-font-size-18 {
+    font-size: 18px;
+    margin-top: 10px    ;
+}
 
+.f_lf{
+    float: left;
+}
+.f_rt{
+    float: right;
+}
 
+.big-p{
+    height: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.small-p{
+    height: 100px;
+    margin-top: 7px;
+    margin-bottom: 7px;
+}
+
+.mr_rt{
+    margin-right: 10%;
+}
 
 .total-item p{
 	font-size:0.9em;
 	font-weight:400;
 	margin-top:1em;
-	color:#727272;	
+	color:#727272;
 }
 .total-item p a:hover{
 	color:#333;
@@ -1268,8 +1342,9 @@ a.morebtn {
     -moz-border-radius: 3px;
     -o-border-radius: 3px;
     -ms-border-radius: 3px;
-    width: 80px;
+    width: 100px;
     margin-bottom: 10px;
+    margin-top: 10px;
     position: relative ;
     left: 80%;
 }

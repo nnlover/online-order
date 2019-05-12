@@ -143,4 +143,24 @@ public class TOrder {
     public void setShopId(Integer shopId) {
         this.shopId = shopId;
     }
+
+    @Override
+    public String toString() {
+        return "TOrder{" +
+                "id=" + id +
+                ", orderNo='" + orderNo + '\'' +
+                ", userId=" + userId +
+                ", itemIds='" + itemIds + '\'' +
+                ", totalPrice=" + totalPrice +
+                ", addrId=" + addrId +
+                ", payTime=" + payTime +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", deliveryTime=" + deliveryTime +
+                ", payType='" + payType + '\'' +
+                ", comments='" + comments + '\'' +
+                ", shopName='" + shopName + '\'' +
+                ", shopId=" + shopId +
+                '}';
+    }
 }

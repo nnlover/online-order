@@ -43,15 +43,38 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- header -->
 <!--商家信息-->
 <div class="shop-and-user-addr">
-
-
+    <div class="left-title f_lf">
+        <div class="big-p">
+            <p class="delivery-addr-p f_rt">送货地址：</p><br>
+        </div>
+        <div class="clearfix"></div>
+        <div class="small-p">
+            <p class="other-font-size-18 f_rt">收货人：</p><br><div class="clearfix"></div>
+            <p class="other-font-size-18 f_rt">预计送达时间：</p><br><div class="clearfix"></div>
+            <p class="other-font-size-18 f_rt">配送费用：</p><br>
+        </div>
+    </div>
+    <div class="right-value f_rt">
+        <div class="mr_rt">
+            <div class="big-p f_rt">
+                <p id="delivery_addr" class="delivery-addr-p">未央区 陕西科技大学 9公寓</p><br>
+            </div>
+            <div class="clearfix"></div>
+            <div class="small-p">
+                <p id="user_name_and_phone" class="other-font-size-18 f_rt">刘女士（女士） 18702904814</p><br><div class="clearfix"></div>
+                <p id="arrived_time" class="other-font-size-18 f_rt">立即送出-- 大约17：20 送达</p><br><div class="clearfix"></div>
+                <p id="delivery_pay" class="other-font-size-18 f_rt">$ 9 元</p><br>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
 </div>
-
+<div class="clearfix"></div>
 
 <!-- checkout -->
 <div class="cart-items">
     <div id="checked_items" class="container">
-        <h1>My Shopping Bag (2)</h1>
+        <h1 id="shop_name"> 肯德基宅急送（科技大学店）</h1>
         <script>$(document).ready(function (c) {
             $('.close1').on('click', function (c) {
                 $('.cart-header').fadeOut('slow', function (c) {
@@ -144,17 +167,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
         </div>
     </div>
-    <div id="shop_info" >
-        <span id="shop_name"></span>
-        <span id="delivery_time"></span>
-        <span id="delivery_pay" class=""></span>
-    </div>
-    <div id="total_cart" >
-        <span id="total_price"></span>
-
-        <li class=\"bt-nn\">
-        <a class="morebtn" href="#" onclick="submit_cart()">submit </a>
-        </li>
+    <div class="total-cart">
+        <div>
+            <span >总计金额：</span>
+        </div> <div class="clearfix"></div>
+        <div>
+            <p class="total-price" id="total_prices">$ 100 元</p>
+        </div>
+        <div class="clearfix"></div>
+        <div>
+            <a class="morebtn" href="#" onclick="submit_cart()">submit </a>
+        </div>
     </div>
 
     <!-- 遮罩层 -->
@@ -205,10 +228,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         $.getJSON("cart/cart-list.json",
             function (data) {
 
-                var checkList = "";
                 var shop = data.shop;
+                var checkList = "<h1 id=\"shop_name\">"+shop.shopName+"</h1>";
                 var dispatchPay = shop.dispatchPay;
                 var dispatchTime = shop.dispatchTime;
+                var user = data.user;
                 var totalPrice = 0.00;
 
                 //TODO:: 需要将购物车面的东西完善
@@ -241,12 +265,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 });
                 $("#checked_items").html(checkList);
 
-                $("#shop_name").html(shop.shopName);
-                $("#delivery_time").html("about approximately :" + dispatchTime +" minutes to arrive. ");
-                $("#delivery_pay").html("delivery pay: $" + dispatchPay +"");
+                //收件人
+                $("#user_name_and_phone").html(user.userName +"   " +user.phone);
+                //寄送地址
+                $("#delivery_addr").html(user.address);
+                //送货时间
+                $("#arrived_time").html("立即送出 -- 约"+frontOneHour("hh:mm", dispatchTime * 60 * 1000) + "送达");
+                console.log(dispatchPay);
+                //配送费
+                $("#delivery_pay").html("$ ：" +dispatchPay +"元");
 
                 totalPrice += dispatchPay;
-                $("#total_price").html("总计为:$"+ parseFloat(totalPrice).toFixed(2));
+                console.log(parseFloat(totalPrice).toFixed(2));
+                //总价
+                $("#total_prices").html("$ ："+ parseFloat(totalPrice).toFixed(2));
             });
 
     });
@@ -293,6 +325,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     function closeWindow() {
         $('#showdiv').hide();  //隐藏弹窗
         $('#cover').css('display','none');   //显示遮罩层
+    }
+
+
+    function frontOneHour (fmt, moreTime) {
+        var currentTime = new Date(new Date().getTime() + moreTime);
+        console.log(currentTime) // Wed Jun 20 2018 16:12:12 GMT+0800 (中国标准时间)
+        var o = {
+            'M+': currentTime.getMonth() + 1, // 月份
+            'd+': currentTime.getDate(), // 日
+            'h+': currentTime.getHours(), // 小时
+            'm+': currentTime.getMinutes(), // 分
+            's+': currentTime.getSeconds(), // 秒
+            'q+': Math.floor((currentTime.getMonth() + 3) / 3), // 季度
+            'S': currentTime.getMilliseconds() // 毫秒
+        }
+        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (currentTime.getFullYear() + '').substr(4 - RegExp.$1.length))
+        for (var k in o) {
+            if (new RegExp('(' + k + ')').test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)))
+        }
+        return fmt
     }
 </script>
 </body>
