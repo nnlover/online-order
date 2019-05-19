@@ -134,4 +134,30 @@ public class CartController {
 		setAttr(request, USER, user);
 		return "ok";
 	}
+
+	/**
+	 * 计算购物车总价
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/cart/query-total.json")
+	@ResponseBody
+	public Result queryTotal(HttpServletRequest request) {
+		UserModel user = getAttr(request, USER);
+		if(user == null || user.getId() == null || user.getId() == 0){
+			log.warn("no user!");
+			return Result.ok(new CartTotal(0.0, 0));
+		}
+		CartModel cart = getAttr(request, CART);
+		if(cart == null || cart.getCartMap().size() == 0){
+			return Result.ok(new CartTotal(0.0, 0));
+		}
+
+		CartTotal total = orderService.calCartTotal(cart.getCartMap());
+		return Result.ok(total);
+	}
+
+
+
+
 }

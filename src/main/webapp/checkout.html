@@ -26,7 +26,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href='http://fonts.adminun/css?family=Libre+Baskerville:400,700' rel='stylesheet' type='text/css'>
     <script src="js/jquery.min.js"></script>
     <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen"/>
-    <script src="js/simpleCart.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/xcConfirm.css"/>
     <script src="js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/xcConfirm.js" type="text/javascript" charset="utf-8"></script>
@@ -38,7 +37,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- header -->
 <div class="header-item"></div>
 <script>
-    $(document).load($('.header-item').load('header.html'));
+    $('.header-item').load('header.html');
 </script>
 <!-- header -->
 <!--商家信息-->
@@ -225,6 +224,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- footer-->
 <script>
     $(document).ready(function () {
+        show_cart_total_price();
+
         $.getJSON("cart/cart-list.json",
             function (data) {
 
@@ -345,6 +346,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             if (new RegExp('(' + k + ')').test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)))
         }
         return fmt
+    }
+
+    //实时计算购物车的总价
+    function show_cart_total_price() {
+        $.getJSON("/cart/query-total.json",
+            function (res) {
+                if (res.status == 200 && res.data != null) {
+                    var data = res.data;
+                    console.log("cart--"+data);
+                    $("#cart_total_price").text((parseFloat(data.totalPrice)).toFixed(2));
+                    $("#total_count").text(data.itemCount);
+                }
+            }
+        );
     }
 </script>
 </body>

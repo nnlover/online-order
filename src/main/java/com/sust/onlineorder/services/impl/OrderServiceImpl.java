@@ -5,10 +5,7 @@ import com.sust.onlineorder.entity.TFood;
 import com.sust.onlineorder.entity.TOrder;
 import com.sust.onlineorder.entity.TOrderExample;
 import com.sust.onlineorder.entity.TShop;
-import com.sust.onlineorder.model.CartModel;
-import com.sust.onlineorder.model.OrderItem;
-import com.sust.onlineorder.model.OutputOrder;
-import com.sust.onlineorder.model.UserModel;
+import com.sust.onlineorder.model.*;
 import com.sust.onlineorder.services.AddressService;
 import com.sust.onlineorder.services.FoodService;
 import com.sust.onlineorder.services.OrderService;
@@ -103,13 +100,20 @@ public class OrderServiceImpl implements OrderService {
 
 	//计算总价  订单价格+ 快递费
 	private BigDecimal calTotalPrice(Map<String, CartModel.SimpleItem> cartMap, Integer dispatchPay) {
+		Double total = calCartTotal(cartMap).getTotalPrice();
+		return new BigDecimal(total + dispatchPay);
+	}
+
+	//购物车的总价
+	@Override
+	public CartTotal calCartTotal(Map<String, CartModel.SimpleItem> cartMap) {
 		log.info("[cart]--->{}", cartMap.values().toString());
-		Double total = 0.0 + dispatchPay;
+		Double total = 0.0;
 		for (CartModel.SimpleItem item : cartMap.values()) {
 			total += item.getCnt() * item.getPrice();
 		}
-		log.info("[total]-->{}", total);
-		return new BigDecimal(total);
+		log.info("[cart]-->{}", total);
+		return new CartTotal(total, cartMap.size());
 	}
 
 
