@@ -3,6 +3,7 @@ package com.sust.onlineorder.controller;
 import com.sust.onlineorder.entity.TFood;
 import com.sust.onlineorder.entity.TShop;
 import com.sust.onlineorder.model.CartModel;
+import com.sust.onlineorder.model.FoodGroup;
 import com.sust.onlineorder.services.FoodService;
 import com.sust.onlineorder.services.ShopService;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -64,7 +66,7 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/shop/food-list.json")
 	@ResponseBody
-	public List<TFood> inShop(@RequestParam(value = "id") Integer id, HttpServletRequest request) {
+	public List<FoodGroup> inShop(@RequestParam(value = "id") Integer id, HttpServletRequest request) {
 		CartModel cart;
 		if ((cart = getAttr(request, CART)) == null) {
 			cart = CartModel.createCart();
@@ -78,8 +80,11 @@ public class HomeController {
 		}
 		log.info("shopId:{}", id);
 		List<TFood> foodList = foodService.getFoodsWithShopId(id);
-
-		return foodList;
+		List<FoodGroup> foodGroups = new ArrayList<>();
+		foodList.stream().collect(Collectors.groupingBy(TFood::getCategory)).forEach((catagory, foods)->{
+			foodGroups.add(new FoodGroup(catagory,foods));
+		});
+		return foodGroups;
 	}
 
 	@RequestMapping(value = "/shop_detail")

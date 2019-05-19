@@ -654,8 +654,28 @@ li.bt-nn {
 }
 .order-top {
   padding: 1.5em 0;
-  border-bottom: 1px dotted #5fa022;
 }
+
+.item-des{
+    float: left;
+    width: 100%;
+    height: 100px;
+}
+.item-pic{
+    float: left;
+    display: block;
+    height: 100px;
+    width: 100px;
+}
+.item-des p{
+    width: auto;
+}
+
+.pre-top{
+    float: left;
+    width: 100%;
+}
+
 .orders {
   padding: 3em 0;
 }
@@ -1363,6 +1383,7 @@ a.morebtn {
 .pr-left {
   float: left;
   width: 50%;
+    height: 100px;
 }
 .pr-right {
   float: left;

@@ -231,25 +231,29 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             //根据 items的大小来扩大 DIV 的高度
             var items = order_items[index];
             //扩大 div 的高度
-            $('.order-list').height(160 + 80 * items.length);
+            var order_listId = '#order_list_'+ index;
             var order_title = set_order_title();
             var details = "";
             $.each(items, function (i, item) {
                 details += set_item_detail(item);
             });
             //将订单详情写入里面
-            $('.order-bd').after(order_title + details);
+            var id= "#order_bd_"+ index;
+            console.log(items.length);
+            $(order_listId).height(160 + 60 * items.length);
+            //$(id).after(" <h1>My order Detail</h1>");
+           $(id).after(order_title + details);
 
         }
 
 
         function set_one_order(index,order){
             var oneOrder =
-                "<div class=\"order-list \">" +
+                "<div class=\"order-list\" "+" id=order_list_"+index+">" +
                 "    <div class=\"order-hd\">" +
                 "        <span><i>订单编号：" + order.orderNo + "</i></span><i>创建时间：" + order.createTime + "</i>" +
                 "    </div>" +
-                "    <div class=\"order-bd clearfix\">" +
+                "    <div class=\"order-bd clearfix\"  id=\""+"order_bd_"+index+"\">" +
                 "        <div class=\"fl restaurant-msg\">" +
                 "            <div>" +
                 "                <img src=\"http://dhcrestaurantlogo.dhero.cn/1019?v=1402245333\" alt=\"\" width=\"43\" height=\"43\"" +

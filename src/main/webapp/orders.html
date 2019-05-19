@@ -39,33 +39,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div class="orders">
     <div id="food-list" class="container">
         <div class="order-top">
-            <li class="data"><h4>Pizzas</h4>
-                <p>Exotic Combo of Cheese & Basil</p>
-                <P> Capsicum, Tomatoes, Onion</P>
-                <P> Chicken Tikka & Cheese</P>
-                <P> Chicken Stripse</P>
+            <li class="data"><h4>类别</h4>
+                <div class="item-des">
+                    <img src="images/4.jpg" class="item-pic">
+                    <p>名字</p>
+                    <p>描述</p>
+                </div>
+                <div class="item-des">
+                    <img src="images/4.jpg" class="item-pic">
+                    <P> 名字</P>
+                    <p>描述</p>
+                </div>
             </li>
             <li class="data">
                 <div class="special-info grid_1 simpleCart_shelfItem">
                     <h4>Price</h4>
-                    <div class="pre-top">
-                        <div class="pr-left">
-                            <div class="item_add"><span class="item_price"><h6>ONLY $30.00</h6></span></div>
-                        </div>
-                        <div class="pr-right">
-                            <div class="item_add"><span class="item_price"><a href="#">Pick</a></span></div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="pre-top">
-                        <div class="pr-left">
-                            <div class="item_add"><span class="item_price"><h6>ONLY $30.00</h6></span></div>
-                        </div>
-                        <div class="pr-right">
-                            <div class="item_add"><span class="item_price"><a href="#">Pick</a></span></div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
                     <div class="pre-top">
                         <div class="pr-left">
                             <div class="item_add"><span class="item_price"><h6>ONLY $30.00</h6></span></div>
@@ -92,30 +80,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <li class="data"><h4>Burgers</h4>
                 <p>Vegetable Patty With Coleslaw</p>
                 <p>Fajita Paneer & Vegetable</p>
-                <p>Chicken Patty With Vegetable</p>
-                <p>Chicken Cut in Mexican Style</p>
             </li>
             <li class="data">
                 <div class="special-info grid_1 simpleCart_shelfItem">
                     <h4>Price</h4>
-                    <div class="pre-top">
-                        <div class="pr-left">
-                            <div class="item_add"><span class="item_price"><h6>ONLY $30.00</h6></span></div>
-                        </div>
-                        <div class="pr-right">
-                            <div class="item_add"><span class="item_price"><a href="#">Pick</a></span></div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="pre-top">
-                        <div class="pr-left">
-                            <div class="item_add"><span class="item_price"><h6>ONLY $30.00</h6></span></div>
-                        </div>
-                        <div class="pr-right">
-                            <div class="item_add"><span class="item_price"><a href="#">Pick</a></span></div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
                     <div class="pre-top">
                         <div class="pr-left">
                             <div class="item_add"><span class="item_price"><h6>ONLY $30.00</h6></span></div>
@@ -305,57 +273,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="clearfix"></div>
         </div>
         <br/>
-        <div class="order-top">
-            <li class="data"><h4>Ice Creams</h4>
-                <p>Butter Scotch</p>
-                <p>Pineapple</p>
-                <p>Black Forest</p>
-                <p>Chocolate with Orange</p>
-            </li>
-            <li class="data">
-                <div class="special-info grid_1 simpleCart_shelfItem">
-                    <h4>Price</h4>
-                    <div class="pre-top">
-                        <div class="pr-left">
-                            <div class="item_add"><span class="item_price"><h6>ONLY $30.00</h6></span></div>
-                        </div>
-                        <div class="pr-right">
-                            <div class="item_add"><span class="item_price"><a href="#">pick</a></span></div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="pre-top">
-                        <div class="pr-left">
-                            <div class="item_add"><span class="item_price"><h6>ONLY $30.00</h6></span></div>
-                        </div>
-                        <div class="pr-right">
-                            <div class="item_add"><span class="item_price"><a href="#">pick</a></span></div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="pre-top">
-                        <div class="pr-left">
-                            <div class="item_add"><span class="item_price"><h6>ONLY $30.00</h6></span></div>
-                        </div>
-                        <div class="pr-right">
-                            <div class="item_add"><span class="item_price"><a href="#">pick</a></span></div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="pre-top">
-                        <div class="pr-left">
-                            <div class="item_add"><span class="item_price"><h6>ONLY $30.00</h6></span></div>
-                        </div>
-                        <div class="pr-right">
-                            <div class="item_add"><span class="item_price"><a href="#">pick</a></span></div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-            </li>
-
-            <div class="clearfix"></div>
-        </div>
     </div>
 </div>
 <!-- about -->
@@ -379,75 +296,59 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
 </div>
 <script>
+
     $(document).ready(function () {
-        $('.header-item').load('header.html');
         /*TODO :: 这里为 商品列表*/
         var id = GetQueryString("id");
         $.getJSON("shop/food-list.json?id=" + id,
-            function (res) {
+            function (result) {
+                var categoryGroup = "";
+                $.each(result, function (i, cata) {
+                    var category = cata.category;
+                    var foodList = cata.foodList;
 
-                //alert(data);
-                var food_list = "<div class=\"order-top\">";
-                var precate = "<li class=\"data\"><h4>Pizzas</h4>";
-                food_list += precate;
-                $.each(res, function (i, item) {
-                    var category = "<P>" + item.itemName + "</P>";
+                    var head = "<div class=\"order-top\">"+
+                                " <li class=\"data\"><h4>"+category+"</h4>";
+                    var headerList = head;
 
-                    food_list += category;
+                    var itemDetailTitle = "<li class=\"data\">" +
+                        "                    <div class=\"special-info grid_1 simpleCart_shelfItem\">" +
+                        "                       <h4>Price</h4>" ;
+                    var headEnd = "</li>";
+                    var detailList = itemDetailTitle;
+                    $.each(foodList, function (i, food) {
+                        var itemmain = "      <div class=\"item-des\">" +
+                            "                    <img src=\"" + food.picture + "\" class=\"item-pic\">" +
+                            "                    <p>" + food.itemName + "</p>" +
+                            "                    <p>" + food.itemTitle + "</p>" +
+                            "                </div>";
+                        headerList += itemmain;
+
+                        var tocart = "toCart(" + food.price + "," + food.id + ")";
+
+                        var itemDetail = "<div class=\"pre-top\">" +
+                            "                        <div class=\"pr-left\">" +
+                            "                            <div class=\"item_add\"><span class=\"item_price\"><h4>ONLY $" + food.price + "</h4></span></div>" +
+                            "                        </div>" +
+                            "                        <div class=\"pr-right\">" +
+                            "                           <div class=\"item_add\"><span class=\"item_price\"><a href=\"#\" onclick=" + tocart + ">Pick</a></span></div>" +
+                            "                        </div>" +
+                            "                        <div class=\"clearfix\"></div>" +
+                            "                    </div>";
+                        detailList += itemDetail;
+                    });
+                    headerList += headEnd;
+                    var detailEnd = "</div>" +
+                        "            </li>" +
+                        "            <div class=\"clearfix\"></div>"+
+                            "</div>";
+                    detailList += detailEnd;
+
+                    categoryGroup += headerList + detailList;
                 });
-                food_list += "</li>";
-                var pre_food = "<li class=\"data\">"
-                    + "<div class=\"special-info grid_1 simpleCart_shelfItem\">"
-                    + "<h4>Price</h4>";
-
-                food_list += pre_food;
-                $.each(res, function (i, item) {
-                    //alert(item.itemName);
-                    var tocart = "toCart(" + item.price + "," + item.id + ")";
-                    var food =
-                        "<div class=\"pre-top\">"
-                        + "<div class=\"pr-left\">\n" +
-                        "<div class=\"item_add\"><span class=\"item_price\"><h6>ONLY $" + item.price + "</h6></span></div>\n" +
-                        "</div>\n" +
-                        "<div class=\"pr-right\">\n" +
-                        "<div class=\"item_add\"><span class=\"item_price\"><a href=\"#\" onclick=" + tocart + ">Pick</a></span></div>\n" +
-                        "</div>\n" +
-                        "<div class=\"clearfix\"></div>"
-                        + "</div>";
-
-                    food_list += food;
-                });
-                food_list += "</div>"
-                    + "</li>"
-                    + "<div class=\"clearfix\"></div>"
-                    + "</div>";
-
-                $("#food-list").html(food_list);
-            }
-        )
+                $("#food-list").html(categoryGroup);
+            });
     });
-
-
-    /*$("#food-list").html(
-        "<div class=\"order-top\">"
-        +"<li class=\"data\"><h4>Pizzas</h4>"
-        +"<P> Chicken Stripse</P>"
-        +"</li>"
-        +"<li class=\"data\">"
-			+"<div class=\"special-info grid_1 simpleCart_shelfItem\">\n" +
-        "\t\t\t\t\t<h4>Price</h4>"
-        +"<div class=\"pre-top\">"
-			+"<div class=\"pr-left\">\n" +
-        "\t\t\t\t\t\t\t<div class=\"item_add\"><span class=\"item_price\"><h6>ONLY $30.00</h6></span></div>\n" +
-        "\t\t\t\t\t\t</div>\n" +
-        "\t\t\t\t\t\t<div class=\"pr-right\">\n" +
-        "\t\t\t\t\t\t\t<div class=\"item_add\"><span class=\"item_price\"><a href=\"#\">Pick</a></span></div>\n" +
-        "\t\t\t\t\t\t</div>\n" +
-        "\t\t\t\t\t\t\t<div class=\"clearfix\"></div>"
-        +"</div>"
-        +"</li>"
-        +"</div>"
-    );*/
     function toCart(price, id) {
         //alert(price +id);
         //TODO::这里是是添加商品到购物车
@@ -457,7 +358,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 id: id
             },
             function (data) {
-                // alert("数据: \n" + data);
+                // alert("数据: " + data);
                 var curtotal = $("#total_price").text();
                 $("#total_price").text((parseFloat(curtotal) + parseFloat(price)).toFixed(2));
                 var total_cnt = parseInt($("#total_count").text());
