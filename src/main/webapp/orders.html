@@ -22,10 +22,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     function hideURLbar() {
         window.scrollTo(0, 1);
     } </script>
-    <link href='http://fonts.adminun/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.adminun/css?family=Libre+Baskerville:400,700' rel='stylesheet' type='text/css'>
+    <!--<link href='http://fonts.adminun/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.adminun/css?family=Libre+Baskerville:400,700' rel='stylesheet' type='text/css'>-->
     <script src="js/jquery.min.js"></script>
-    <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen"/>
 </head>
 <body>
 <!-- header -->
@@ -41,13 +40,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <li class="data"><h4>类别</h4>
                 <div class="item-des">
                     <img src="images/4.jpg" class="item-pic">
-                    <p>名字</p>
-                    <p>描述</p>
+                    <p class="desc-name">名字</p>
+                    <p class="desc-desc">描述</p>
                 </div>
                 <div class="item-des">
                     <img src="images/4.jpg" class="item-pic">
-                    <P> 名字</P>
-                    <p>描述</p>
+                    <p class="desc-name">名字</p>
+                    <p class="desc-desc">描述</p>
                 </div>
             </li>
             <li class="data">
@@ -55,7 +54,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <h4>Price</h4>
                     <div class="pre-top">
                         <div class="pr-left">
-                            <div class="item_add"><span class="item_price"><h6>ONLY $30.00</h6></span></div>
+                            <div class="item_add"><span class="item_price">ONLY &nbsp;<h4 class="h4-price">$30.00</h4></span></div>
                         </div>
                         <div class="pr-right">
                             <div class="item_add"><span class="item_price"><a href="#">Pick</a></span></div>
@@ -64,7 +63,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </div>
                     <div class="pre-top">
                         <div class="pr-left">
-                            <div class="item_add"><span class="item_price"><h6>ONLY $30.00</h6></span></div>
+                            <div class="item_add"><span class="item_price">ONLY &nbsp;<h4 class="h4-price">$30.00</h4></span></div>
                         </div>
                         <div class="pr-right">
                             <div class="item_add"><span class="item_price"><a href="#">Pick</a></span></div>
@@ -295,7 +294,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
 </div>
 <script>
-
     $(document).ready(function () {
         /*TODO :: 这里为 商品列表*/
         var id = GetQueryString("id");
@@ -307,7 +305,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     var foodList = cata.foodList;
 
                     var head = "<div class=\"order-top\">"+
-                                " <li class=\"data\"><h4>"+category+"</h4>";
+                                " <li class=\"data\"><h3>"+category+"</h3>";
                     var headerList = head;
 
                     var itemDetailTitle = "<li class=\"data\">" +
@@ -318,8 +316,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     $.each(foodList, function (i, food) {
                         var itemmain = "      <div class=\"item-des\">" +
                             "                    <img src=\"" + food.picture + "\" class=\"item-pic\">" +
-                            "                    <p>" + food.itemName + "</p>" +
-                            "                    <p>" + food.itemTitle + "</p>" +
+                            "                    <p class=\"desc-name\">" + food.itemName + "</p>" +
+                            "                    <p class=\"desc-desc\">" + food.itemTitle + "</p>" +
                             "                </div>";
                         headerList += itemmain;
 
@@ -327,7 +325,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
                         var itemDetail = "<div class=\"pre-top\">" +
                             "                        <div class=\"pr-left\">" +
-                            "                            <div class=\"item_add\"><span class=\"item_price\"><h4>ONLY $" + food.price + "</h4></span></div>" +
+                            "                            <div class=\"item_add\"><span class=\"item_price\">ONLY &nbsp;<h4 class=\"h4-price\">$" + food.price + "</h4></span></div>" +
                             "                        </div>" +
                             "                        <div class=\"pr-right\">" +
                             "                           <div class=\"item_add\"><span class=\"item_price\"><a href=\"#\" onclick=" + tocart + ">Pick</a></span></div>" +

@@ -667,10 +667,33 @@ li.bt-nn {
     height: 100px;
     width: 100px;
 }
-.item-des p{
+.desc-name{
     width: auto;
+    font-size: 1.3em;
+    color: #000000;
+    font-weight: 400;
+    line-height: 1.8em;
+    margin-left: 6em;
+    margin-top: 5px;
 }
-
+.desc-desc{
+    width: auto;
+    color: #6b6969;
+    font-size: 1em;
+    font-weight: 400;
+    line-height: 1.8em;
+    margin-left: 8em;
+}
+.item_price{
+    float: left;
+}
+.h4-price{
+    float: right;
+    font-family: 'Libre Baskerville', serif;
+    color: #ac2925;
+    font-size: 1.3em;
+    font-weight: 400;
+}
 .pre-top{
     float: left;
     width: 100%;
@@ -821,15 +844,16 @@ a.order:hover{
     width: 120px;
     height: 30px;
     margin-right: 10%;
-    font-size: 22px;
+    font-size: 20px;
 }
 .total-price{
     float: right;
-    width: 100px;
+    width: 130px;
     height: 50px;
     margin-top: 10px;
-    margin-right: 8%;
-    font-size: 20px;
+    margin-right: 10%;
+    font-size: 22px;
+    color: #ac2925;
 }
 
 .total-item h3 {
@@ -1346,7 +1370,8 @@ div.register-bottom-grid {
 }
 a.morebtn {
     display: block;
-    font-size: 1em;
+    font-size: 1.5em;
+    text-align: center;
     color: #FFF;
     text-decoration: none;
     font-weight: 400;
@@ -1362,11 +1387,10 @@ a.morebtn {
     -moz-border-radius: 3px;
     -o-border-radius: 3px;
     -ms-border-radius: 3px;
-    width: 100px;
+    width: 130px;
     margin-bottom: 10px;
-    margin-top: 10px;
     position: relative ;
-    left: 80%;
+    left: 78%;
 }
 .b-search:after {
   content: url(../images/arow.png) 0px 0px;
@@ -1408,12 +1432,12 @@ a.morebtn {
   -moz-border-radius: 4px;
   -o-border-radius: 4px;
 }
-.order-top h4 {
+/*.order-top h4 {
   font-family: 'Libre Baskerville', serif;
   color: #1A1A1A;
   font-size: 1.3em;
   font-weight: 400;
-}
+}*/
 /*--login--*/
 .login-left {
 	padding: 0;
@@ -1505,13 +1529,6 @@ a.forgot {
 .login-page {
   padding: 20em 0;
   min-height: 900px;
-}
-.order-top p {
-  color: #6b6969;
-  font-size: 1em;
-  font-weight: 400;
-  line-height: 1.8em;
-  margin: 1em 0;
 }
 /*-- responsive --*/
 @media(max-width:1440px){

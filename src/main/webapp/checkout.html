@@ -22,10 +22,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     function hideURLbar() {
         window.scrollTo(0, 1);
     } </script>
-    <link href='http://fonts.adminun/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.adminun/css?family=Libre+Baskerville:400,700' rel='stylesheet' type='text/css'>
+    <!--<link href='http://fonts.adminun/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.adminun/css?family=Libre+Baskerville:400,700' rel='stylesheet' type='text/css'>-->
     <script src="js/jquery.min.js"></script>
-    <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen"/>
+    <!--<link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen"/>-->
     <link rel="stylesheet" type="text/css" href="css/xcConfirm.css"/>
     <script src="js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/xcConfirm.js" type="text/javascript" charset="utf-8"></script>
@@ -168,14 +168,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
     <div class="total-cart">
         <div>
-            <span >总计金额：</span>
+            <span >总计金额</span>
         </div> <div class="clearfix"></div>
         <div>
             <p class="total-price" id="total_prices">$ 100 元</p>
         </div>
         <div class="clearfix"></div>
         <div>
-            <a class="morebtn" href="#" onclick="submit_cart()">submit </a>
+            <a class="morebtn" href="#" onclick="submit_cart()">提交订单 </a>
         </div>
     </div>
 
@@ -274,12 +274,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 $("#arrived_time").html("立即送出 -- 约"+frontOneHour("hh:mm", dispatchTime * 60 * 1000) + "送达");
                 console.log(dispatchPay);
                 //配送费
-                $("#delivery_pay").html("$ ：" +dispatchPay +"元");
+                $("#delivery_pay").html("$:" +dispatchPay +"元");
 
                 totalPrice += dispatchPay;
                 console.log(parseFloat(totalPrice).toFixed(2));
                 //总价
-                $("#total_prices").html("$ ："+ parseFloat(totalPrice).toFixed(2));
+                $("#total_prices").html("$:"+ parseFloat(totalPrice).toFixed(2) +" 元");
             });
 
     });
