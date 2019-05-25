@@ -1,6 +1,5 @@
 package com.sust.onlineorder.model;
 
-import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
@@ -14,6 +13,7 @@ import java.util.Map;
 @Slf4j
 public class CartModel implements Serializable {
 	Integer shopId;
+	Integer dispatchPay;
 	Map<String, SimpleItem> cartMap;
 
 	private CartModel() {
@@ -21,7 +21,16 @@ public class CartModel implements Serializable {
 	}
 
 	public static CartModel createCart() {
+
 		return new CartModel();
+	}
+
+	public Integer getDispatchPay() {
+		return dispatchPay;
+	}
+
+	public void setDispatchPay(Integer dispatchPay) {
+		this.dispatchPay = dispatchPay;
 	}
 
 	public Integer getShopId() {
@@ -51,9 +60,7 @@ public class CartModel implements Serializable {
 	}
 
 	public void removeItem(String id) {
-		if (cartMap.containsKey(id)) {
-			cartMap.remove(id);
-		}
+		cartMap.remove(id);
 	}
 
 	public Integer getPayCount(String id) {
@@ -73,6 +80,7 @@ public class CartModel implements Serializable {
 		 * 数量
 		 */
 		Integer cnt;
+
 		public SimpleItem(Float price, Integer cnt) {
 			this.price = price;
 			this.cnt = cnt;

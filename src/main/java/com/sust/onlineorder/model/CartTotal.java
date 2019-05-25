@@ -6,6 +6,7 @@ import lombok.Data;
 public class CartTotal {
 	double totalPrice;
 	Integer itemCount;
+	Integer dispatchPay;
 
 	public CartTotal(double v, int i) {
 		totalPrice = v;

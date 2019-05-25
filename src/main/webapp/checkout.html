@@ -219,6 +219,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </ul>
         </div>
         <div class="clearfix"></div>
+        <input type="text" id="h_dispatch_pay" style="display: none"/>
     </div>
 </div>
 <!-- footer-->
@@ -238,9 +239,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
                 //TODO:: 需要将购物车面的东西完善
                 $.each(data.items, function (i, item) {
-                    //console.log(item);
-                    var check_item = "<div class=\"cart-header\">" +
-                        " <div class=\"close1\"> </div>" +
+                    //console.log(item);onclick='remove_item("+i+")'
+                    var check_item = "<div class=\"cart-header"+i+"\">" +
+                        " <div class=\"close"+i+"\" > </div>" +
                         " <div class=\"cart-sec simpleCart_shelfItem\">" +
                         "<div class=\"cart-item cyc\">" +
                         " <img src=" + item.picture + " class=\"img-responsive\" alt=\"\">" +
@@ -280,7 +281,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 console.log(parseFloat(totalPrice).toFixed(2));
                 //总价
                 $("#total_prices").html("$:"+ parseFloat(totalPrice).toFixed(2) +" 元");
+                //设置快递费
+                setTotalPrice(dispatchPay);
+                //添加删除监听事件
+                addRemoveItemFunc(data);
             });
+
+
 
     });
 
@@ -301,16 +308,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         $('#order-detail').href = "/order_success.html";
         */
         $.post("/submit/cart",
-            function(data){
+            function (data) {
                 //订单成功
-                if(data.status == 200) {
+                if (data.status == 200) {
                     $('#showdiv').show();  //显示弹窗
-                    $('#cover').css('display','block'); //显示遮罩层
-                    $('#cover').css('height',document.body.clientHeight+'px'); //设置遮罩层的高度为当前页面高度
+                    $('#cover').css('display', 'block'); //显示遮罩层
+                    $('#cover').css('height', document.body.clientHeight + 'px'); //设置遮罩层的高度为当前页面高度
                     $('#order-detail').href = "/order_success.html";
-                }else if(data.status == 400){
+                } else if (data.status == 400) {
                     alert(data.msg);
-                    return ;
+                    return;
                 }
             });
     }
@@ -350,17 +357,76 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
     //实时计算购物车的总价
     function show_cart_total_price() {
+
         $.getJSON("/cart/query-total.json",
             function (res) {
                 if (res.status == 200 && res.data != null) {
                     var data = res.data;
-                    console.log("cart--"+data);
-                    $("#cart_total_price").text((parseFloat(data.totalPrice)).toFixed(2));
+                    console.log("cart--"+data.totalPrice);
+                    var total = (parseFloat(data.totalPrice)).toFixed(2);
+                    console.log("total--"+total);
+                    $("#cart_total_price").text(total);
                     $("#total_count").text(data.itemCount);
                 }
             }
         );
     }
+
+    function remove_item(index) {
+
+        var closex = ".close" + index;
+        var cartheadern = ".cart-header"+index;
+        console.log(closex +"  " + cartheadern);
+        $(closex).on('click', function (c) {
+            $(cartheadern).fadeOut('slow', function (c) {
+                $(cartheadern).remove();
+            });
+        });
+        var totalPrice = show_cart_total_price();
+        var dispatchPay = getTotalPrice();
+        $("#total_prices").html("$:"+ parseFloat(totalPrice + dispatchPay).toFixed(2) +" 元");
+    }
+
+    function addRemoveItemFunc(data) {
+        $.each(data.items, function (i, item) {
+            var closex = ".close" + i;
+            var cartheadern = ".cart-header"+i;
+            $(closex).on('click', function (c) {
+                $(cartheadern).fadeOut('slow', function (c) {
+                    $(cartheadern).remove();
+                });
+                $.post("/remove/from_cart",
+                    {
+                        id: item.id
+                    },
+                    function (data) {
+                    data = data.data;
+                        console.log(data);
+                        //重新设置总价
+                        show_cart_total_price();
+                        var to;
+                        if(data.itemCount != 0) {
+                            to = parseFloat(parseFloat(data.totalPrice) + parseFloat(data.dispatchPay)).toFixed(2);
+                        }else {
+                            to = parseFloat(data.dispatchPay).toFixed(2);
+                        }
+                        $("#total_prices").html("$:"+ to +" 元");
+                        console.log("total = " + to);
+                    });
+            });
+        });
+    }
+
+
+    function setTotalPrice(dispatchPay) {
+
+        $("#h_dispatch_pay").attr("value",dispatchPay);
+    }
+    function getTotalPrice() {
+
+        return $("#h_dispatch_pay").val();
+    }
+
 </script>
 </body>
 </html>

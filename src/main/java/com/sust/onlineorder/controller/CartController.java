@@ -68,11 +68,34 @@ public class CartController {
 		if (cart == null) {
 			cart = CartModel.createCart();
 			cart.putItem(id, price);
+			setDispatchPay(Integer.valueOf(id), cart);
 		} else {
 			cart.putItem(id, price);
 		}
 		setAttr(request, CART, cart);
 		return "ok";
+	}
+
+	private void setDispatchPay(Integer id, CartModel cart) {
+		if(cart.getDispatchPay() == null || cart.getDispatchPay() == 0) {
+			TShop tShop = shopService.getShopById(id);
+			cart.setDispatchPay(tShop.getDispatchPay());
+		}
+	}
+
+	@RequestMapping("/remove/from_cart")
+	@ResponseBody
+	public Result removeFromCart(String id, HttpServletRequest request) {
+		log.info("remove--id:{}",id);
+		CartModel cart = getAttr(request, CART);
+		if (cart == null) {
+			Result.ok();
+		} else {
+			cart.removeItem(id);
+		}
+		setDispatchPay(cart.getShopId(),cart);
+		setAttr(request, CART, cart);
+		return queryTotal(request);
 	}
 
 	@RequestMapping("/remove/clean_cart")
@@ -154,10 +177,9 @@ public class CartController {
 		}
 
 		CartTotal total = orderService.calCartTotal(cart.getCartMap());
+		total.setDispatchPay(cart.getDispatchPay());
 		return Result.ok(total);
 	}
-
-
 
 
 }

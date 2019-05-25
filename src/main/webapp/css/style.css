@@ -763,9 +763,9 @@ li.bt-nn {
 .cart-item-info h4 span{
 	font-size:0.65em;
 	font-weight:400;
-} 
+}
 
-.close1,.close2{
+.close0,.close1,.close2{
   background: url('../images/close_1.png') no-repeat 0px 0px;
   cursor: pointer;
   width: 28px;
@@ -791,8 +791,25 @@ li.bt-nn {
   -o-transition: color 0.2s ease-in-out;
   transition: color 0.2s ease-in-out;
 }
-.cart-header {  
-  position: relative;  
+.close4,.close5,.close6,.close7,.close8,.close9,.close10,.close11,.close12,.close12,.close13,.close14,.close15,.close16,.close17,.close18{
+    background: url('../images/close_1.png') no-repeat 0px 0px;
+    cursor: pointer;
+    width: 28px;
+    height: 28px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    -webkit-transition: color 0.2s ease-in-out;
+    -moz-transition: color 0.2s ease-in-out;
+    -o-transition: color 0.2s ease-in-out;
+    transition: color 0.2s ease-in-out;
+}
+
+.cart-header0 {
+    position: relative;
+}
+.cart-header1 {
+    position: relative;
 }
 .cart-header2 {  
   position: relative;  
@@ -800,6 +817,58 @@ li.bt-nn {
 .cart-header3 {  
   position: relative;  
 }
+.cart-header4 {
+    position: relative;
+}
+.cart-header5 {
+    position: relative;
+}
+.cart-header6 {
+    position: relative;
+}
+.cart-header7 {
+    position: relative;
+}
+.cart-header8 {
+    position: relative;
+}
+.cart-header9 {
+    position: relative;
+}
+.cart-header10 {
+    position: relative;
+}
+.cart-header11 {
+    position: relative;
+}
+.cart-header12 {
+    position: relative;
+}
+.cart-header13 {
+    position: relative;
+}
+.cart-header14 {
+    position: relative;
+}
+.cart-header15 {
+    position: relative;
+}
+.cart-header16 {
+    position: relative;
+}
+.cart-header17 {
+    position: relative;
+}
+.cart-header18 {
+    position: relative;
+}
+.cart-header19 {
+    position: relative;
+}
+.cart-header20 {
+    position: relative;
+}
+
 a.order {
   background:#00405d;
   padding: 10px 20px;
