@@ -82,14 +82,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script>
 	function login_fun() {
 		//alert("hah")
+		/*获取输入框的值*/
 		var phone = $("#phone").val();
 		var pwd = $("#pwd").val();
+		/*请求后端接口*/
         $.post("/login/user",
             {
                 phone: phone,
                 pwd: pwd
             },
-            function(data){
+            function(data){/*这里是拿到了请求的结果*/
             	if(data.status == 200) {
                     function jumurl() {
                         window.location.href = '/index.html';

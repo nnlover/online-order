@@ -61,8 +61,16 @@ public class UserController {
 		return Result.ok();
 	}
 
+	/**
+	 * 和 $.post("/login/user"） 是一一对应的
+	 *
+	 * @param phone
+	 * @param pwd
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping("/login/user")
-	@ResponseBody
+	@ResponseBody /*返回一个字符串*/
 	public Result login(@RequestParam("phone") String phone,
 	                    @RequestParam("pwd") String pwd,
 	                    HttpServletRequest request
@@ -73,14 +81,16 @@ public class UserController {
 		if (pwd == null || "".equals(pwd)) {
 			return Result.failed("密码为空");
 		}
-
+		/*查询数据库*/
 		TUser user = userService.selectByPhone(phone, pwd);
+		/*做返回值的校验*/
 		if (phone.equals(user.getPhone()) && pwd.equals(user.getPassword())) {
 			List<TAddress> addrList = addressService.getByUserId(user.getId());
 			//TODO::只能在登录的地方设置 userSession
 			setUserSession(request, convertFrom(user, addrList.get(0)));
 			return Result.ok();
 		}
+		/*如果异常了就返回异常信息*/
 		return Result.failed("电话或者密码错误");
 	}
 
