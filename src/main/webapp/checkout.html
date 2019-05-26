@@ -311,10 +311,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             function (data) {
                 //订单成功
                 if (data.status == 200) {
-                    $('#showdiv').show();  //显示弹窗
+                    /*$('#showdiv').show();  //显示弹窗
                     $('#cover').css('display', 'block'); //显示遮罩层
                     $('#cover').css('height', document.body.clientHeight + 'px'); //设置遮罩层的高度为当前页面高度
-                    $('#order-detail').href = "/order_success.html";
+                    $('#order-detail').href = "/order_success.html";*/
+                    window.location.href = '/order_paid.html';
                 } else if (data.status == 400) {
                     alert(data.msg);
                     return;
