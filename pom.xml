@@ -16,31 +16,46 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <spring-boot.version>2.1.2.RELEASE</spring-boot.version>
+        <mysql-connector-java.version>8.0.13</mysql-connector-java.version>
+        <javax.servlet.version>1.2</javax.servlet.version>
+        <tomcat-embed-jasper.version>9.0.14</tomcat-embed-jasper.version>
+
+        <basePath>/Users/wzy/personal/love/online-order</basePath>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
+            <version>${spring-boot.version}</version>
+            <systemPath>${basePath}/lib/spring-boot-starter-aop-2.1.2.RELEASE.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
+            <version>${spring-boot.version}</version>
+            <systemPath>${basePath}/lib/spring-boot-starter-jdbc-2.1.2.RELEASE.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <version>${spring-boot.version}</version>
+            <systemPath>${basePath}/lib/spring-boot-starter-web-2.1.2.RELEASE.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>2.0.0</version>
+            <systemPath>${basePath}/lib/mybatis-spring-boot-starter-2.0.0.jar</systemPath>
         </dependency>
 
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
+            <version>${mysql-connector-java.version}</version>
+            <systemPath>${basePath}/lib/mysql-connector-java-8.0.13.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -56,18 +71,23 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
+            <version>${javax.servlet.version}</version>
+            <systemPath>${basePath}/lib/jstl-1.2.jar</systemPath>
         </dependency>
 
         <!-- Need this to compile JSP -->
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-jasper</artifactId>
+            <version>${tomcat-embed-jasper.version}</version>
             <scope>provided</scope>
+            <systemPath>${basePath}/lib/tomcat-embed-jasper-9.0.14.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>1.2.8.sec01</version>
+            <systemPath>${basePath}/lib/fastjson-1.2.8.sec01.jar</systemPath>
         </dependency>
 
         <!--分页插件-->
@@ -75,6 +95,7 @@
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper</artifactId>
             <version>5.0.0</version>
+            <systemPath>${basePath}/lib/pagehelper-5.0.0.jar</systemPath>
         </dependency>
         <!--H2 数据库-->
         <!--<dependency>
@@ -88,6 +109,7 @@
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
             <version>4.5.3</version>
+            <systemPath>${basePath}/lib/httpclient-4.5.3.jar</systemPath>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.json/json -->
@@ -95,6 +117,7 @@
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20180813</version>
+            <systemPath>${basePath}/lib/json-20180813.jar</systemPath>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
@@ -102,6 +125,7 @@
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.6</version>
+            <systemPath>${basePath}/lib/commons-io-2.6.jar</systemPath>
         </dependency>
 
 
@@ -109,6 +133,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
+            <systemPath>${basePath}/lib/spring-boot-devtools-2.1.2.RELEASE.jar</systemPath>
         </dependency>
     </dependencies>
 
