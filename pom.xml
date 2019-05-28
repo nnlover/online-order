@@ -21,7 +21,7 @@
         <javax.servlet.version>1.2</javax.servlet.version>
         <tomcat-embed-jasper.version>9.0.14</tomcat-embed-jasper.version>
 
-        <basePath>/Users/wzy/personal/love/online-order</basePath>
+        <basePath>C:\Users\lenovo\Desktop\毕业设计</basePath>
     </properties>
 
     <dependencies>
