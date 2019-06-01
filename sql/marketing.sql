@@ -11,7 +11,7 @@
  Target Server Version : 80013
  File Encoding         : 65001
 
- Date: 21/04/2019 13:57:58
+ Date: 01/06/2019 20:02:15
 */
 
 SET NAMES utf8mb4;
@@ -39,7 +39,7 @@ CREATE TABLE `t_address` (
   `user_id` int(10) unsigned NOT NULL COMMENT '用户ID',
   `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '用户地址',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='用户地址表';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='用户地址表';
 
 -- ----------------------------
 -- Records of t_address
@@ -51,6 +51,7 @@ INSERT INTO `t_address` VALUES (3, 5, '东西南北楼');
 INSERT INTO `t_address` VALUES (4, 6, '');
 INSERT INTO `t_address` VALUES (5, 7, '');
 INSERT INTO `t_address` VALUES (6, 8, '东西南北楼');
+INSERT INTO `t_address` VALUES (7, 9, 'ABC的');
 COMMIT;
 
 -- ----------------------------
@@ -4563,14 +4564,32 @@ CREATE TABLE `t_order` (
   `pay_type` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '支付方式，支付宝，微信，银行卡',
   `comments` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '备注信息',
   `shop_name` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '店铺名称',
+  `shop_id` int(10) unsigned NOT NULL COMMENT '店铺 Id',
+  `delivery_pay` decimal(10,2) DEFAULT NULL COMMENT '配送费用',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='订单表';
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COMMENT='订单表';
 
 -- ----------------------------
 -- Records of t_order
 -- ----------------------------
 BEGIN;
-INSERT INTO `t_order` VALUES (1, '1117046055348830208', 1, '[{\"itemId\":\"12\",\"cnt\":4}]', 157.00, 1, '2019-04-13 07:45:08', '2019-04-13 07:45:08', NULL, '2019-04-13 08:41:08', '支付宝', '', '芝心乐披萨（凤城十路店）');
+INSERT INTO `t_order` VALUES (1, '1117046055348830208', 1, '[{\"itemId\":\"12\",\"cnt\":4}]', 157.00, 1, '2019-04-21 16:29:09', '2019-04-21 16:29:09', '2019-04-21 16:29:09', '2019-04-13 08:41:08', '支付宝', '', '芝心乐披萨（凤城十路店）', 11, NULL);
+INSERT INTO `t_order` VALUES (2, 'D-11198951', 1, '[{\"itemId\":\"12\",\"cnt\":6}]', 227.00, 1, '2019-04-21 17:26:14', '2019-04-21 17:26:14', NULL, '2019-04-21 18:22:14', '支付宝', '', '芝心乐披萨（凤城十路店）', 11, NULL);
+INSERT INTO `t_order` VALUES (3, 'D-11199003', 1, '[{\"itemId\":\"22\",\"cnt\":1}]', 33.00, 1, '2019-04-21 17:47:16', '2019-04-21 17:47:16', NULL, '2019-04-21 18:17:16', '支付宝', '', '德克士（陕科大 ）', 14, NULL);
+INSERT INTO `t_order` VALUES (4, 'D-11199013', 1, '[{\"itemId\":\"349\",\"cnt\":1},{\"itemId\":\"350\",\"cnt\":1},{\"itemId\":\"351\",\"cnt\":1}]', 76.00, 1, '2019-04-21 17:50:54', '2019-04-21 17:50:54', NULL, '2019-04-21 18:20:54', '支付宝', '', '迈德思客（西工院店）', 19, NULL);
+INSERT INTO `t_order` VALUES (5, 'D-11221260', 5, '[{\"itemId\":\"22\",\"cnt\":1}]', 33.00, 3, '2019-04-27 21:11:22', '2019-04-27 21:11:22', NULL, '2019-04-27 21:41:22', '支付宝', '', '德克士（陕科大 ）', 14, NULL);
+INSERT INTO `t_order` VALUES (6, 'D-11271310', 9, '[{\"itemId\":\"22\",\"cnt\":2}]', 46.00, 7, '2019-05-11 16:39:23', '2019-05-11 16:39:23', NULL, '2019-05-11 17:09:23', '支付宝', '', '德克士（陕科大 ）', 14, NULL);
+INSERT INTO `t_order` VALUES (7, 'D-11275348', 9, '[{\"itemId\":\"22\",\"cnt\":2}]', 46.00, 7, '2019-05-12 19:23:52', '2019-05-12 19:23:52', NULL, '2019-05-12 19:53:52', '支付宝', '', '德克士（陕科大 ）', 14, NULL);
+INSERT INTO `t_order` VALUES (8, 'D-11275396', 9, '[{\"itemId\":\"1\",\"cnt\":1},{\"itemId\":\"2\",\"cnt\":1}]', 42.36, 7, '2019-05-12 19:43:07', '2019-05-12 19:43:07', NULL, '2019-05-12 20:23:07', '支付宝', '', '意大利风味牛排饭(未央店)', 12, NULL);
+INSERT INTO `t_order` VALUES (9, 'D-11275409', 9, '[{\"itemId\":\"1\",\"cnt\":2}]', 43.96, 7, '2019-05-12 19:48:06', '2019-05-12 19:48:06', NULL, '2019-05-12 20:28:06', '支付宝', '', '意大利风味牛排饭(未央店)', 12, 15.00);
+INSERT INTO `t_order` VALUES (10, 'D-11275425', 9, '[{\"itemId\":\"27\",\"cnt\":1},{\"itemId\":\"28\",\"cnt\":1}]', 106.00, 7, '2019-05-12 19:54:18', '2019-05-12 19:54:18', NULL, '2019-05-12 20:24:18', '支付宝', '', '德克士（陕科大 ）', 14, 20.00);
+INSERT INTO `t_order` VALUES (11, 'D-11275456', 9, '[{\"itemId\":\"9\",\"cnt\":1},{\"itemId\":\"7\",\"cnt\":1},{\"itemId\":\"10\",\"cnt\":1}]', 70.75, 7, '2019-05-12 20:06:36', '2019-05-12 20:06:36', NULL, '2019-05-12 20:46:36', '支付宝', '', '意大利风味牛排饭(未央店)', 12, 15.00);
+INSERT INTO `t_order` VALUES (12, 'D-11275471', 9, '[{\"itemId\":\"380\",\"cnt\":1},{\"itemId\":\"378\",\"cnt\":1}]', 55.00, 7, '2019-05-12 20:12:43', '2019-05-12 20:12:43', NULL, '2019-05-12 20:47:43', '支付宝', '', '驴美人河间驴肉火烧（北辰店）', 20, 20.00);
+INSERT INTO `t_order` VALUES (13, 'D-11275478', 9, '[{\"itemId\":\"451\",\"cnt\":1},{\"itemId\":\"452\",\"cnt\":1},{\"itemId\":\"453\",\"cnt\":1}]', 20.00, 7, '2019-05-12 20:15:42', '2019-05-12 20:15:42', NULL, '2019-05-12 20:49:42', '支付宝', '', '久粥源', 21, 3.00);
+INSERT INTO `t_order` VALUES (14, 'D-11299930', 9, '[{\"itemId\":\"1\",\"cnt\":1},{\"itemId\":\"13\",\"cnt\":1}]', 27.48, 7, '2019-05-19 14:11:42', '2019-05-19 14:11:42', NULL, '2019-05-19 15:07:42', '支付宝', '', '芝心乐披萨（凤城十路店）', 11, 7.00);
+INSERT INTO `t_order` VALUES (15, 'D-11325545', 9, '[{\"itemId\":\"12\",\"cnt\":1},{\"itemId\":\"13\",\"cnt\":1},{\"itemId\":\"14\",\"cnt\":1}]', 69.99, 7, '2019-05-26 15:50:13', '2019-05-26 15:50:13', NULL, '2019-05-26 16:46:13', '支付宝', '', '芝心乐披萨（凤城十路店）', 11, 7.00);
+INSERT INTO `t_order` VALUES (16, 'D-11325569', 9, '[{\"itemId\":\"12\",\"cnt\":1},{\"itemId\":\"13\",\"cnt\":1}]', 48.00, 7, '2019-05-26 15:59:42', '2019-05-26 15:59:42', NULL, '2019-05-26 16:55:42', '支付宝', '', '芝心乐披萨（凤城十路店）', 11, 7.00);
+INSERT INTO `t_order` VALUES (17, 'D-11325615', 9, '[{\"itemId\":\"12\",\"cnt\":1},{\"itemId\":\"13\",\"cnt\":1},{\"itemId\":\"14\",\"cnt\":1}]', 69.99, 7, '2019-05-26 16:18:07', '2019-05-26 16:18:07', NULL, '2019-05-26 17:14:07', '支付宝', '', '芝心乐披萨（凤城十路店）', 11, 7.00);
 COMMIT;
 
 -- ----------------------------
@@ -4664,7 +4683,7 @@ CREATE TABLE `t_user` (
   `phone` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '手机号',
   `rank` int(11) NOT NULL DEFAULT '1' COMMENT '用户等级',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='用户信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='用户信息表';
 
 -- ----------------------------
 -- Records of t_user
@@ -4675,6 +4694,7 @@ INSERT INTO `t_user` VALUES (2, 'lisi', '/image/maomi.jpg', '1', '13811119999', 
 INSERT INTO `t_user` VALUES (3, 'lisi', '/image/maomi.jpg', '123', '13811118888', 1);
 INSERT INTO `t_user` VALUES (4, 'lisi', '/image/maomi.jpg', '123', '13812341234', 1);
 INSERT INTO `t_user` VALUES (5, 'a', '/image/maomi.jpg', '1', '1', 1);
+INSERT INTO `t_user` VALUES (9, '王五', '/image/maomi.jpg', '1', '13800001111', 1);
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
