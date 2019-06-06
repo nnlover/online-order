@@ -39,4 +39,12 @@ public class ShopServiceImpl implements ShopService {
 		return shopMapper.selectByExample(example);
 
 	}
+
+	@Override
+	public List<TShop> getShopListBykeyword(String keyword) {
+		TShopExample example = new TShopExample();
+		example.createCriteria().andShopNameLike("%"+keyword+"%");
+		return shopMapper.selectByExample(example);
+
+	}
 }

@@ -15,4 +15,6 @@ public interface ShopService {
 	TShop getShopById(Integer shopId);
 
 	List<TShop> getShopByIds(List<Integer> shopIds);
+
+	List<TShop> getShopListBykeyword(String keyword);
 }

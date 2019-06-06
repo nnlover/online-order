@@ -53,7 +53,11 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/shop/shop-list.json")
 	@ResponseBody
-	public List<TShop> shopList() {
+	public List<TShop> shopList(@RequestParam(value = "keyword", required = false) String keyword) {
+		log.info("keyword", keyword);
+		if(keyword != null && !"".equals(keyword)){
+			return shopService.getShopListBykeyword(keyword);
+		}
 		List<TShop> shopListByPage = shopService.getShopListByPage();
 		//model.addAttribute("shopList", shopListByPage);
 		return shopListByPage;

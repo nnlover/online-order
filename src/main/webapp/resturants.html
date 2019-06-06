@@ -140,8 +140,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- footer-->
 <script>
 	$(document).ready(function () {
+        var keyword = getQueryString("keyword");
+        var params = "";
+		if(keyword != null){
+		    params += "keyword="+keyword;
+		}
+        console.log("keywork:"+keyword);
+		console.log("params:"+params);
 	    /*TODO:: 这里是店铺列表*/
-        $.getJSON("shop/shop-list.json",
+        $.getJSON("shop/shop-list.json?"+params,
             function(res)
 			{
 			    var shop_lists = "";
@@ -168,6 +175,31 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             });
     });
 
+
+    /**
+     * @desc 获取url参数
+     * @param {String} name  想要获取的参数名字
+     */
+   /* function GetQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]);
+        return null;
+    }*/
+
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var reg_rewrite = new RegExp("(^|/)" + name + "/([^/]*)(/|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        var q = window.location.pathname.substr(1).match(reg_rewrite);
+        if(r != null){
+            return decodeURI(r[2]);
+        }else if(q != null){
+            return decodeURI(q[2]);
+        }else{
+            return null;
+        }
+    }
 </script>
 </body>
 </html>
