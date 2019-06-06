@@ -1673,6 +1673,15 @@ a.forgot {
 .date_btn form input[type="submit"] {
   font-size: 1em;
 }
+.search_item{
+    font-size: 1em;
+    text-transform: capitalize;
+    width: 100% !important;
+    background: #D96B66;
+    color: #fff;
+    padding: 7px;
+    border: none;
+}
 li.im-g {
   float: left;
   width: 15%;

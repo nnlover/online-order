@@ -58,7 +58,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<li class="span1_of_1">
 								 <!----------start section_room----------->
 								 <form>
-									<input type="text" class="textbox" value="Resturant Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Resturant Name';}">
+									<input id="search_words" type="text" class="textbox" value="Resturant Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Resturant Name';}">
 								</form>
 							 </li>	
 							<li class="span1_of_1">
@@ -79,11 +79,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								 </div>
 							 </li>
 							 <li class="span1_of_3">
-									<div class="date_btn">
-										<form id="search_shop" action="resturants.html" >
-											<input type="submit" value="Find resturants">
-										</form>
-									</div>
+								 <input class="search_item" type="submit" value="Find resturants" onclick="findResturants()" >
+
 							 </li>
 								<div class="clearfix"></div>
 						</ul>
@@ -306,6 +303,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         });
 
     })*/
+	function findResturants() {
+		var keyword = $('#search_words').val();
+		if(keyword == null || keyword =="" || keyword ==" " || keyword =="Resturant Name"){
+		    alert("请输入商家名称进行搜索哦！");
+		    return;
+		}
+		window.location.replace('/resturants.html?keyword='+keyword);
+    }
 </script>
 </body>
 </html>
