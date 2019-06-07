@@ -241,11 +241,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         });
 
         function show_order_detail(index) {
-            disable_a(index);
+            //disable_a(index);
             //根据 items的大小来扩大 DIV 的高度
             var items = order_items[index];
             //扩大 div 的高度
             var order_listId = '#order_list_'+ index;
+            console.log("offsetHeight:"+$(order_listId).height());
+            if($(order_listId).height() > 160 ){
+                close_detail(order_listId,index);
+                return;
+            }
+            var order_t_div_l = "<div id=\"detail_n_"+index+"\">";
+            var order_t_div_r = "</div>";
             var order_title = set_order_title();
             var details = "";
             $.each(items, function (i, item) {
@@ -256,13 +263,30 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             console.log(items.length);
             $(order_listId).height(160 + 60 * items.length);
             //$(id).after(" <h1>My order Detail</h1>");
-           $(id).after(order_title + details);
+           $(id).after(order_t_div_l + order_title + details+order_t_div_r);
+            //设置 a 的名字为收起详情
+            var a_id = "#" + "see_detail" + index;
+            $(a_id).html("收起详情");
+        }
 
+        /**
+         * //将 A 标签设置为收起详情
+         */
+        function close_detail(order_listId,index) {
+            var a_id = "#"+"detail_n_"+index;
+            $(a_id).css("display", "none");
+            $(order_listId).height(160);
+            // 收起之后将标签名字设置为查看详情
+            var a_id = "#" + "see_detail" + index;
+            $(a_id).html("查看详情");
         }
 
         function add_comment_line(index) {
             //扩大 div 的高度
             var order_listId = '#order_list_'+ index;
+            if($(order_listId).height() > 160 ){
+                close_detail(order_listId,index);
+            }
             $(order_listId).height(160 + 40);
             //将订单详情写入里面
             var id= "#order_bd_"+ index;
