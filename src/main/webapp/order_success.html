@@ -381,15 +381,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         function set_comments_line(index) {
             var comment_line ="<div id=\"comment_id_"+index+"\">\n" +
                 "<span style='margin-left: 10px; font-size: 16px;'>评价：</span>"+
-                "                <input id=\"comments_\""+index+" class=\"comment_c\" type=\"text\" value=\"说说你的评价吧\">\n" +
-                    "<input class=\"comment_btn\" type=\"button\" id=\"sub_comments\" value=\"提交\" onclick=\"sub_cmt("+index+")\">"
+                "                <input id=\"comments_"+index+" class=\"comment_c\" type=\"text\" value=\"说说你的评价吧\">\n" +
+                    "<input class=\"comment_btn\" type=\"button\" id=\"sub_comments\" value=\"提交\" onclick=\"sub_cmt("+index+")\">"+
                 "            </div>";
             return comment_line;
         }
 
         function sub_cmt(index){
-
-            var msg = $('#sub_comments').val();
+            var cmmt_id = "#" + "comments_" +index;
+            var msg = $(cmmt_id).val();
             if(msg == null || msg == " " || msg == ""){
                 return;
             }
