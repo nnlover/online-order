@@ -7,6 +7,7 @@ import com.sust.onlineorder.services.CommentService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @Author: wangzongyu
@@ -24,5 +25,14 @@ public class CommentServiceImpl implements CommentService {
 
 		int insert = commentMapper.insert(comment);
 		return insert;
+	}
+
+	@Override
+	public List<TComment> queryByShopIds(List<Integer> shopIds) {
+		TCommentExample example = new TCommentExample();
+		TCommentExample.Criteria criteria = example.createCriteria();
+		criteria.andShopIdIn(shopIds);
+		List<TComment> comments = commentMapper.selectByExample(example);
+		return comments;
 	}
 }

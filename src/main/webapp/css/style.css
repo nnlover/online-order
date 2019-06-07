@@ -644,7 +644,7 @@ li.im-g {
 }
 li.data {
   float: left;
-  width: 50%;
+  width: 70%;
 }
 li.bt-nn {
   float: right;
@@ -655,7 +655,14 @@ li.bt-nn {
 .order-top {
   padding: 1.5em 0;
 }
-
+.cmmt_msg_c{
+    margin-top: 5px;
+    width: 60%;
+    height: 30px;
+}
+.cmmt_msg_c span{
+    margin-top: 5px;
+}
 .item-des{
     float: left;
     width: 100%;

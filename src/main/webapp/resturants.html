@@ -38,6 +38,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<li class="bt-nn">
 				<a class="morebtn hvr-rectangle-in" href="orders.html">Explore</a>
 			</li>
+			<li class="sp_cmmt">
+				<span>最新用户评论：</span> <span id="cmmt_msg" class="cmmt_msg_c">哈哈，真不错，推荐！</span>
+			</li>
 			<div class="clearfix"></div>
 		</div>
 		<div class="order-top">
@@ -152,7 +155,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             function(res)
 			{
 			    var shop_lists = "";
-				$.each(res,function (i,item)
+                var comment = new Array();
+                var data = res.data;
+				$.each(data,function (i,item)
 				{
                     var shop = "<div class=\"order-top\">" +
                         "<li class=\"im-g\"><a href=\"#\">" +
@@ -160,8 +165,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         "\"class=\"img-responsive\" alt=\"\"></a></li>" +
                         "<li class=\"data\">" +
                         "<h4>"+item.shopName+"</h4>" +
-                        "<p>"+item.businessTime+"</p>" +
-                        "<P>"+item.address+"</P>" +
+                        "<p>营业时间："+item.businessTime+"</p>" +
+                        "<P>店铺地址："+item.address+"</P>" +
+                        "<span style='font-size: 14px;'>最新用户评论：</span> <span id=\"cmmt_msg\" class=\"cmmt_msg_c\">"+item.lastComment+"</span>\n" +
                         "</li>" +
                         "<li class=\"bt-nn\">" +
                         "<a class=\"morebtn hvr-rectangle-in\" href=\"orders.html?id="+item.id+"\">Explore</a>" +

@@ -1,12 +1,17 @@
 package com.sust.onlineorder.controller;
 
+import com.sust.onlineorder.entity.TComment;
 import com.sust.onlineorder.entity.TFood;
 import com.sust.onlineorder.entity.TShop;
 import com.sust.onlineorder.model.CartModel;
 import com.sust.onlineorder.model.FoodGroup;
+import com.sust.onlineorder.model.ShopModel;
+import com.sust.onlineorder.services.CommentService;
 import com.sust.onlineorder.services.FoodService;
 import com.sust.onlineorder.services.ShopService;
+import com.sust.onlineorder.utils.Result;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +39,8 @@ public class HomeController {
 	private ShopService shopService;
 	@Autowired
 	private FoodService foodService;
+	@Resource
+	private CommentService commentService;
 
 	@RequestMapping(value = "/index")
 	public String home(HttpServletRequest request) {
@@ -53,14 +61,47 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/shop/shop-list.json")
 	@ResponseBody
-	public List<TShop> shopList(@RequestParam(value = "keyword", required = false) String keyword) {
+	public Result shopList(@RequestParam(value = "keyword", required = false) String keyword) {
 		log.info("keyword", keyword);
-		if(keyword != null && !"".equals(keyword)){
-			return shopService.getShopListBykeyword(keyword);
+		List<TShop> shopListByPage;
+		if (keyword != null && !"".equals(keyword)) {
+			shopListByPage = shopService.getShopListBykeyword(keyword);
+		} else {
+			shopListByPage = shopService.getShopListByPage();
 		}
-		List<TShop> shopListByPage = shopService.getShopListByPage();
-		//model.addAttribute("shopList", shopListByPage);
-		return shopListByPage;
+		List<Integer> shopIds = shopListByPage.stream().map(shop -> shop.getId()).collect(Collectors.toList());
+		List<TComment> comments = commentService.queryByShopIds(shopIds);
+		List<ShopModel> shopModels = convert2ShopModelList(shopListByPage, comments);
+
+		return Result.ok(shopModels);
+	}
+
+	private List<ShopModel> convert2ShopModelList(List<TShop> shopListByPage, List<TComment> comments) {
+		ArrayList<ShopModel> shopModels = new ArrayList<>(shopListByPage.size());
+		Map<Integer, TComment> commentMap = comments.stream().
+				collect(Collectors.toMap(
+						TComment::getShopId,
+						e -> e,
+						(v1, v2) -> {
+							if (v1.getId() > v2.getId()) {
+								return v1;
+							}
+							return v2;
+						}));
+		for (TShop shop : shopListByPage) {
+			shopModels.add(convert2ShopModel(shop, commentMap.getOrDefault(shop.getId(), new TComment())));
+		}
+		return shopModels;
+	}
+
+	private ShopModel convert2ShopModel(TShop shop, TComment comment) {
+		ShopModel shopModel = new ShopModel();
+		BeanUtils.copyProperties(shop, shopModel);
+		if (comment.getCommentMsg() == null || "".equals(comment.getCommentMsg())) {
+			comment.setCommentMsg("暂时还没有评论，快去添加一个吧！");
+		}
+		shopModel.setLastComment(comment.getCommentMsg());
+		return shopModel;
 	}
 
 	/**
@@ -85,8 +126,8 @@ public class HomeController {
 		log.info("shopId:{}", id);
 		List<TFood> foodList = foodService.getFoodsWithShopId(id);
 		List<FoodGroup> foodGroups = new ArrayList<>();
-		foodList.stream().collect(Collectors.groupingBy(TFood::getCategory)).forEach((catagory, foods)->{
-			foodGroups.add(new FoodGroup(catagory,foods));
+		foodList.stream().collect(Collectors.groupingBy(TFood::getCategory)).forEach((catagory, foods) -> {
+			foodGroups.add(new FoodGroup(catagory, foods));
 		});
 		return foodGroups;
 	}
