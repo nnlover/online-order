@@ -1136,6 +1136,11 @@ img {
   max-width: 100%;
   height: 108px;
 }
+.img-responsive_logo{
+  display: block;
+  max-width: 100%;
+  height: 45px;
+}
 .img-rounded {
   border-radius: 6px;
 }

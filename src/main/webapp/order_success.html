@@ -249,6 +249,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             console.log("offsetHeight:"+$(order_listId).height());
             if($(order_listId).height() > 160 ){
                 close_detail(order_listId,index);
+                close_comments_line(index);
                 return;
             }
             var order_t_div_l = "<div id=\"detail_n_"+index+"\">";
@@ -286,6 +287,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             var order_listId = '#order_list_'+ index;
             if($(order_listId).height() > 160 ){
                 close_detail(order_listId,index);
+                close_comments_line(index);
             }
             $(order_listId).height(160 + 40);
             //将订单详情写入里面
