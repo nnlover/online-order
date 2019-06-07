@@ -1,10 +1,12 @@
 package com.sust.onlineorder.controller;
 
 import com.sust.onlineorder.entity.TAddress;
+import com.sust.onlineorder.entity.TComment;
 import com.sust.onlineorder.entity.TUser;
 import com.sust.onlineorder.model.OutputOrder;
 import com.sust.onlineorder.model.UserModel;
 import com.sust.onlineorder.services.AddressService;
+import com.sust.onlineorder.services.CommentService;
 import com.sust.onlineorder.services.OrderService;
 import com.sust.onlineorder.services.UserService;
 import com.sust.onlineorder.utils.Result;
@@ -35,6 +37,9 @@ public class UserController {
 	private AddressService addressService;
 	@Resource
 	private OrderService orderService;
+
+	@Resource
+	private CommentService commentService;
 
 	@RequestMapping("/register/user")
 	@ResponseBody
@@ -119,6 +124,28 @@ public class UserController {
 		SessionUtils.removeAttr(request, USER);
 		return Result.ok();
 	}
+
+	@RequestMapping("/comments/add")
+	@ResponseBody
+	public Result comentAdd(@RequestParam("shopId")String shopId,
+	                        @RequestParam("userId")String userId,
+	                        @RequestParam("orderId")String orderId,
+	                        @RequestParam("msg")String msg,
+	                        HttpServletRequest request) {
+		if("".equals(shopId) || "".equals(userId) || "".equals(orderId) || "".equals(msg)){
+			return Result.failed("提交内容不正确");
+		}
+		TComment comment = new TComment();
+		comment.setCommentMsg(msg);
+		comment.setOrderId(Integer.valueOf(orderId));
+		comment.setShopId(Integer.valueOf(shopId));
+		comment.setUserId(Integer.valueOf(userId));
+		Integer integer = commentService.insertComment(comment);
+		return Result.ok(comment.getId());
+	}
+
+
+
 
 
 	private boolean checkParam(String name, String phone, String address, String pwd) {

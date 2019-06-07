@@ -95,7 +95,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <a href="javascript:" order-number="" orderid="3788798"
                            class="btn_a see-details">查看详情<i></i></a>
                     </p>
+                    <p>
+                        <a href="javascript:" order-number="" orderid="3788799"
+                           class="btn_a see-details" onclick="add_comment_line()">添加评论<i></i></a>
+                    </p>
                 </div>
+            </div>
+            <div>
+                <span>评价：</span>
+                <input id="comments_" class="comment_c" type="text" value="说说你的评价吗">
+                <input class="comment_btn" type="button" id="sub_comments" value="提交">
             </div>
             <div class="order-details clearfix">
                 <div ng-hide="orderStatus['3788798']" class="order-loading">
@@ -207,6 +216,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <script>
 
         var order_items = new Array();
+        var shopIds = new Array();
+        var userIds  = new Array();
+        var orderIds  = new Array();
         $(document).ready(function () {
             $.getJSON("order/user-order-list.json",
                 function (res) {
@@ -219,6 +231,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     $.each(data, function (i, order) {
                         order_list += set_one_order(i,order);
                         order_items[i] = order.items;
+                        shopIds[i] = order.shopId;
+                        userIds[i] = order.userId;
+                        orderIds[i] = order.orderId;
                     });
                     $("#checked_items").html(order_list);
                 }
@@ -245,6 +260,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
         }
 
+        function add_comment_line(index) {
+            //扩大 div 的高度
+            var order_listId = '#order_list_'+ index;
+            $(order_listId).height(160 + 40);
+            //将订单详情写入里面
+            var id= "#order_bd_"+ index;
+            //$(id).after(" <h1>My order comments</h1>");
+            $(id).after(set_comments_line(index));
+
+        }
 
         function set_one_order(index,order){
             var oneOrder =
@@ -277,6 +302,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 "            <p>" +
                 "                <a href=\"javascript:void(0);\""+
                 "                   class=\"btn_a see-details\"  id=\"see_detail"+index+"\"  onclick=\"show_order_detail("+index+")\">查看详情<i></i></a>" +
+                "            </p>" +
+                "            <p>" +
+                "                <a href=\"javascript:void(0);\""+
+                "                   class=\"btn_a see-details\"  id=\"add_comment"+index+"\"  onclick=\"add_comment_line("+index+")\">添加评论<i></i></a>" +
                 "            </p>" +
                 "        </div>" +
                 "    </div>" +
@@ -320,6 +349,42 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 "<div class=\"goods-subtotal fl goods-font2\">￥："+total+"</div>" +
                 "</div>";
             return detail;
+        }
+
+
+        function set_comments_line(index) {
+            var comment_line ="<div id=\"comment_id_"+index+"\">\n" +
+                "<span style='margin-left: 10px; font-size: 16px;'>评价：</span>"+
+                "                <input id=\"comments_\""+index+" class=\"comment_c\" type=\"text\" value=\"说说你的评价吧\">\n" +
+                    "<input class=\"comment_btn\" type=\"button\" id=\"sub_comments\" value=\"提交\" onclick=\"sub_cmt("+index+")\">"
+                "            </div>";
+            return comment_line;
+        }
+
+        function sub_cmt(index){
+
+            var msg = $('#sub_comments').val();
+            if(msg == null || msg == " " || msg == ""){
+                return;
+            }
+            $.post("/comments/add",
+                {
+                    shopId: shopIds[index],
+                    userId:userIds[index],
+                    orderId:orderIds[index],
+                    msg:msg
+                },
+                function (data) {
+                    alert("添加评论成功！");
+                    close_comments_line(index);
+                });
+        }
+
+        function close_comments_line(index) {
+            var order_listId = '#order_list_'+ index;
+            $(order_listId).height(160);
+            var commentId = "#"+"comment_id_"+index;
+            $(commentId).css("display","none");
         }
     </script>
 </body>

@@ -30,6 +30,9 @@ public class OutputOrder {
 	String shopPhone;
 
 	String totalPrice;
+	Integer shopId;
+	Integer userId;
+	Integer orderId;
 
 
 	public static OutputOrder convertFrom(TOrder order, TShop shop, List<TFood> foodList) {
@@ -43,6 +46,9 @@ public class OutputOrder {
 
 		outputOrder.setItems(convertItemFrom(order, foodList));
 		outputOrder.setTotalPrice(order.getTotalPrice().toString());
+		outputOrder.setShopId(shop.getId());
+		outputOrder.setUserId(order.getUserId());
+		outputOrder.setOrderId(order.getId());
 		return outputOrder;
 	}
 

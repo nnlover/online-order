@@ -136,6 +136,19 @@ div {
     text-align: center;
 }
 
+.comment_c{
+    margin-top: 10px;
+    margin-left: 7px;
+    width: 70%;
+    height: 35px;
+}
+.comment_btn{
+    width: 80px;
+    height: 30px;
+    background: #ff6978;
+}
+
+
 .padding-margin {
     margin-bottom: -10000px;
     padding-bottom: 10000px;
