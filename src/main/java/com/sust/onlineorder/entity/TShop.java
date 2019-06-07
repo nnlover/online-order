@@ -152,25 +152,4 @@ public class TShop {
     public void setShopType(Integer shopType) {
         this.shopType = shopType;
     }
-
-    @Override
-    public String toString() {
-        return "TShop{" +
-                "id=" + id +
-                ", shopName='" + shopName + '\'' +
-                ", title='" + title + '\'' +
-                ", dispatchPay=" + dispatchPay +
-                ", dispatchTime=" + dispatchTime +
-                ", assessRate=" + assessRate +
-                ", address='" + address + '\'' +
-                ", dispatchPrice=" + dispatchPrice +
-                ", salesroomPrice=" + salesroomPrice +
-                ", phone='" + phone + '\'' +
-                ", businessTime='" + businessTime + '\'' +
-                ", mainPicture='" + mainPicture + '\'' +
-                ", average=" + average +
-                ", monthPay=" + monthPay +
-                ", shopType=" + shopType +
-                '}';
-    }
 }

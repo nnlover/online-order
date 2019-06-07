@@ -655,11 +655,19 @@ li.bt-nn {
 .order-top {
   padding: 1.5em 0;
 }
-
+.cmmt_msg_c{
+    margin-top: 5px;
+    width: 60%;
+    height: 30px;
+}
+.cmmt_msg_c span{
+    margin-top: 5px;
+}
 .item-des{
     float: left;
     width: 100%;
     height: 100px;
+    margin-top: 10px;
 }
 .item-pic{
     float: left;
@@ -686,6 +694,7 @@ li.bt-nn {
 }
 .item_price{
     float: left;
+    margin-top: 10pxs;
 }
 .h4-price{
     float: right;
@@ -697,6 +706,8 @@ li.bt-nn {
 .pre-top{
     float: left;
     width: 100%;
+    height: 100px;
+    margin-top: 10px;
 }
 
 .orders {
@@ -1051,6 +1062,9 @@ ul.total_price li.last_price span{
   font-size: 0.8125em;
   color: #000;
   line-height: 1.8em;
+}
+.item_add{
+    margin-top: 10px;
 }
 
 
@@ -1682,6 +1696,7 @@ a.forgot {
     padding: 7px;
     border: none;
 }
+
 li.im-g {
   float: left;
   width: 15%;
