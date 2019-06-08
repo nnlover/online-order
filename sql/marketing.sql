@@ -141,4 +141,19 @@ CREATE TABLE `t_shop` (
 ) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8 COMMENT='店铺表';
 
 
+-- ----------------------------
+-- Table structure for t_comment
+-- ----------------------------
+DROP TABLE IF EXISTS `t_comment`;
+CREATE TABLE `t_comment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `shop_id` int(11) DEFAULT NULL COMMENT '店铺 Id',
+  `order_id` int(11) DEFAULT NULL COMMENT '订单 Id',
+  `user_id` int(11) DEFAULT NULL COMMENT '用户 Id',
+  `comment_msg` varchar(500) DEFAULT NULL COMMENT '评论内容',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='用户评论表';
+
+
+
 SET FOREIGN_KEY_CHECKS = 1;
