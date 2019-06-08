@@ -71,7 +71,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         $.getJSON("/user/query-user.json",
             function (res) {
                 if (res.status == 200 && res.data != null) {
-                    $("#sign_in").html("Sign out");
+                    $("#sign_in").html("注销");
                     $("#sign_in").attr("href", "javascript:void(0);");
                     $("#sign_in").attr("onclick", "login_out()");
 
