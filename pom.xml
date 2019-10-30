@@ -86,7 +86,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.8.sec01</version>
+            <version>1.2.25</version>
             <systemPath>${basePath}/lib/fastjson-1.2.8.sec01.jar</systemPath>
         </dependency>
 
